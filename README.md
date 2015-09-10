@@ -1,5 +1,3 @@
-# navyxie github home
-
 <a name="微信开放平台接入篇" />
 
 ## 微信开放平台接入篇
@@ -16,6 +14,8 @@
 ## 工具库
  + [根据银行卡卡号查询银行类型和卡类型](https://github.com/navyxie/bankcardinfo)
  + [通过手机号查询运营商以及号码归属地](https://github.com/navyxie/phone-service)
+ + [校验身份证合法性，获取身份证详细信息](https://github.com/navyxie/idcard)
+ + [事件扩展工具库](https://github.com/navyxie/minievent)
 
 ----------
 
