@@ -27,7 +27,7 @@
  + [连连支付SDK开发](https://github.com/navyxie/wapllpay)
  + [连连实名认证SDK开发](https://github.com/navyxie/llpayauth)
  + [连连代付(提现)SDK开发](https://github.com/navyxie/llpaycashpay)
-
+ + [支付聚合平台](https://github.com/navyxie/n-pay)
 
 <a name="文章" />
 
