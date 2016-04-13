@@ -391,6 +391,11 @@ body {
   float: left;
   margin-left: 64px;
 }
+@media screen and (max-width: 479px) {
+  #main-nav {
+    margin-left: -15px;
+  }
+}
 .nav-icon,
 .main-nav-link {
   float: left;
@@ -513,7 +518,7 @@ body {
 #avatar {
   position: absolute;
   z-index: 99;
-  left: 35px;
+  left: 0;
   top: 9px;
   width: 40px;
   height: 40px;
@@ -528,6 +533,11 @@ body {
   display: inline-block;
   width: 100%;
   height: 100%;
+}
+@media screen and (max-width: 479px) {
+  #avatar {
+    display: none;
+  }
 }
 .article {
   margin: 50px 0;
