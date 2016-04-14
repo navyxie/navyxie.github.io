@@ -3,51 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>文章 | Navy&#39;s Blog</title>
+  <title>mongo | Navy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何进行插件化开发
-protractor-scenario(利用protractor进行场景测试)
-karma-unit(利用karma进行单元测试)
-简单的对象模板
-webpack构建demo
-npm包的管理和发布
-react例子
-vim常用命令
-shell常用命令
-css-layout布局(rem)
-最新最全行政区域代码
-react-native笔记">
+  <meta name="description" content="数据库 mongo aggregate">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文章">
-<meta property="og:url" content="http://navyxie.github.io/2016/04/07/post/index.html">
+<meta property="og:title" content="mongo">
+<meta property="og:url" content="http://navyxie.github.io/2016/04/15/mongo/index.html">
 <meta property="og:site_name" content="Navy's Blog">
-<meta property="og:description" content="如何进行插件化开发
-protractor-scenario(利用protractor进行场景测试)
-karma-unit(利用karma进行单元测试)
-简单的对象模板
-webpack构建demo
-npm包的管理和发布
-react例子
-vim常用命令
-shell常用命令
-css-layout布局(rem)
-最新最全行政区域代码
-react-native笔记">
-<meta property="og:updated_time" content="2016-04-13T18:17:58.000Z">
+<meta property="og:description" content="数据库 mongo aggregate">
+<meta property="og:updated_time" content="2016-04-14T17:55:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文章">
-<meta name="twitter:description" content="如何进行插件化开发
-protractor-scenario(利用protractor进行场景测试)
-karma-unit(利用karma进行单元测试)
-简单的对象模板
-webpack构建demo
-npm包的管理和发布
-react例子
-vim常用命令
-shell常用命令
-css-layout布局(rem)
-最新最全行政区域代码
-react-native笔记">
+<meta name="twitter:title" content="mongo">
+<meta name="twitter:description" content="数据库 mongo aggregate">
   
     <link rel="alternate" href="/atom.xml" title="Navy&#39;s Blog" type="application/atom+xml">
   
@@ -89,14 +56,14 @@ react-native笔记">
   </div>
 </header>
       <div class="outer" id="body">
-        <section id="main"><article id="post-post" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-mongo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/07/post/" class="article-date">
-  <time datetime="2016-04-06T17:49:10.000Z" itemprop="datePublished">2016-04-07</time>
+    <a href="/2016/04/15/mongo/" class="article-date">
+  <time datetime="2016-04-14T17:43:05.000Z" itemprop="datePublished">2016-04-15</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/随笔/">随笔</a>
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>►<a class="article-category-link" href="/categories/数据库/mongo/">mongo</a>
   </div>
 
   </div>
@@ -107,7 +74,7 @@ react-native笔记">
         
   
     <h1 class="article-title" itemprop="name">
-      文章
+      mongo
     </h1>
   
 
@@ -116,20 +83,11 @@ react-native笔记">
     <div class="article-entry" itemprop="articleBody">
       
         
-        <ul>
-<li><a href="https://github.com/navyxie/how-to-plugin-development" target="_blank" rel="external">如何进行插件化开发</a></li>
-<li><a href="https://github.com/navyxie/protractor-scenario" target="_blank" rel="external">protractor-scenario(利用protractor进行场景测试)</a></li>
-<li><a href="https://github.com/navyxie/karma-unit" target="_blank" rel="external">karma-unit(利用karma进行单元测试)</a></li>
-<li><a href="https://github.com/navyxie/html-tpl" target="_blank" rel="external">简单的对象模板</a></li>
-<li><a href="https://github.com/navyxie/webpack" target="_blank" rel="external">webpack构建demo</a></li>
-<li><a href="https://github.com/navyxie/npm" target="_blank" rel="external">npm包的管理和发布</a></li>
-<li><a href="https://github.com/navyxie/react-demo" target="_blank" rel="external">react例子</a></li>
-<li><a href="https://github.com/navyxie/vim" target="_blank" rel="external">vim常用命令</a></li>
-<li><a href="https://github.com/navyxie/shell" target="_blank" rel="external">shell常用命令</a></li>
-<li><a href="https://github.com/navyxie/css-layout" target="_blank" rel="external">css-layout布局(rem)</a></li>
-<li><a href="https://github.com/navyxie/idcard/blob/master/lib/province_city_area_code.js" target="_blank" rel="external">最新最全行政区域代码</a></li>
-<li><a href="https://github.com/navyxie/react-native-note" target="_blank" rel="external">react-native笔记</a></li>
-</ul>
+        <h2 id="mongodb-的-aggregate-操作"><a href="#mongodb-的-aggregate-操作" class="headerlink" title="mongodb 的 aggregate 操作"></a>mongodb 的 aggregate 操作</h2><p>当我们对数据按日期进行分组时，经常遇到ISO日期格式比北京时间小8个小时的问题，导致数据分组时，存在跨天的问题，一组数据如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1 */</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"amount"</span> : <span class="number">1</span>,</span><br><span class="line">  <span class="string">"oType"</span> : <span class="number">1</span>,</span><br><span class="line">  <span class="string">"status"</span> : <span class="number">1</span>,</span><br><span class="line">  <span class="string">"createdAt"</span> : ISODate(<span class="string">"2015-02-01T18:16:23.133Z"</span>),</span><br><span class="line">  <span class="string">"updatedAt"</span> : ISODate(<span class="string">"2015-02-02T10:29:01.463Z"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2 */</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"amount"</span> : <span class="number">3000</span>,</span><br><span class="line">  <span class="string">"oType"</span> : <span class="number">1</span>,</span><br><span class="line">  <span class="string">"status"</span> : <span class="number">3</span>,</span><br><span class="line">  <span class="string">"createdAt"</span> : ISODate(<span class="string">"2015-02-02T03:39:48.580Z"</span>),</span><br><span class="line">  <span class="string">"updatedAt"</span> : ISODate(<span class="string">"2015-02-02T10:29:01.463Z"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>aggregate 操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> orders = db.getCollection(<span class="string">'order'</span>).aggregate(</span><br><span class="line">  [</span><br><span class="line">    &#123;</span><br><span class="line">      $match:&#123;oType:&#123;$<span class="keyword">in</span>:[<span class="number">1</span>,<span class="number">10</span>]&#125;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      $project:&#123;amount:<span class="number">1</span>,createdAt:<span class="number">1</span>,status:<span class="number">1</span>,dateAdd8:&#123; $add: [ <span class="string">"$createdAt"</span>, <span class="number">8</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span> ] &#125;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      $group:&#123;</span><br><span class="line">        _id:&#123;month:&#123;$month:<span class="string">"$dateAdd8"</span>&#125;,day:&#123;$dayOfMonth:<span class="string">"$dateAdd8"</span>&#125;,year:&#123;$year:<span class="string">"$dateAdd8"</span>&#125;&#125;,</span><br><span class="line">        totalAmount:&#123;$sum:<span class="string">"$amount"</span>&#125;,</span><br><span class="line">        count:&#123; $sum: <span class="number">1</span> &#125;,</span><br><span class="line">        items:&#123;$push:&#123;amount:<span class="string">"$amount"</span>,status:<span class="string">"$status"</span>&#125;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">).toArray();</span><br></pre></td></tr></table></figure>
+<p>这样就可以解决ISO日期格式时间比北京时间小8个钟导致按日期分组时出现跨天的问题</p>
 
       
     </div>
@@ -159,19 +117,10 @@ var jiathis_config={
     
 <nav id="article-nav">
   
-    <a href="/2016/04/07/collect/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          收藏
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/07/game/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/07/collect/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">游戏开发</div>
+      <div class="article-nav-title">收藏</div>
     </a>
   
 </nav>
@@ -182,7 +131,7 @@ var jiathis_config={
 
 <section id="comments">
   <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-post" data-title="文章" data-url="http://navyxie.github.io/2016/04/07/post/"></div>
+    <div class="ds-thread" data-thread-key="post-mongo" data-title="mongo" data-url="http://navyxie.github.io/2016/04/15/mongo/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
