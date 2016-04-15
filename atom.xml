@@ -139,13 +139,16 @@
     <link href="http://navyxie.github.io/2016/04/07/post/"/>
     <id>http://navyxie.github.io/2016/04/07/post/</id>
     <published>2016-04-06T17:49:10.000Z</published>
-    <updated>2016-04-15T19:11:21.000Z</updated>
+    <updated>2016-04-15T20:02:39.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/how-to-plugin-development&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何进行插件化开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/protractor-scenario&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;protractor-scenario(利用protractor进行场景测试)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/karma-unit&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;karma-unit(利用karma进行单元测试)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/html-tpl&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;简单的对象模板&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/html-tpl&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;简单的对象模板&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/webpack&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;webpack构建demo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/npm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;npm包的管理和发布&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/react-demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;react例子&lt;/a&gt;&lt;/li&gt;
@@ -163,7 +166,8 @@
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/how-to-plugin-development&quot;&gt;如何进行插件化开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/protractor-scenario&quot;&gt;protractor-scenario(利用protractor进行场景测试)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/karma-unit&quot;&gt;karma-unit(利用karma进行单元测试)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/html-tpl&quot;&gt;简单的对象模板&lt;/a&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/html-tpl&quot;&gt;简单的对象模板&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -187,12 +191,15 @@
     <link href="http://navyxie.github.io/2016/04/07/game/"/>
     <id>http://navyxie.github.io/2016/04/07/game/</id>
     <published>2016-04-06T17:47:44.000Z</published>
-    <updated>2016-04-15T19:10:55.000Z</updated>
+    <updated>2016-04-15T20:02:38.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;phaser-demo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/flappy-bird&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;flappy-bird&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/earth&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;earth&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/earth&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;earth&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/eat-star&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;eat-star&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/music&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;music&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -203,7 +210,8 @@
       &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo&quot;&gt;phaser-demo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/flappy-bird&quot;&gt;flappy-bird&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/earth&quot;&gt;earth&lt;/a&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/earth&quot;&gt;earth&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -223,12 +231,15 @@
     <link href="http://navyxie.github.io/2016/04/07/pay/"/>
     <id>http://navyxie.github.io/2016/04/07/pay/</id>
     <published>2016-04-06T17:45:48.000Z</published>
-    <updated>2016-04-15T19:11:16.000Z</updated>
+    <updated>2016-04-15T20:02:36.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;易宝支付SDK开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay-realname&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;易宝实名认证SDK开发&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wapllpay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连支付SDK开发&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wapllpay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连支付SDK开发&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/llpayauth&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连实名认证SDK开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/llpaycashpay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连代付(提现)SDK开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/n-pay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;支付聚合平台&lt;/a&gt;&lt;/li&gt;
@@ -240,7 +251,8 @@
       &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay&quot;&gt;易宝支付SDK开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay-realname&quot;&gt;易宝实名认证SDK开发&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wapllpay&quot;&gt;连连支付SDK开发&lt;/a&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wapllpay&quot;&gt;连连支付SDK开发&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -262,12 +274,15 @@
     <link href="http://navyxie.github.io/2016/04/07/tools/"/>
     <id>http://navyxie.github.io/2016/04/07/tools/</id>
     <published>2016-04-06T17:43:51.000Z</published>
-    <updated>2016-04-15T19:11:26.000Z</updated>
+    <updated>2016-04-15T20:02:34.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/minievent&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;事件扩展工具库&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/n-crypto&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Nodejs的加密解密&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://meiriyitie.com/2015/05/26/diagnosing-network-issues-with-mtr/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用 MTR 诊断网络问题&lt;/a&gt;&lt;/li&gt;
@@ -279,7 +294,8 @@
       &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
