@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://navyxie.github.io/"/>
-  <updated>2016-04-15T19:35:02.000Z</updated>
+  <updated>2016-04-15T22:26:32.000Z</updated>
   <id>http://navyxie.github.io/</id>
   
   <author>
@@ -14,6 +14,83 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo-theme-landscape-swiftype</title>
+    <link href="http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/"/>
+    <id>http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/</id>
+    <published>2016-04-15T22:16:04.000Z</published>
+    <updated>2016-04-15T22:26:32.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;hexo站内搜索功能-——-swiftype&quot;&gt;&lt;a href=&quot;#hexo站内搜索功能-——-swiftype&quot; class=&quot;headerlink&quot; title=&quot;hexo站内搜索功能 —— swiftype&quot;&gt;&lt;/a&gt;hexo站内搜索功能 —— swiftype&lt;/h2&gt;&lt;p&gt;hexo 默认自带的搜索引擎是google,我们接下来是讲解如何用swiftype实现站内搜索&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;去&lt;a href=&quot;https://swiftype.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;swiftype&lt;/a&gt;官网注册一个账号，按步骤同步站点内容，然后复制代码，代码如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;w,d,t,u,n,s,e&lt;/span&gt;)&lt;/span&gt;&amp;#123;w[&lt;span class=&quot;string&quot;&gt;&#39;SwiftypeObject&#39;&lt;/span&gt;]=n;w[n]=w[n]||&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (w[n].q=w[n].q||[]).push(&lt;span class=&quot;built_in&quot;&gt;arguments&lt;/span&gt;);&amp;#125;;s=d.createElement(t);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  e=d.getElementsByTagName(t)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];s.async=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;s.src=u;e.parentNode.insertBefore(s,e);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)(&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;script&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;//s.swiftypecdn.com/install/v2/st.js&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;_st&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  _st(&lt;span class=&quot;string&quot;&gt;&#39;install&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;kWSKry9NQXF2ddPp_Lay&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;2.0.0&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//请更换自己的kWSKry9NQXF2ddPp_Lay&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;搜索主题的search_form方法，不同主题可能位置不一样，但是landscape主题是在layout/_partial/header.ejs文件中，替换掉search_form方法，如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;div id=&lt;span class=&quot;string&quot;&gt;&quot;search-form-wrap&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;st-default-search-input search-form-input&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;outline: none;width: 110px;&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;w,d,t,u,n,s,e&lt;/span&gt;)&lt;/span&gt;&amp;#123;w[&lt;span class=&quot;string&quot;&gt;&#39;SwiftypeObject&#39;&lt;/span&gt;]=n;w[n]=w[n]||&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (w[n].q=w[n].q||[]).push(&lt;span class=&quot;built_in&quot;&gt;arguments&lt;/span&gt;);&amp;#125;;s=d.createElement(t);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  e=d.getElementsByTagName(t)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];s.async=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;s.src=u;e.parentNode.insertBefore(s,e);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)(&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;script&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;//s.swiftypecdn.com/install/v2/st.js&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;_st&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  _st(&lt;span class=&quot;string&quot;&gt;&#39;install&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;kWSKry9NQXF2ddPp_Lay&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;2.0.0&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;可参照本博客&lt;a href=&quot;https://github.com/navyxie/hexo-github-page&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;源码&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      hexo theme landscape add swiftype
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://navyxie.github.io/categories/hexo/"/>
+    
+      <category term="theme" scheme="http://navyxie.github.io/categories/hexo/theme/"/>
+    
+      <category term="landscape" scheme="http://navyxie.github.io/categories/hexo/theme/landscape/"/>
+    
+    
+      <category term="hexo" scheme="http://navyxie.github.io/tags/hexo/"/>
+    
+      <category term="theme" scheme="http://navyxie.github.io/tags/theme/"/>
+    
+      <category term="landscape" scheme="http://navyxie.github.io/tags/landscape/"/>
+    
+      <category term="swiftype" scheme="http://navyxie.github.io/tags/swiftype/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo-them-landscape</title>
+    <link href="http://navyxie.github.io/2016/04/16/hexo-them-landscape/"/>
+    <id>http://navyxie.github.io/2016/04/16/hexo-them-landscape/</id>
+    <published>2016-04-15T22:06:28.000Z</published>
+    <updated>2016-04-15T22:15:09.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;hexo-theme-landscape-0-0-1-版本文章分页显示的bug&quot;&gt;&lt;a href=&quot;#hexo-theme-landscape-0-0-1-版本文章分页显示的bug&quot; class=&quot;headerlink&quot; title=&quot;hexo-theme-landscape  0.0.1 版本文章分页显示的bug&quot;&gt;&lt;/a&gt;hexo-theme-landscape  0.0.1 版本文章分页显示的bug&lt;/h2&gt;&lt;p&gt;上一页和下一页的bug显示如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;« __(&#39;prev&#39;) __(&#39;next&#39;) »&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;解决方法(layout/_partial/archive.ejs)：&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;nav id=&lt;span class=&quot;string&quot;&gt;&quot;page-nav&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;prev_text&lt;/span&gt; = &quot;&amp;amp;&lt;span class=&quot;attr&quot;&gt;laquo&lt;/span&gt;; &quot; + &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;prev&lt;/span&gt;&#39;);&lt;span class=&quot;attr&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;next_text&lt;/span&gt; = &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;next&lt;/span&gt;&#39;) + &quot; &amp;amp;&lt;span class=&quot;attr&quot;&gt;raquo&lt;/span&gt;;&quot;%&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;%-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;paginator&lt;/span&gt;(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;prev_text:&lt;/span&gt; &quot;&amp;amp;&lt;span class=&quot;attr&quot;&gt;laquo&lt;/span&gt;; &quot;+&lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;prev&lt;/span&gt;&#39;),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;next_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;next&lt;/span&gt;&#39;)+&quot; &amp;amp;&lt;span class=&quot;attr&quot;&gt;raquo&lt;/span&gt;;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;prev_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;prev_text&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;next_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;next_text&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;) %&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;nav&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;已向官方提交&lt;a href=&quot;https://github.com/hexojs/hexo-theme-landscape/pull/67/files&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PR&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      hexo landscape theme
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://navyxie.github.io/categories/hexo/"/>
+    
+      <category term="theme" scheme="http://navyxie.github.io/categories/hexo/theme/"/>
+    
+      <category term="landscape" scheme="http://navyxie.github.io/categories/hexo/theme/landscape/"/>
+    
+    
+      <category term="hexo" scheme="http://navyxie.github.io/tags/hexo/"/>
+    
+      <category term="theme" scheme="http://navyxie.github.io/tags/theme/"/>
+    
+      <category term="landscape" scheme="http://navyxie.github.io/tags/landscape/"/>
+    
+  </entry>
   
   <entry>
     <title>mongo_aggregate_cond</title>
