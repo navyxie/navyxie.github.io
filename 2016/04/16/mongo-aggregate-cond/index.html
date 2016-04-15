@@ -3,48 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>收藏 | Navy&#39;s Blog</title>
+  <title>mongo_aggregate_cond | Navy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JavaScript SDK 设计指导
-js-the-right-way
-JSbooks
-superherojs
-前端开发者都应知道的 jQuery 小技巧
-常用的 Javascript 设计模式
-10 个 jQuery 图表插件推荐
-理解JavaScript原型
-只有20行Javascript代码！手把手教你写一个页面模板引擎
-编写快速、高效的JavaScript代码
-45个实用的JavaSc">
+  <meta name="description" content="mongo aggregate cond">
 <meta property="og:type" content="article">
-<meta property="og:title" content="收藏">
-<meta property="og:url" content="http://navyxie.github.io/2016/04/07/collect/index.html">
+<meta property="og:title" content="mongo_aggregate_cond">
+<meta property="og:url" content="http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/index.html">
 <meta property="og:site_name" content="Navy's Blog">
-<meta property="og:description" content="JavaScript SDK 设计指导
-js-the-right-way
-JSbooks
-superherojs
-前端开发者都应知道的 jQuery 小技巧
-常用的 Javascript 设计模式
-10 个 jQuery 图表插件推荐
-理解JavaScript原型
-只有20行Javascript代码！手把手教你写一个页面模板引擎
-编写快速、高效的JavaScript代码
-45个实用的JavaSc">
-<meta property="og:updated_time" content="2016-04-13T18:18:04.000Z">
+<meta property="og:description" content="mongo aggregate cond">
+<meta property="og:updated_time" content="2016-04-15T18:28:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="收藏">
-<meta name="twitter:description" content="JavaScript SDK 设计指导
-js-the-right-way
-JSbooks
-superherojs
-前端开发者都应知道的 jQuery 小技巧
-常用的 Javascript 设计模式
-10 个 jQuery 图表插件推荐
-理解JavaScript原型
-只有20行Javascript代码！手把手教你写一个页面模板引擎
-编写快速、高效的JavaScript代码
-45个实用的JavaSc">
+<meta name="twitter:title" content="mongo_aggregate_cond">
+<meta name="twitter:description" content="mongo aggregate cond">
   
     <link rel="alternate" href="/atom.xml" title="Navy&#39;s Blog" type="application/atom+xml">
   
@@ -86,14 +56,14 @@ superherojs
   </div>
 </header>
       <div class="outer" id="body">
-        <section id="main"><article id="post-collect" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-mongo-aggregate-cond" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/07/collect/" class="article-date">
-  <time datetime="2016-04-06T17:50:29.000Z" itemprop="datePublished">2016-04-07</time>
+    <a href="/2016/04/16/mongo-aggregate-cond/" class="article-date">
+  <time datetime="2016-04-15T18:24:19.000Z" itemprop="datePublished">2016-04-16</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/收藏/">收藏</a>
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>►<a class="article-category-link" href="/categories/数据库/mongo/">mongo</a>
   </div>
 
   </div>
@@ -104,7 +74,7 @@ superherojs
         
   
     <h1 class="article-title" itemprop="name">
-      收藏
+      mongo_aggregate_cond
     </h1>
   
 
@@ -113,22 +83,14 @@ superherojs
     <div class="article-entry" itemprop="articleBody">
       
         
-        <ul>
-<li><a href="https://github.com/huei90/javascript-sdk-design" target="_blank" rel="external">JavaScript SDK 设计指导</a></li>
-<li><a href="https://github.com/braziljs/js-the-right-way" target="_blank" rel="external">js-the-right-way</a></li>
-<li><a href="https://github.com/revolunet/JSbooks" target="_blank" rel="external">JSbooks</a></li>
-<li><a href="https://github.com/superherojs/superherojs" target="_blank" rel="external">superherojs</a></li>
-<li><a href="http://web.jobbole.com/84028/" target="_blank" rel="external">前端开发者都应知道的 jQuery 小技巧</a></li>
-<li><a href="http://web.jobbole.com/29454/" target="_blank" rel="external">常用的 Javascript 设计模式</a></li>
-<li><a href="http://web.jobbole.com/21136/" target="_blank" rel="external">10 个 jQuery 图表插件推荐</a></li>
-<li><a href="http://web.jobbole.com/9648/" target="_blank" rel="external">理解JavaScript原型</a></li>
-<li><a href="http://web.jobbole.com/56689/" target="_blank" rel="external">只有20行Javascript代码！手把手教你写一个页面模板引擎</a></li>
-<li><a href="http://web.jobbole.com/31951/" target="_blank" rel="external">编写快速、高效的JavaScript代码</a></li>
-<li><a href="http://web.jobbole.com/54495/" target="_blank" rel="external">45个实用的JavaScript技巧、窍门和最佳实践</a></li>
-<li><a href="http://web.jobbole.com/66135/" target="_blank" rel="external">为现代JavaScript开发做好准备</a></li>
-<li><a href="http://web.jobbole.com/53199/" target="_blank" rel="external">给JavaScript初学者的24条最佳实践</a></li>
-<li><a href="http://web.jobbole.com/8087/" target="_blank" rel="external">JavaScript的那些书</a></li>
-</ul>
+        <h2 id="mongo按条件返回字段值"><a href="#mongo按条件返回字段值" class="headerlink" title="mongo按条件返回字段值"></a>mongo按条件返回字段值</h2><p>假设数据库表inventory中的数据如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : <span class="number">1</span>, <span class="string">"item"</span> : <span class="string">"abc1"</span>, <span class="string">"discount"</span> : <span class="number">30</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : <span class="number">2</span>, <span class="string">"item"</span> : <span class="string">"abc2"</span>, <span class="string">"discount"</span> : <span class="number">20</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : <span class="number">3</span>, <span class="string">"item"</span> : <span class="string">"xyz1"</span>, <span class="string">"discount"</span> : <span class="number">30</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>执行aggregate操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">db.inventory.aggregate(</span><br><span class="line">   [</span><br><span class="line">      &#123;</span><br><span class="line">         $project:</span><br><span class="line">           &#123;</span><br><span class="line">             item: <span class="number">1</span>,</span><br><span class="line">             discount:</span><br><span class="line">               &#123;</span><br><span class="line">                 $cond: &#123; <span class="keyword">if</span>: &#123; $gte: [ <span class="string">"$qty"</span>, <span class="number">250</span> ] &#125;, then: <span class="number">30</span>, <span class="keyword">else</span>: <span class="number">20</span> &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">db.inventory.aggregate(</span><br><span class="line">   [</span><br><span class="line">      &#123;</span><br><span class="line">         $project:</span><br><span class="line">           &#123;</span><br><span class="line">             item: <span class="number">1</span>,</span><br><span class="line">             discount:</span><br><span class="line">               &#123;</span><br><span class="line">                 $cond: [ &#123; $gte: [ <span class="string">"$qty"</span>, <span class="number">250</span> ] &#125;, <span class="number">30</span>, <span class="number">20</span> ]</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>返回结果：</p>
+<p>{ “_id” : 1, “item” : “abc1”, “discount” : 30 }<br>{ “_id” : 2, “item” : “abc2”, “discount” : 20 }<br>{ “_id” : 3, “item” : “xyz1”, “discount” : 30 }</p>
 
       
     </div>
@@ -158,19 +120,10 @@ var jiathis_config={
     
 <nav id="article-nav">
   
-    <a href="/2016/04/15/mongo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          mongo
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/07/post/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/15/mongo/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">文章</div>
+      <div class="article-nav-title">mongo</div>
     </a>
   
 </nav>
@@ -181,7 +134,7 @@ var jiathis_config={
 
 <section id="comments">
   <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-collect" data-title="收藏" data-url="http://navyxie.github.io/2016/04/07/collect/"></div>
+    <div class="ds-thread" data-thread-key="post-mongo-aggregate-cond" data-title="mongo_aggregate_cond" data-url="http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
