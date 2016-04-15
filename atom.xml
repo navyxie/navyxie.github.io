@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://navyxie.github.io/"/>
-  <updated>2016-04-15T18:28:10.000Z</updated>
+  <updated>2016-04-15T19:35:02.000Z</updated>
   <id>http://navyxie.github.io/</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/"/>
     <id>http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/</id>
     <published>2016-04-15T18:24:19.000Z</published>
-    <updated>2016-04-15T18:28:10.000Z</updated>
+    <updated>2016-04-15T19:35:02.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;mongo按条件返回字段值&quot;&gt;&lt;a href=&quot;#mongo按条件返回字段值&quot; class=&quot;headerlink&quot; title=&quot;mongo按条件返回字段值&quot;&gt;&lt;/a&gt;mongo按条件返回字段值&lt;/h2&gt;&lt;p&gt;假设数据库表inventory中的数据如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123; &lt;span class=&quot;string&quot;&gt;&quot;_id&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;item&quot;&lt;/span&gt; : &lt;span class=&quot;string&quot;&gt;&quot;abc1&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;discount&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;30&lt;/span&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123; &lt;span class=&quot;string&quot;&gt;&quot;_id&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;item&quot;&lt;/span&gt; : &lt;span class=&quot;string&quot;&gt;&quot;abc2&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;discount&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123; &lt;span class=&quot;string&quot;&gt;&quot;_id&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;item&quot;&lt;/span&gt; : &lt;span class=&quot;string&quot;&gt;&quot;xyz1&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;discount&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;30&lt;/span&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;执行aggregate操作：&lt;/p&gt;
 &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.inventory.aggregate(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   [&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         $project:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             item: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             discount:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;               &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                 $cond: &amp;#123; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;: &amp;#123; $gte: [ &lt;span class=&quot;string&quot;&gt;&quot;$qty&quot;&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;250&lt;/span&gt; ] &amp;#125;, then: &lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;               &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   ]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;或者&lt;/p&gt;
@@ -56,10 +57,11 @@
     <link href="http://navyxie.github.io/2016/04/15/mongo/"/>
     <id>http://navyxie.github.io/2016/04/15/mongo/</id>
     <published>2016-04-14T17:43:05.000Z</published>
-    <updated>2016-04-14T17:55:51.000Z</updated>
+    <updated>2016-04-15T19:11:12.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;mongodb-的-aggregate-操作&quot;&gt;&lt;a href=&quot;#mongodb-的-aggregate-操作&quot; class=&quot;headerlink&quot; title=&quot;mongodb 的 aggregate 操作&quot;&gt;&lt;/a&gt;mongodb 的 aggregate 操作&lt;/h2&gt;&lt;p&gt;当我们对数据按日期进行分组时，经常遇到ISO日期格式比北京时间小8个小时的问题，导致数据分组时，存在跨天的问题，一组数据如下&lt;/p&gt;
 &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* 1 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;amount&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;oType&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;status&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;createdAt&quot;&lt;/span&gt; : ISODate(&lt;span class=&quot;string&quot;&gt;&quot;2015-02-01T18:16:23.133Z&quot;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;updatedAt&quot;&lt;/span&gt; : ISODate(&lt;span class=&quot;string&quot;&gt;&quot;2015-02-02T10:29:01.463Z&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* 2 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;amount&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;3000&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;oType&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;status&quot;&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;createdAt&quot;&lt;/span&gt; : ISODate(&lt;span class=&quot;string&quot;&gt;&quot;2015-02-02T03:39:48.580Z&quot;&lt;/span&gt;),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;updatedAt&quot;&lt;/span&gt; : ISODate(&lt;span class=&quot;string&quot;&gt;&quot;2015-02-02T10:29:01.463Z&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;aggregate 操作&lt;/p&gt;
 &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; orders = db.getCollection(&lt;span class=&quot;string&quot;&gt;&#39;order&#39;&lt;/span&gt;).aggregate(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      $match:&amp;#123;oType:&amp;#123;$&lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt;:[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;]&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      $project:&amp;#123;amount:&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,createdAt:&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,status:&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,dateAdd8:&amp;#123; $add: [ &lt;span class=&quot;string&quot;&gt;&quot;$createdAt&quot;&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;*&lt;span class=&quot;number&quot;&gt;60&lt;/span&gt;*&lt;span class=&quot;number&quot;&gt;60&lt;/span&gt;*&lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt; ] &amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      $group:&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        _id:&amp;#123;month:&amp;#123;$month:&lt;span class=&quot;string&quot;&gt;&quot;$dateAdd8&quot;&lt;/span&gt;&amp;#125;,day:&amp;#123;$dayOfMonth:&lt;span class=&quot;string&quot;&gt;&quot;$dateAdd8&quot;&lt;/span&gt;&amp;#125;,year:&amp;#123;$year:&lt;span class=&quot;string&quot;&gt;&quot;$dateAdd8&quot;&lt;/span&gt;&amp;#125;&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        totalAmount:&amp;#123;$sum:&lt;span class=&quot;string&quot;&gt;&quot;$amount&quot;&lt;/span&gt;&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        count:&amp;#123; $sum: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        items:&amp;#123;$push:&amp;#123;amount:&lt;span class=&quot;string&quot;&gt;&quot;$amount&quot;&lt;/span&gt;,status:&lt;span class=&quot;string&quot;&gt;&quot;$status&quot;&lt;/span&gt;&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;).toArray();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;这样就可以解决ISO日期格式时间比北京时间小8个钟导致按日期分组时出现跨天的问题&lt;/p&gt;
@@ -87,7 +89,7 @@
     <link href="http://navyxie.github.io/2016/04/07/collect/"/>
     <id>http://navyxie.github.io/2016/04/07/collect/</id>
     <published>2016-04-06T17:50:29.000Z</published>
-    <updated>2016-04-13T18:18:04.000Z</updated>
+    <updated>2016-04-15T19:34:51.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/huei90/javascript-sdk-design&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JavaScript SDK 设计指导&lt;/a&gt;&lt;/li&gt;
@@ -96,6 +98,9 @@
 &lt;li&gt;&lt;a href=&quot;https://github.com/superherojs/superherojs&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;superherojs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/84028/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;前端开发者都应知道的 jQuery 小技巧&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/29454/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;常用的 Javascript 设计模式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/21136/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;10 个 jQuery 图表插件推荐&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/9648/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;理解JavaScript原型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/56689/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;只有20行Javascript代码！手把手教你写一个页面模板引擎&lt;/a&gt;&lt;/li&gt;
@@ -110,8 +115,13 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/huei90/javascript-sdk-design&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JavaScript SDK 设计指导&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;
+&lt;li&gt;&lt;a href=&quot;https://github.com/huei90/javascript-sdk-design&quot;&gt;JavaScript SDK 设计指导&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/braziljs/js-the-right-way&quot;&gt;js-the-right-way&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/revolunet/JSbooks&quot;&gt;JSbooks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/superherojs/superherojs&quot;&gt;superherojs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/84028/&quot;&gt;前端开发者都应知道的 jQuery 小技巧&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/29454/&quot;&gt;常用的 Javascript 设计模式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -129,13 +139,13 @@
     <link href="http://navyxie.github.io/2016/04/07/post/"/>
     <id>http://navyxie.github.io/2016/04/07/post/</id>
     <published>2016-04-06T17:49:10.000Z</published>
-    <updated>2016-04-13T18:17:58.000Z</updated>
+    <updated>2016-04-15T19:11:21.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/how-to-plugin-development&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何进行插件化开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/protractor-scenario&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;protractor-scenario(利用protractor进行场景测试)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/karma-unit&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;karma-unit(利用karma进行单元测试)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/html-tpl&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;简单的对象模板&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/html-tpl&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;简单的对象模板&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/webpack&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;webpack构建demo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/npm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;npm包的管理和发布&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/react-demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;react例子&lt;/a&gt;&lt;/li&gt;
@@ -150,8 +160,10 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/how-to-plugin-development&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何进行插件化开发&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/how-to-plugin-development&quot;&gt;如何进行插件化开发&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/protractor-scenario&quot;&gt;protractor-scenario(利用protractor进行场景测试)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/karma-unit&quot;&gt;karma-unit(利用karma进行单元测试)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/html-tpl&quot;&gt;简单的对象模板&lt;/a&gt;
     
     </summary>
     
@@ -175,12 +187,12 @@
     <link href="http://navyxie.github.io/2016/04/07/game/"/>
     <id>http://navyxie.github.io/2016/04/07/game/</id>
     <published>2016-04-06T17:47:44.000Z</published>
-    <updated>2016-04-12T17:27:32.000Z</updated>
+    <updated>2016-04-15T19:10:55.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;phaser-demo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/flappy-bird&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;flappy-bird&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/earth&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;earth&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/earth&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;earth&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/eat-star&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;eat-star&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/music&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;music&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -189,8 +201,9 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;phaser-demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.co
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo&quot;&gt;phaser-demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/flappy-bird&quot;&gt;flappy-bird&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo/tree/master/examples/earth&quot;&gt;earth&lt;/a&gt;
     
     </summary>
     
@@ -210,12 +223,12 @@
     <link href="http://navyxie.github.io/2016/04/07/pay/"/>
     <id>http://navyxie.github.io/2016/04/07/pay/</id>
     <published>2016-04-06T17:45:48.000Z</published>
-    <updated>2016-04-12T17:27:41.000Z</updated>
+    <updated>2016-04-15T19:11:16.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;易宝支付SDK开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay-realname&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;易宝实名认证SDK开发&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wapllpay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连支付SDK开发&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wapllpay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连支付SDK开发&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/llpayauth&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连实名认证SDK开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/llpaycashpay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;连连代付(提现)SDK开发&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/n-pay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;支付聚合平台&lt;/a&gt;&lt;/li&gt;
@@ -225,8 +238,9 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;易宝支付SDK开发&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyx
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay&quot;&gt;易宝支付SDK开发&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/yeepay-realname&quot;&gt;易宝实名认证SDK开发&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wapllpay&quot;&gt;连连支付SDK开发&lt;/a&gt;
     
     </summary>
     
@@ -248,12 +262,12 @@
     <link href="http://navyxie.github.io/2016/04/07/tools/"/>
     <id>http://navyxie.github.io/2016/04/07/tools/</id>
     <published>2016-04-06T17:43:51.000Z</published>
-    <updated>2016-04-12T17:28:01.000Z</updated>
+    <updated>2016-04-15T19:11:26.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/minievent&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;事件扩展工具库&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/n-crypto&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Nodejs的加密解密&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://meiriyitie.com/2015/05/26/diagnosing-network-issues-with-mtr/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用 MTR 诊断网络问题&lt;/a&gt;&lt;/li&gt;
@@ -263,8 +277,9 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://gi
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;
     
     </summary>
     
@@ -282,12 +297,15 @@
     <link href="http://navyxie.github.io/2016/04/07/wechat-develop/"/>
     <id>http://navyxie.github.io/2016/04/07/wechat-develop/</id>
     <published>2016-04-06T17:41:10.000Z</published>
-    <updated>2016-04-12T17:28:11.000Z</updated>
+    <updated>2016-04-15T19:12:52.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信公众平台接入例子&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-code/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信开放平台接入Code Demo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-local-debug/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何在本地进行微信开放平台开发调试测与试&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/weixin_js/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何在微信6.0.2+版本不接入微信API的情况下设置自定义分享内容&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/oauth2-wechat-develop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;以接入微信开放平台为例讲解oauth2原理&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -296,8 +314,10 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信公众平台接入例子&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop/&quot;&gt;微信公众平台接入例子&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-code/&quot;&gt;微信开放平台接入Code Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-local-debug/&quot;&gt;如何在本地进行微信开放平台开发调试测与试&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

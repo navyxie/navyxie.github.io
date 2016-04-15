@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/index.html">
 <meta property="og:site_name" content="Navy's Blog">
 <meta property="og:description" content="mongo aggregate cond">
-<meta property="og:updated_time" content="2016-04-15T18:28:10.000Z">
+<meta property="og:updated_time" content="2016-04-15T19:35:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongo_aggregate_cond">
 <meta name="twitter:description" content="mongo aggregate cond">
@@ -85,6 +85,7 @@
         
         <h2 id="mongo按条件返回字段值"><a href="#mongo按条件返回字段值" class="headerlink" title="mongo按条件返回字段值"></a>mongo按条件返回字段值</h2><p>假设数据库表inventory中的数据如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : <span class="number">1</span>, <span class="string">"item"</span> : <span class="string">"abc1"</span>, <span class="string">"discount"</span> : <span class="number">30</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : <span class="number">2</span>, <span class="string">"item"</span> : <span class="string">"abc2"</span>, <span class="string">"discount"</span> : <span class="number">20</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : <span class="number">3</span>, <span class="string">"item"</span> : <span class="string">"xyz1"</span>, <span class="string">"discount"</span> : <span class="number">30</span> &#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>执行aggregate操作：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">db.inventory.aggregate(</span><br><span class="line">   [</span><br><span class="line">      &#123;</span><br><span class="line">         $project:</span><br><span class="line">           &#123;</span><br><span class="line">             item: <span class="number">1</span>,</span><br><span class="line">             discount:</span><br><span class="line">               &#123;</span><br><span class="line">                 $cond: &#123; <span class="keyword">if</span>: &#123; $gte: [ <span class="string">"$qty"</span>, <span class="number">250</span> ] &#125;, then: <span class="number">30</span>, <span class="keyword">else</span>: <span class="number">20</span> &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>或者</p>
@@ -241,7 +242,7 @@ updateTime()
   <div class="outer">
     <div id="footer-info" class="inner">
     	<div id="copyRight">
-        &copy; 2016 Navy xie<br>
+        &copy; 2016 - 2016 Navy xie<br>
         Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       </div>
       <div id="siteInfo">
@@ -281,7 +282,7 @@ updateTime()
 
 <script src="/js/script.js"></script>
 
-<div id="totop" style="position:fixed;bottom:20px;right:20px;cursor: pointer;width:20px;text-align:center;cursor: pointer;z-index:10;">回到顶部</div>
+<div id="totop"></div>
 <script src="/js/totop.js"></script>
 {% if theme.baidu_push %}
 <script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
