@@ -1519,3 +1519,6 @@ pre .javascript .function {
   border-color: transparent transparent #fff transparent;
   border-style: solid;
 }
+.textCenter {
+  text-align: center;
+}
