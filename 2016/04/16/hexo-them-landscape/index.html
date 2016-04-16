@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://navyxie.github.io/2016/04/16/hexo-them-landscape/index.html">
 <meta property="og:site_name" content="Navy's Blog">
 <meta property="og:description" content="hexo landscape theme">
-<meta property="og:updated_time" content="2016-04-15T22:15:09.000Z">
+<meta property="og:updated_time" content="2016-04-16T13:10:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo-them-landscape">
 <meta name="twitter:description" content="hexo landscape theme">
@@ -105,6 +105,7 @@
         <h2 id="hexo-theme-landscape-0-0-1-版本文章分页显示的bug"><a href="#hexo-theme-landscape-0-0-1-版本文章分页显示的bug" class="headerlink" title="hexo-theme-landscape  0.0.1 版本文章分页显示的bug"></a>hexo-theme-landscape  0.0.1 版本文章分页显示的bug</h2><p>上一页和下一页的bug显示如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">« __('prev') __('next') »</span><br></pre></td></tr></table></figure>
 <p>解决方法(layout/_partial/archive.ejs)：</p>
+<a id="more"></a>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;nav id=<span class="string">"page-nav"</span>&gt;</span><br><span class="line">	<span class="xml"><span class="tag">&lt;<span class="name">%</span> <span class="attr">var</span> <span class="attr">prev_text</span> = "&amp;<span class="attr">laquo</span>; " + <span class="attr">__</span>('<span class="attr">prev</span>');<span class="attr">var</span> <span class="attr">next_text</span> = <span class="attr">__</span>('<span class="attr">next</span>') + " &amp;<span class="attr">raquo</span>;"%&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">%-</span> <span class="attr">paginator</span>(&#123;</span><br><span class="line">		<span class="attr">prev_text:</span> "&amp;<span class="attr">laquo</span>; "+<span class="attr">__</span>('<span class="attr">prev</span>'),</span><br><span class="line">		<span class="attr">next_text:</span> <span class="attr">__</span>('<span class="attr">next</span>')+" &amp;<span class="attr">raquo</span>;"</span><br><span class="line">		<span class="attr">prev_text:</span> <span class="attr">prev_text</span>,</span><br><span class="line">		<span class="attr">next_text:</span> <span class="attr">next_text</span></span><br><span class="line">	&#125;) %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>已向官方提交<a href="https://github.com/hexojs/hexo-theme-landscape/pull/67/files" target="_blank" rel="external">PR</a></p>
 
@@ -155,26 +156,6 @@ var jiathis_config={
 
   
 </article>
-
-
-<section id="comments">
-  <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-hexo-them-landscape" data-title="hexo-them-landscape" data-url="http://navyxie.github.io/2016/04/16/hexo-them-landscape/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-  var duoshuoQuery = {short_name:"navyxie"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0] 
-       || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    </script>
-  <!-- 多说公共JS代码 end -->
-</section>
 </section>
         
           <aside id="sidebar">
@@ -257,6 +238,32 @@ updateTime()
     </div>
   </div>
 
+  
+    <div class="widget-wrap">
+  
+  <h3 class="widget-title">我有话说</h3>
+  <div class="widget">
+    <section id="comments">
+      <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="page-404.html" data-title="" data-url="http://navyxie.github.io/404.html"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"navyxie"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0] 
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      <!-- 多说公共JS代码 end -->
+    </section>
+  </div>
+  
+</div>
   
 </aside>
         

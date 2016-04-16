@@ -1015,14 +1015,14 @@ a.article-title:hover {
   padding-left: 20px;
 }
 #comments {
-  background: #fff;
   -webkit-box-shadow: 1px 2px 3px #ddd;
   box-shadow: 1px 2px 3px #ddd;
-  padding: 20px;
   border: 1px solid #ddd;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  margin: 50px 0;
+}
+#comments #ds-thread #ds-reset .ds-login-buttons .ds-service-list li {
+  margin-left: 0;
 }
 #comments a {
   color: #258fb8;

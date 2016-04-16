@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/index.html">
 <meta property="og:site_name" content="Navy's Blog">
 <meta property="og:description" content="hexo theme landscape add swiftype">
-<meta property="og:updated_time" content="2016-04-15T22:26:32.000Z">
+<meta property="og:updated_time" content="2016-04-16T13:10:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo-theme-landscape-swiftype">
 <meta name="twitter:description" content="hexo theme landscape add swiftype">
@@ -107,6 +107,7 @@
 <li>去<a href="https://swiftype.com" target="_blank" rel="external">swiftype</a>官网注册一个账号，按步骤同步站点内容，然后复制代码，代码如下：</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>&#123;w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);&#125;;s=d.createElement(t);</span><br><span class="line">  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);</span><br><span class="line">  &#125;)(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);</span><br><span class="line">  _st(<span class="string">'install'</span>,<span class="string">'kWSKry9NQXF2ddPp_Lay'</span>,<span class="string">'2.0.0'</span>);</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="comment">//请更换自己的kWSKry9NQXF2ddPp_Lay</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <ol>
 <li>搜索主题的search_form方法，不同主题可能位置不一样，但是landscape主题是在layout/_partial/header.ejs文件中，替换掉search_form方法，如下：</li>
 </ol>
@@ -151,26 +152,6 @@ var jiathis_config={
 
   
 </article>
-
-
-<section id="comments">
-  <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-hexo-theme-landscape-swiftype" data-title="hexo-theme-landscape-swiftype" data-url="http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-  var duoshuoQuery = {short_name:"navyxie"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0] 
-       || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    </script>
-  <!-- 多说公共JS代码 end -->
-</section>
 </section>
         
           <aside id="sidebar">
@@ -253,6 +234,32 @@ updateTime()
     </div>
   </div>
 
+  
+    <div class="widget-wrap">
+  
+  <h3 class="widget-title">我有话说</h3>
+  <div class="widget">
+    <section id="comments">
+      <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="page-404.html" data-title="" data-url="http://navyxie.github.io/404.html"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"navyxie"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0] 
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      <!-- 多说公共JS代码 end -->
+    </section>
+  </div>
+  
+</div>
   
 </aside>
         
