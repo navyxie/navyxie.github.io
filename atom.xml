@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://navyxie.github.io/"/>
+  <link href="http://www.navyxie.com/"/>
   <updated>2016-04-16T13:10:23.000Z</updated>
-  <id>http://navyxie.github.io/</id>
+  <id>http://www.navyxie.com/</id>
   
   <author>
     <name>Navy xie</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>hexo-theme-landscape-swiftype</title>
-    <link href="http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/"/>
-    <id>http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/</id>
+    <link href="http://www.navyxie.com/2016/04/16/hexo-theme-landscape-swiftype/"/>
+    <id>http://www.navyxie.com/2016/04/16/hexo-theme-landscape-swiftype/</id>
     <published>2016-04-15T22:16:04.000Z</published>
     <updated>2016-04-16T13:10:23.000Z</updated>
     
@@ -41,27 +41,27 @@
     
     </summary>
     
-      <category term="hexo" scheme="http://navyxie.github.io/categories/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/categories/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/categories/hexo/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/categories/hexo/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/categories/hexo/theme/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/categories/hexo/theme/landscape/"/>
     
     
-      <category term="hexo" scheme="http://navyxie.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/tags/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/tags/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/tags/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/tags/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/tags/landscape/"/>
     
-      <category term="swiftype" scheme="http://navyxie.github.io/tags/swiftype/"/>
+      <category term="swiftype" scheme="http://www.navyxie.com/tags/swiftype/"/>
     
   </entry>
   
   <entry>
     <title>hexo-them-landscape</title>
-    <link href="http://navyxie.github.io/2016/04/16/hexo-them-landscape/"/>
-    <id>http://navyxie.github.io/2016/04/16/hexo-them-landscape/</id>
+    <link href="http://www.navyxie.com/2016/04/16/hexo-them-landscape/"/>
+    <id>http://www.navyxie.com/2016/04/16/hexo-them-landscape/</id>
     <published>2016-04-15T22:06:28.000Z</published>
     <updated>2016-04-16T13:10:14.000Z</updated>
     
@@ -79,25 +79,25 @@
     
     </summary>
     
-      <category term="hexo" scheme="http://navyxie.github.io/categories/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/categories/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/categories/hexo/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/categories/hexo/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/categories/hexo/theme/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/categories/hexo/theme/landscape/"/>
     
     
-      <category term="hexo" scheme="http://navyxie.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/tags/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/tags/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/tags/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/tags/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/tags/landscape/"/>
     
   </entry>
   
   <entry>
     <title>mongo_aggregate_cond</title>
-    <link href="http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/"/>
-    <id>http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/</id>
+    <link href="http://www.navyxie.com/2016/04/16/mongo-aggregate-cond/"/>
+    <id>http://www.navyxie.com/2016/04/16/mongo-aggregate-cond/</id>
     <published>2016-04-15T18:24:19.000Z</published>
     <updated>2016-04-15T19:35:02.000Z</updated>
     
@@ -118,23 +118,23 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mongo" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
     
     
-      <category term="mongo" scheme="http://navyxie.github.io/tags/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/tags/mongo/"/>
     
-      <category term="数据库" scheme="http://navyxie.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="aggregate" scheme="http://navyxie.github.io/tags/aggregate/"/>
+      <category term="aggregate" scheme="http://www.navyxie.com/tags/aggregate/"/>
     
   </entry>
   
   <entry>
     <title>mongo</title>
-    <link href="http://navyxie.github.io/2016/04/15/mongo/"/>
-    <id>http://navyxie.github.io/2016/04/15/mongo/</id>
+    <link href="http://www.navyxie.com/2016/04/15/mongo/"/>
+    <id>http://www.navyxie.com/2016/04/15/mongo/</id>
     <published>2016-04-14T17:43:05.000Z</published>
     <updated>2016-04-15T19:11:12.000Z</updated>
     
@@ -152,21 +152,21 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mongo" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
     
     
-      <category term="mongo" scheme="http://navyxie.github.io/tags/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/tags/mongo/"/>
     
-      <category term="数据库" scheme="http://navyxie.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>收藏</title>
-    <link href="http://navyxie.github.io/2016/04/07/collect/"/>
-    <id>http://navyxie.github.io/2016/04/07/collect/</id>
+    <link href="http://www.navyxie.com/2016/04/07/collect/"/>
+    <id>http://www.navyxie.com/2016/04/07/collect/</id>
     <published>2016-04-06T17:50:29.000Z</published>
     <updated>2016-04-15T19:34:51.000Z</updated>
     
@@ -204,19 +204,19 @@
     
     </summary>
     
-      <category term="收藏" scheme="http://navyxie.github.io/categories/%E6%94%B6%E8%97%8F/"/>
+      <category term="收藏" scheme="http://www.navyxie.com/categories/%E6%94%B6%E8%97%8F/"/>
     
     
-      <category term="JavaScript" scheme="http://navyxie.github.io/tags/JavaScript/"/>
+      <category term="框架" scheme="http://www.navyxie.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="框架" scheme="http://navyxie.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="JavaScript" scheme="http://www.navyxie.com/tags/JavaScript/"/>
     
   </entry>
   
   <entry>
     <title>文章</title>
-    <link href="http://navyxie.github.io/2016/04/07/post/"/>
-    <id>http://navyxie.github.io/2016/04/07/post/</id>
+    <link href="http://www.navyxie.com/2016/04/07/post/"/>
+    <id>http://www.navyxie.com/2016/04/07/post/</id>
     <published>2016-04-06T17:49:10.000Z</published>
     <updated>2016-04-15T20:02:39.000Z</updated>
     
@@ -250,25 +250,25 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://navyxie.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://www.navyxie.com/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="框架" scheme="http://navyxie.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="插件化" scheme="http://www.navyxie.com/tags/%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
     
-      <category term="插件化" scheme="http://navyxie.github.io/tags/%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
+      <category term="npm" scheme="http://www.navyxie.com/tags/npm/"/>
     
-      <category term="npm" scheme="http://navyxie.github.io/tags/npm/"/>
+      <category term="protractor" scheme="http://www.navyxie.com/tags/protractor/"/>
     
-      <category term="protractor" scheme="http://navyxie.github.io/tags/protractor/"/>
+      <category term="测试" scheme="http://www.navyxie.com/tags/%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="测试" scheme="http://navyxie.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="框架" scheme="http://www.navyxie.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
   <entry>
     <title>游戏开发</title>
-    <link href="http://navyxie.github.io/2016/04/07/game/"/>
-    <id>http://navyxie.github.io/2016/04/07/game/</id>
+    <link href="http://www.navyxie.com/2016/04/07/game/"/>
+    <id>http://www.navyxie.com/2016/04/07/game/</id>
     <published>2016-04-06T17:47:44.000Z</published>
     <updated>2016-04-15T20:02:38.000Z</updated>
     
@@ -294,21 +294,21 @@
     
     </summary>
     
-      <category term="游戏" scheme="http://navyxie.github.io/categories/%E6%B8%B8%E6%88%8F/"/>
+      <category term="游戏" scheme="http://www.navyxie.com/categories/%E6%B8%B8%E6%88%8F/"/>
     
     
-      <category term="game" scheme="http://navyxie.github.io/tags/game/"/>
+      <category term="game" scheme="http://www.navyxie.com/tags/game/"/>
     
-      <category term="游戏" scheme="http://navyxie.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+      <category term="游戏" scheme="http://www.navyxie.com/tags/%E6%B8%B8%E6%88%8F/"/>
     
-      <category term="phaser" scheme="http://navyxie.github.io/tags/phaser/"/>
+      <category term="phaser" scheme="http://www.navyxie.com/tags/phaser/"/>
     
   </entry>
   
   <entry>
     <title>支付</title>
-    <link href="http://navyxie.github.io/2016/04/07/pay/"/>
-    <id>http://navyxie.github.io/2016/04/07/pay/</id>
+    <link href="http://www.navyxie.com/2016/04/07/pay/"/>
+    <id>http://www.navyxie.com/2016/04/07/pay/</id>
     <published>2016-04-06T17:45:48.000Z</published>
     <updated>2016-04-15T20:02:36.000Z</updated>
     
@@ -335,23 +335,23 @@
     
     </summary>
     
-      <category term="支付" scheme="http://navyxie.github.io/categories/%E6%94%AF%E4%BB%98/"/>
+      <category term="支付" scheme="http://www.navyxie.com/categories/%E6%94%AF%E4%BB%98/"/>
     
     
-      <category term="支付" scheme="http://navyxie.github.io/tags/%E6%94%AF%E4%BB%98/"/>
+      <category term="支付" scheme="http://www.navyxie.com/tags/%E6%94%AF%E4%BB%98/"/>
     
-      <category term="易宝" scheme="http://navyxie.github.io/tags/%E6%98%93%E5%AE%9D/"/>
+      <category term="易宝" scheme="http://www.navyxie.com/tags/%E6%98%93%E5%AE%9D/"/>
     
-      <category term="连连" scheme="http://navyxie.github.io/tags/%E8%BF%9E%E8%BF%9E/"/>
+      <category term="连连" scheme="http://www.navyxie.com/tags/%E8%BF%9E%E8%BF%9E/"/>
     
-      <category term="实名认证" scheme="http://navyxie.github.io/tags/%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81/"/>
+      <category term="实名认证" scheme="http://www.navyxie.com/tags/%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81/"/>
     
   </entry>
   
   <entry>
     <title>工具</title>
-    <link href="http://navyxie.github.io/2016/04/07/tools/"/>
-    <id>http://navyxie.github.io/2016/04/07/tools/</id>
+    <link href="http://www.navyxie.com/2016/04/07/tools/"/>
+    <id>http://www.navyxie.com/2016/04/07/tools/</id>
     <published>2016-04-06T17:43:51.000Z</published>
     <updated>2016-04-15T20:02:34.000Z</updated>
     
@@ -378,19 +378,19 @@
     
     </summary>
     
-      <category term="工具" scheme="http://navyxie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://www.navyxie.com/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="工具库" scheme="http://navyxie.github.io/tags/%E5%B7%A5%E5%85%B7%E5%BA%93/"/>
+      <category term="工具库" scheme="http://www.navyxie.com/tags/%E5%B7%A5%E5%85%B7%E5%BA%93/"/>
     
-      <category term="tool" scheme="http://navyxie.github.io/tags/tool/"/>
+      <category term="tool" scheme="http://www.navyxie.com/tags/tool/"/>
     
   </entry>
   
   <entry>
     <title>微信开放平台接入</title>
-    <link href="http://navyxie.github.io/2016/04/07/wechat-develop/"/>
-    <id>http://navyxie.github.io/2016/04/07/wechat-develop/</id>
+    <link href="http://www.navyxie.com/2016/04/07/wechat-develop/"/>
+    <id>http://www.navyxie.com/2016/04/07/wechat-develop/</id>
     <published>2016-04-06T17:41:10.000Z</published>
     <updated>2016-04-15T19:12:52.000Z</updated>
     
@@ -416,12 +416,12 @@
     
     </summary>
     
-      <category term="微信开发" scheme="http://navyxie.github.io/categories/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91/"/>
+      <category term="微信开发" scheme="http://www.navyxie.com/categories/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="微信" scheme="http://navyxie.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
+      <category term="微信" scheme="http://www.navyxie.com/tags/%E5%BE%AE%E4%BF%A1/"/>
     
-      <category term="开发平台" scheme="http://navyxie.github.io/tags/%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/"/>
+      <category term="开发平台" scheme="http://www.navyxie.com/tags/%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/"/>
     
   </entry>
   
