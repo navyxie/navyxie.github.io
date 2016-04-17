@@ -1371,8 +1371,13 @@ pre .javascript .function {
   text-align: center;
   padding: 10px 0;
 }
-#page-tags .tag-cloud-tags a {
+#page-tags .tag-cloud-tags .tag-list-item {
   display: inline-block;
+  position: relative;
+}
+#page-tags .tag-cloud-tags .tag-list-item a {
+  display: inline-block;
+  color: #fff;
   width: 100px;
   height: 100px;
   line-height: 100px;
@@ -1383,9 +1388,14 @@ pre .javascript .function {
   text-align: center;
   overflow: hidden;
 }
-#page-tags .tag-cloud-tags a:hover {
+#page-tags .tag-cloud-tags .tag-list-item a:hover {
   text-decoration: underline;
   color: #258fb8;
+}
+#page-tags .tag-cloud-tags .tag-list-item .tag-list-count {
+  position: absolute;
+  top: 5px;
+  right: 15px;
 }
 #page-category .category-all-title {
   text-align: center;
