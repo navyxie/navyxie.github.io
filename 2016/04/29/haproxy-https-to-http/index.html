@@ -5,16 +5,19 @@
   
   <title>haproxy-https-to-http | Navy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="haproxy 把https转发的时候变成了http今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。">
+  <meta name="description" content="haproxy 把https转发的时候变成了http今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。
+后来证实，这不是haproxy的bug.是由于我们项目使用的是nodejs的sails框架导致的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="haproxy-https-to-http">
 <meta property="og:url" content="http://www.navyxie.com/2016/04/29/haproxy-https-to-http/index.html">
 <meta property="og:site_name" content="Navy's Blog">
-<meta property="og:description" content="haproxy 把https转发的时候变成了http今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。">
-<meta property="og:updated_time" content="2016-04-28T18:23:32.000Z">
+<meta property="og:description" content="haproxy 把https转发的时候变成了http今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。
+后来证实，这不是haproxy的bug.是由于我们项目使用的是nodejs的sails框架导致的。">
+<meta property="og:updated_time" content="2016-04-30T11:44:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="haproxy-https-to-http">
-<meta name="twitter:description" content="haproxy 把https转发的时候变成了http今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。">
+<meta name="twitter:description" content="haproxy 把https转发的时候变成了http今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。
+后来证实，这不是haproxy的bug.是由于我们项目使用的是nodejs的sails框架导致的。">
   
     <link rel="alternate" href="/atom.xml" title="Navy&#39;s Blog" type="application/atom+xml">
   
@@ -99,6 +102,7 @@
       
         
         <h2 id="haproxy-把https转发的时候变成了http"><a href="#haproxy-把https转发的时候变成了http" class="headerlink" title="haproxy 把https转发的时候变成了http"></a>haproxy 把https转发的时候变成了http</h2><p>今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。</p>
+<p>后来证实，这不是haproxy的bug.是由于我们项目使用的是<a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a>的<a href="http://sailsjs.org/" target="_blank" rel="external">sails</a>框架导致的。</p>
 
       
     </div>
