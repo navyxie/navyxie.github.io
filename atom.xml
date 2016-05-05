@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.navyxie.com/"/>
-  <updated>2016-05-02T16:55:58.000Z</updated>
+  <updated>2016-05-05T05:18:20.000Z</updated>
   <id>http://www.navyxie.com/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>weixin-js-sdk</title>
+    <link href="http://www.navyxie.com/2016/05/05/weixin-js-sdk/"/>
+    <id>http://www.navyxie.com/2016/05/05/weixin-js-sdk/</id>
+    <published>2016-05-05T05:05:45.000Z</published>
+    <updated>2016-05-05T05:18:20.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;微信web开发者工具&quot;&gt;&lt;a href=&quot;#微信web开发者工具&quot; class=&quot;headerlink&quot; title=&quot;微信web开发者工具&quot;&gt;&lt;/a&gt;微信web开发者工具&lt;/h2&gt;&lt;p&gt;在调试js-sdk api showMenuItems 时存在bug，不按预期执行（本想只显示发送给朋友和分享到朋友圈选项，结果显示所有的选项），部署到真实环境是正常的。&lt;/p&gt;
+&lt;p&gt;OS：MacBook Pro (10.11.4)&lt;br&gt;微信web开发者工具反馈:v0.5.0（升级到最新版v0.6.0同样存在这个问题）&lt;/p&gt;
+&lt;h3 id=&quot;附图&quot;&gt;&lt;a href=&quot;#附图&quot; class=&quot;headerlink&quot; title=&quot;附图&quot;&gt;&lt;/a&gt;附图&lt;/h3&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;本想只显示发送给朋友和分享到朋友圈选项，结果显示所有的选项:&lt;br&gt;&lt;img src=&quot;images/wechat-js-sdk/share_dev.jpeg&quot; alt=&quot;微信web开发者工具显示效果图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;真实环境效果：&lt;br&gt;&lt;img src=&quot;images/wechat-js-sdk/share_prod.jpg&quot; alt=&quot;真实环境效果图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;前端js调用代码：&lt;br&gt;&lt;img src=&quot;images/wechat-js-sdk/call_code.png&quot; alt=&quot;前端js调用代码&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;微信web开发者工具&quot;&gt;&lt;a href=&quot;#微信web开发者工具&quot; class=&quot;headerlink&quot; title=&quot;微信web开发者工具&quot;&gt;&lt;/a&gt;微信web开发者工具&lt;/h2&gt;&lt;p&gt;在调试js-sdk api showMenuItems 时存在bug，不按预期执行（本想只显示发送给朋友和分享到朋友圈选项，结果显示所有的选项），部署到真实环境是正常的。&lt;/p&gt;
+&lt;p&gt;OS：MacBook Pro (10.11.4)&lt;br&gt;微信web开发者工具反馈:v0.5.0（升级到最新版v0.6.0同样存在这个问题）&lt;/p&gt;
+&lt;h3 id=&quot;附图&quot;&gt;&lt;a href=&quot;#附图&quot; class=&quot;headerlink&quot; title=&quot;附图&quot;&gt;&lt;/a&gt;附图&lt;/h3&gt;
+    
+    </summary>
+    
+    
+      <category term="微信" scheme="http://www.navyxie.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+      <category term="工具" scheme="http://www.navyxie.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="js-sdk" scheme="http://www.navyxie.com/tags/js-sdk/"/>
+    
+  </entry>
   
   <entry>
     <title>haproxy-https-to-http</title>
