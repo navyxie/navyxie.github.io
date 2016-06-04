@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.navyxie.com/2016/06/04/access-token/</loc>
+    
+    <lastmod>2016-06-04T09:54:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.navyxie.com/2016/05/20/redis-lock/</loc>
+    
+    <lastmod>2016-06-04T06:50:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.navyxie.com/2016/05/31/custom-weixin-share-content/</loc>
+    
+    <lastmod>2016-06-04T06:50:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.navyxie.com/2016/05/05/weixin-js-sdk/</loc>
     
     <lastmod>2016-05-05T05:18:20.000Z</lastmod>

@@ -76,6 +76,188 @@
       <div class="outer" id="body">
         <section id="main">
   
+    <article id="post-haproxy-https-to-http" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/29/haproxy-https-to-http/" class="article-date">
+  <time datetime="2016-04-28T18:20:17.000Z" itemprop="datePublished">2016-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/29/haproxy-https-to-http/">haproxy-https-to-http</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="haproxy-把https转发的时候变成了http"><a href="#haproxy-把https转发的时候变成了http" class="headerlink" title="haproxy 把https转发的时候变成了http"></a>haproxy 把https转发的时候变成了http</h2><p>今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。</p>
+<p>后来证实，这不是haproxy的bug.是由于我们项目使用的是<a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a>的<a href="http://sailsjs.org/" target="_blank" rel="external">sails</a>框架导致的。</p>
+<p>使用express的nodejs应用程序，需要注意，使用代理服务器转发的时候，获取请求协议的时候正确的取值方法是req.headers[‘x-forwarded-proto’]，直接取值req.protocol取得值是http,在接入微信授权的时候，本地调试都正常，一旦部署到线上(https)，就会提示：<code>config: invalid signature</code>。所以当接入微信API，本地调试一切正常，到线上(https)部署后发现不正常，就应当检查一下授权的地址协议是否正确。</p>
+<h3 id="referrer"><a href="#referrer" class="headerlink" title="referrer:"></a>referrer:</h3><p><a href="https://github.com/nodejs/node-v0.x-archive/issues/6735" target="_blank" rel="external">https://github.com/nodejs/node-v0.x-archive/issues/6735</a><br><a href="https://github.com/expressjs/express/issues/1863" target="_blank" rel="external">https://github.com/expressjs/express/issues/1863</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+</article>
+
+  
+    <article id="post-image-preload" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/27/image-preload/" class="article-date">
+  <time datetime="2016-04-27T15:08:37.000Z" itemprop="datePublished">2016-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/27/image-preload/">image-preload</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="图片预加载——显示加载进度"><a href="#图片预加载——显示加载进度" class="headerlink" title="图片预加载——显示加载进度"></a>图片预加载——显示加载进度</h2><h3 id="usage"><a href="#usage" class="headerlink" title="usage"></a>usage</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">@param imageArr:预先加载的图片数组,</span><br><span class="line">@param config:</span><br><span class="line">  @param update:每加载一张执行一次update函数</span><br><span class="line">  @param complete:加载完成所有图片执行该函数</span><br><span class="line">  @param silent:true//表示使用默认的加载样式</span><br><span class="line">*/</span></span><br><span class="line">ImageLoader(imageArr,config)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>imageloader<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../imageloader.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"../imageloader.css"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">style</span>=<span class="string">"text-align:center"</span>&gt;</span>imageloader demo<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"imageContainer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">      <span class="keyword">var</span> imagesArr = [<span class="string">'./images/buy_domain.png'</span>,<span class="string">'./images/dusk.jpg'</span>,<span class="string">'./images/malaysia_dusk.jpg'</span>,<span class="string">'./images/malaysia_sea.jpg'</span>];</span><br><span class="line">      <span class="keyword">var</span> updateFn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> img = <span class="built_in">document</span>.createElement(<span class="string">'IMG'</span>);</span><br><span class="line">        img.setAttribute(<span class="string">'src'</span>,<span class="built_in">arguments</span>[<span class="number">2</span>]);</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">'imageContainer'</span>).appendChild(img);</span><br><span class="line">      &#125;</span><br><span class="line">      ImageLoader(imagesArr,&#123;update:updateFn,complete:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        alert(<span class="string">'All images loaded.'</span>);</span><br><span class="line">      &#125;,silent:<span class="literal">true</span>&#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/navyxie/imageloader" target="_blank" rel="external">源码地址：https://github.com/navyxie/imageloader</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+</article>
+
+  
+    <article id="post-mobile-fix" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/22/mobile-fix/" class="article-date">
+  <time datetime="2016-04-21T17:32:18.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端/">移动端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/22/mobile-fix/">mobile_fix</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="像图片一样布局"><a href="#像图片一样布局" class="headerlink" title="像图片一样布局"></a>像图片一样布局</h2><ul>
+<li><a href="https://github.com/xiangpaopao/blog/issues/9" target="_blank" rel="external">https://github.com/xiangpaopao/blog/issues/9</a></li>
+<li><a href="https://github.com/peunzhang/pageResponse" target="_blank" rel="external">https://github.com/peunzhang/pageResponse</a></li>
+</ul>
+<h2 id="单页，单屏切换"><a href="#单页，单屏切换" class="headerlink" title="单页，单屏切换"></a>单页，单屏切换</h2><ul>
+<li><a href="https://github.com/powy1993/fullpage" target="_blank" rel="external">https://github.com/powy1993/fullpage</a></li>
+<li><a href="https://github.com/thebird/Swipe" target="_blank" rel="external">https://github.com/thebird/Swipe</a></li>
+</ul>
+<h2 id="打字效果"><a href="#打字效果" class="headerlink" title="打字效果"></a>打字效果</h2><ul>
+<li><a href="http://coffeedeveloper.github.io/typing.js/" target="_blank" rel="external">http://coffeedeveloper.github.io/typing.js/</a></li>
+<li><a href="https://github.com/mattboldt/typed.js" target="_blank" rel="external">https://github.com/mattboldt/typed.js</a></li>
+</ul>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><ul>
+<li><a href="https://github.com/daneden/animate.css" target="_blank" rel="external">https://github.com/daneden/animate.css</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+</article>
+
+  
     <article id="post-web-security" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/19/web-security/" class="article-date">
@@ -113,193 +295,6 @@
         
           <p class="article-more-link">
             <a href="/2016/04/19/web-security/#more">阅读全文 &gt;</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-<!-- JiaThis Button BEGIN -->
-<div style="float:right;">
-<div class="jiathis_style">
-<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
-</div>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-	data_track_clickback:true,
-	summary:"",
-	shortUrl:false,
-	hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-watch-ENOSPC" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/18/watch-ENOSPC/" class="article-date">
-  <time datetime="2016-04-18T08:44:36.000Z" itemprop="datePublished">2016-04-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/系统/">系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/18/watch-ENOSPC/">watch-ENOSPC</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-        <h2 id="Node-JS-Error-ENOSPC-ENOSPC-Error-No-space-left-on-device"><a href="#Node-JS-Error-ENOSPC-ENOSPC-Error-No-space-left-on-device" class="headerlink" title="Node.JS Error: ENOSPC (ENOSPC:Error No space left on device)"></a>Node.JS Error: ENOSPC (ENOSPC:Error No space left on device)</h2><h3 id="Run-the-below-command"><a href="#Run-the-below-command" class="headerlink" title="Run the below command:"></a>Run the below command:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;&amp; sudo sysctl -p</span><br></pre></td></tr></table></figure>
-<p><em>The system has a limit to how many files can be watched by a user. You can run out of watches pretty quickly if you have Grunt running with other programs like Dropbox. This command increases the maximum amount of watches a user can have.</em></p>
-<h4 id="referrer"><a href="#referrer" class="headerlink" title="referrer"></a>referrer</h4><ul>
-<li><a href="http://stackoverflow.com/questions/16748737/grunt-watch-error-waiting-fatal-error-watch-enospc" target="_blank" rel="external">http://stackoverflow.com/questions/16748737/grunt-watch-error-waiting-fatal-error-watch-enospc</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Sysctl" target="_blank" rel="external">https://wiki.archlinux.org/index.php/Sysctl</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-<!-- JiaThis Button BEGIN -->
-<div style="float:right;">
-<div class="jiathis_style">
-<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
-</div>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-	data_track_clickback:true,
-	summary:"",
-	shortUrl:false,
-	hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-mac-pow" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/17/mac-pow/" class="article-date">
-  <time datetime="2016-04-16T21:37:11.000Z" itemprop="datePublished">2016-04-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/software/">software</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/17/mac-pow/">mac-pow</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://pow.cx/">pow is a zero-config Rack server for Mac OS X</a></p>
-<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><h3 id="curl-get-pow-cx-sh"><a href="#curl-get-pow-cx-sh" class="headerlink" title="curl get.pow.cx | sh"></a>curl get.pow.cx | sh</h3><p><em>install log info:</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100  9039  100  9039    0     0   3396      0  0:00:02  0:00:02 --:--:--  3395</span><br><span class="line">*** Installing Pow 0.5.0...</span><br><span class="line">*** Installing local configuration files...</span><br><span class="line">/Users/Navy/Library/LaunchAgents/cx.pow.powd.plist</span><br><span class="line">*** Installing system configuration files as root...</span><br><span class="line">Password:</span><br><span class="line">/etc/resolver/dev</span><br><span class="line">/Library/LaunchDaemons/cx.pow.firewall.plist</span><br><span class="line">*** Starting the Pow server...</span><br><span class="line">*** Performing self-test...</span><br><span class="line">*** Installed</span><br><span class="line"></span><br><span class="line">For troubleshooting instructions, please see the Pow wiki:</span><br><span class="line">https://github.com/basecamp/pow/wiki/Troubleshooting</span><br><span class="line"></span><br><span class="line">To uninstall Pow, `curl get.pow.cx/uninstall.sh | sh`</span><br></pre></td></tr></table></figure></p>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/17/mac-pow/#more">阅读全文 &gt;</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-<!-- JiaThis Button BEGIN -->
-<div style="float:right;">
-<div class="jiathis_style">
-<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
-</div>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-	data_track_clickback:true,
-	summary:"",
-	shortUrl:false,
-	hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-hexo-theme-landscape-swiftype" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/16/hexo-theme-landscape-swiftype/" class="article-date">
-  <time datetime="2016-04-15T22:16:04.000Z" itemprop="datePublished">2016-04-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>►<a class="article-category-link" href="/categories/hexo/theme/">theme</a>►<a class="article-category-link" href="/categories/hexo/theme/landscape/">landscape</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/16/hexo-theme-landscape-swiftype/">hexo-theme-landscape-swiftype</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="hexo站内搜索功能-——-swiftype"><a href="#hexo站内搜索功能-——-swiftype" class="headerlink" title="hexo站内搜索功能 —— swiftype"></a>hexo站内搜索功能 —— swiftype</h2><p>hexo 默认自带的搜索引擎是google,我们接下来是讲解如何用swiftype实现站内搜索</p>
-<ol>
-<li>去<a href="https://swiftype.com">swiftype</a>官网注册一个账号，按步骤同步站点内容，然后复制代码，代码如下：</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">w,d,t,u,n,s,e</span>)</span>&#123;w[<span class="string">'SwiftypeObject'</span>]=n;w[n]=w[n]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  (w[n].q=w[n].q||[]).push(<span class="built_in">arguments</span>);&#125;;s=d.createElement(t);</span><br><span class="line">  e=d.getElementsByTagName(t)[<span class="number">0</span>];s.async=<span class="number">1</span>;s.src=u;e.parentNode.insertBefore(s,e);</span><br><span class="line">  &#125;)(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'//s.swiftypecdn.com/install/v2/st.js'</span>,<span class="string">'_st'</span>);</span><br><span class="line">  _st(<span class="string">'install'</span>,<span class="string">'kWSKry9NQXF2ddPp_Lay'</span>,<span class="string">'2.0.0'</span>);</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="comment">//请更换自己的kWSKry9NQXF2ddPp_Lay</span></span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/16/hexo-theme-landscape-swiftype/#more">阅读全文 &gt;</a>
           </p>
         
       
@@ -386,23 +381,23 @@ updateTime()
       <ul>
         
           <li>
+            <a href="/2016/06/04/access-token/">access-token</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/31/custom-weixin-share-content/">custom_weixin_share_content</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/20/redis-lock/">redis_lock</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/05/weixin-js-sdk/">weixin-js-sdk</a>
           </li>
         
           <li>
             <a href="/2016/04/29/haproxy-https-to-http/">haproxy-https-to-http</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/27/image-preload/">image-preload</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/22/mobile-fix/">mobile_fix</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/19/web-security/">web-security</a>
           </li>
         
       </ul>
@@ -414,7 +409,7 @@ updateTime()
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ENOSPC/" style="font-size: 10px;">ENOSPC</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/api/" style="font-size: 10px;">api</a> <a href="/tags/fullpage/" style="font-size: 10px;">fullpage</a> <a href="/tags/game/" style="font-size: 10px;">game</a> <a href="/tags/haproxy/" style="font-size: 10px;">haproxy</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/js-sdk/" style="font-size: 10px;">js-sdk</a> <a href="/tags/landscape/" style="font-size: 15px;">landscape</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongo/" style="font-size: 15px;">mongo</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/phaser/" style="font-size: 10px;">phaser</a> <a href="/tags/pow/" style="font-size: 10px;">pow</a> <a href="/tags/protractor/" style="font-size: 10px;">protractor</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/singlepage/" style="font-size: 10px;">singlepage</a> <a href="/tags/swiftype/" style="font-size: 10px;">swiftype</a> <a href="/tags/theme/" style="font-size: 15px;">theme</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/watch/" style="font-size: 10px;">watch</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/加载/" style="font-size: 10px;">加载</a> <a href="/tags/单页/" style="font-size: 10px;">单页</a> <a href="/tags/实名认证/" style="font-size: 10px;">实名认证</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/工具库/" style="font-size: 10px;">工具库</a> <a href="/tags/开发平台/" style="font-size: 10px;">开发平台</a> <a href="/tags/微信/" style="font-size: 20px;">微信</a> <a href="/tags/插件化/" style="font-size: 10px;">插件化</a> <a href="/tags/支付/" style="font-size: 10px;">支付</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/易宝/" style="font-size: 10px;">易宝</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a> <a href="/tags/盗刷/" style="font-size: 10px;">盗刷</a> <a href="/tags/移动端/" style="font-size: 10px;">移动端</a> <a href="/tags/解密/" style="font-size: 10px;">解密</a> <a href="/tags/连连/" style="font-size: 10px;">连连</a> <a href="/tags/适配/" style="font-size: 10px;">适配</a> <a href="/tags/验证码/" style="font-size: 10px;">验证码</a>
+      <a href="/tags/ENOSPC/" style="font-size: 10px;">ENOSPC</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Toekn/" style="font-size: 10px;">Toekn</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/api/" style="font-size: 15px;">api</a> <a href="/tags/fullpage/" style="font-size: 10px;">fullpage</a> <a href="/tags/game/" style="font-size: 10px;">game</a> <a href="/tags/haproxy/" style="font-size: 10px;">haproxy</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/js-sdk/" style="font-size: 10px;">js-sdk</a> <a href="/tags/landscape/" style="font-size: 15px;">landscape</a> <a href="/tags/lock/" style="font-size: 10px;">lock</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongo/" style="font-size: 15px;">mongo</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/phaser/" style="font-size: 10px;">phaser</a> <a href="/tags/pow/" style="font-size: 10px;">pow</a> <a href="/tags/protractor/" style="font-size: 10px;">protractor</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/singlepage/" style="font-size: 10px;">singlepage</a> <a href="/tags/swiftype/" style="font-size: 10px;">swiftype</a> <a href="/tags/theme/" style="font-size: 15px;">theme</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/watch/" style="font-size: 10px;">watch</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/加载/" style="font-size: 10px;">加载</a> <a href="/tags/单页/" style="font-size: 10px;">单页</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/实名认证/" style="font-size: 10px;">实名认证</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/工具库/" style="font-size: 10px;">工具库</a> <a href="/tags/开发平台/" style="font-size: 10px;">开发平台</a> <a href="/tags/微信/" style="font-size: 20px;">微信</a> <a href="/tags/插件化/" style="font-size: 10px;">插件化</a> <a href="/tags/支付/" style="font-size: 10px;">支付</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/易宝/" style="font-size: 10px;">易宝</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a> <a href="/tags/盗刷/" style="font-size: 10px;">盗刷</a> <a href="/tags/移动端/" style="font-size: 10px;">移动端</a> <a href="/tags/解密/" style="font-size: 10px;">解密</a> <a href="/tags/连连/" style="font-size: 10px;">连连</a> <a href="/tags/适配/" style="font-size: 10px;">适配</a> <a href="/tags/验证码/" style="font-size: 10px;">验证码</a>
     </div>
   </div>
 

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>custom_weixin_share_content | Navy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自定义微信分享内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="custom_weixin_share_content">
+<meta property="og:url" content="http://www.navyxie.com/2016/05/31/custom-weixin-share-content/index.html">
+<meta property="og:site_name" content="Navy's Blog">
+<meta property="og:description" content="自定义微信分享内容">
+<meta property="og:updated_time" content="2016-06-04T06:50:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="custom_weixin_share_content">
+<meta name="twitter:description" content="自定义微信分享内容">
+  
+    <link rel="alternate" href="/atom.xml" title="Navy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-ico" href="/favicon32.ico">
+  
+  
+    <!-- <link href="http://fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <div id="avatar"><a href="/"></a></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+          <a class="main-nav-link" href="https://github.com/navyxie">Github</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+        
+      </nav>
+      
+        <div id="search-form-wrap">
+	<input type="text" class="st-default-search-input search-form-input" style="outline: none;width: 110px;">
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+  _st('install','kWSKry9NQXF2ddPp_Lay','2.0.0');
+</script>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer" id="body">
+        <section id="main"><article id="post-custom-weixin-share-content" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/31/custom-weixin-share-content/" class="article-date">
+  <time datetime="2016-05-31T07:35:05.000Z" itemprop="datePublished">2016-05-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      custom_weixin_share_content
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）"><a href="#如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）" class="headerlink" title="如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）"></a>如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）</h2><p>1 设置分享title:动态改变document.title值即可:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.title = <span class="string">'test'</span></span><br></pre></td></tr></table></figure>
+<p>2 设置分享图片：在页面隐藏一张尺寸大于290*290的图（图片需要容器包裹，设置容器css属性display:none即可）:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"display:none"</span>&gt;&lt;img src="share.jpg" /&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>3 设置分享的链接：动态修改document.documentURI的值即可（safari下，document.documentURI为只读属性，可借助history.pushState ）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//android:</span></span><br><span class="line"><span class="built_in">document</span>.documentURI = <span class="string">"http://www.navyxie.com"</span>；<span class="comment">//经测试wechat6.3.13版本下此方法已失效，可使用同下IOS的方法自定义。</span></span><br><span class="line"><span class="comment">//ios:</span></span><br><span class="line"><span class="built_in">window</span>.history.pushState(<span class="string">"weixin-share-url"</span>, <span class="string">"weixinshare"</span>, <span class="string">"http://www.navyxie.com"</span>);<span class="comment">//只可设置同域链接</span></span><br></pre></td></tr></table></figure>
+<p><strong>具体的运行原理可以看 <a href="https://github.com/navyxie/weixin_js" target="_blank" rel="external">微信Android SDK 中的 js</a> 源码分析。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/04/access-token/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          access-token
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/20/redis-lock/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">redis_lock</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap" style="text-align:center;">
+  <h3 class="widget-title">当前时间</h3>
+  <div class="widget">
+    <span id="year-month-date"></span>
+    <span id="weekDay"></span>
+    <span id="hour-min-sec"></span>
+  </div>
+</div>
+<script>
+var weekday = [
+  "星期日",
+  "星期一",
+  "星期二",
+  "星期三",
+  "星期四",
+  "星期五",
+  "星期六"
+];
+var dateDom = document.getElementById('year-month-date');
+var weekdayDom =  document.getElementById('weekDay');
+var timeDom = document.getElementById('hour-min-sec');
+function prefixTime(num){
+  if(num < 10){
+    return '0'+num;
+  }
+  return num;
+}
+function updateDom(){
+  var date = new Date();
+  dateDom.innerHTML = date.getFullYear() + '/' + (1+date.getMonth()) + '/'+date.getDate();
+  weekdayDom.innerHTML = weekday[date.getDay()];
+  timeDom.innerHTML = prefixTime(date.getHours()) + ':' + prefixTime(date.getMinutes()) + ':' + prefixTime(date.getSeconds());
+}
+function updateTime(){
+  window.setInterval(updateDom,1000);
+}
+updateTime()
+</script/>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/04/access-token/">access-token</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/31/custom-weixin-share-content/">custom_weixin_share_content</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/20/redis-lock/">redis_lock</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/05/weixin-js-sdk/">weixin-js-sdk</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/29/haproxy-https-to-http/">haproxy-https-to-http</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ENOSPC/" style="font-size: 10px;">ENOSPC</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Toekn/" style="font-size: 10px;">Toekn</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/api/" style="font-size: 15px;">api</a> <a href="/tags/fullpage/" style="font-size: 10px;">fullpage</a> <a href="/tags/game/" style="font-size: 10px;">game</a> <a href="/tags/haproxy/" style="font-size: 10px;">haproxy</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/js-sdk/" style="font-size: 10px;">js-sdk</a> <a href="/tags/landscape/" style="font-size: 15px;">landscape</a> <a href="/tags/lock/" style="font-size: 10px;">lock</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongo/" style="font-size: 15px;">mongo</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/phaser/" style="font-size: 10px;">phaser</a> <a href="/tags/pow/" style="font-size: 10px;">pow</a> <a href="/tags/protractor/" style="font-size: 10px;">protractor</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/singlepage/" style="font-size: 10px;">singlepage</a> <a href="/tags/swiftype/" style="font-size: 10px;">swiftype</a> <a href="/tags/theme/" style="font-size: 15px;">theme</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/watch/" style="font-size: 10px;">watch</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/加载/" style="font-size: 10px;">加载</a> <a href="/tags/单页/" style="font-size: 10px;">单页</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/实名认证/" style="font-size: 10px;">实名认证</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/工具库/" style="font-size: 10px;">工具库</a> <a href="/tags/开发平台/" style="font-size: 10px;">开发平台</a> <a href="/tags/微信/" style="font-size: 20px;">微信</a> <a href="/tags/插件化/" style="font-size: 10px;">插件化</a> <a href="/tags/支付/" style="font-size: 10px;">支付</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/易宝/" style="font-size: 10px;">易宝</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a> <a href="/tags/盗刷/" style="font-size: 10px;">盗刷</a> <a href="/tags/移动端/" style="font-size: 10px;">移动端</a> <a href="/tags/解密/" style="font-size: 10px;">解密</a> <a href="/tags/连连/" style="font-size: 10px;">连连</a> <a href="/tags/适配/" style="font-size: 10px;">适配</a> <a href="/tags/验证码/" style="font-size: 10px;">验证码</a>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+  
+  <h3 class="widget-title">我有话说</h3>
+  <div class="widget">
+    <section id="comments">
+      <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="page-404.html" data-title="" data-url="http://www.navyxie.com/404.html"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"navyxie"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0] 
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      <!-- 多说公共JS代码 end -->
+    </section>
+  </div>
+  
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+    	<div id="copyRight">
+        &copy; 2016 - 2016 Navy xie<br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+      <div id="siteInfo">
+        <a href="/sitemap.xml" target="_blank">网站地图</a>
+        <a href="https://github.com/navyxie/hexo-github-page" target="_blank">网站源码</a>
+      </div>
+    </div>
+  </div>
+  
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div style="text-align:center;">本站总访问量<span id="busuanzi_value_site_pv"></span>次 本站访客数<span id="busuanzi_value_site_uv"></span>人 本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</div>
+  
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+    <a href="https://github.com/navyxie" class="mobile-nav-link">Github</a>
+  
+</nav>
+    
+
+<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<div id="totop"></div>
+<script src="/js/totop.js"></script>
+{% if theme.baidu_push %}
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+{% endif %}
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?2da296b109637a928dbd18a25189d7e2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>
