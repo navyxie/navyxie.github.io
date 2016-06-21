@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.navyxie.com/"/>
-  <updated>2016-06-04T09:54:46.000Z</updated>
+  <updated>2016-06-21T10:23:12.000Z</updated>
   <id>http://www.navyxie.com/</id>
   
   <author>
@@ -14,6 +14,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>write-sails-hook</title>
+    <link href="http://www.navyxie.com/2016/06/21/write-sails-hook/"/>
+    <id>http://www.navyxie.com/2016/06/21/write-sails-hook/</id>
+    <published>2016-06-21T10:03:05.000Z</published>
+    <updated>2016-06-21T10:23:12.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;how-to-write-one-sails-hook&quot;&gt;&lt;a href=&quot;#how-to-write-one-sails-hook&quot; class=&quot;headerlink&quot; title=&quot;how to write one sails-hook&quot;&gt;&lt;/a&gt;how to write one sails-hook&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;you module package.json must have key ‘sails’ , it’s a object, with contain key &lt;code&gt;isHook&lt;/code&gt;, if want to replace default hook, you can add key &lt;code&gt;hookName&lt;/code&gt;, eg: sails:{isHook:true,hookName:’orm’}&lt;/li&gt;
+&lt;li&gt;export a function and return object, the first param is sails&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;sails-hook-how-to-load&quot;&gt;&lt;a href=&quot;#sails-hook-how-to-load&quot; class=&quot;headerlink&quot; title=&quot;sails hook how to load?&quot;&gt;&lt;/a&gt;sails hook how to load?&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;load hook principle : &lt;a href=&quot;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L507&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L507&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;replace default hook : &lt;a href=&quot;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L513&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L513&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;example&quot;&gt;&lt;a href=&quot;#example&quot; class=&quot;headerlink&quot; title=&quot;example&quot;&gt;&lt;/a&gt;example&lt;/h2&gt;&lt;p&gt;package.json&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;version&amp;quot;:&amp;quot;0.0.1&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;sails&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;quot;isHook&amp;quot;: true,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;quot;hookName&amp;quot;: &amp;quot;test&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;index.js(export)&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;module.exports = function(sails)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.log(&amp;apos;010101010101010101&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      how to write sails hook
+    
+    </summary>
+    
+      <category term="hook" scheme="http://www.navyxie.com/categories/hook/"/>
+    
+      <category term="sails" scheme="http://www.navyxie.com/categories/hook/sails/"/>
+    
+      <category term="module" scheme="http://www.navyxie.com/categories/hook/sails/module/"/>
+    
+    
+      <category term="sails" scheme="http://www.navyxie.com/tags/sails/"/>
+    
+      <category term="hook" scheme="http://www.navyxie.com/tags/hook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sails-orm-bug</title>
+    <link href="http://www.navyxie.com/2016/06/20/sails-orm-bug/"/>
+    <id>http://www.navyxie.com/2016/06/20/sails-orm-bug/</id>
+    <published>2016-06-20T11:38:39.000Z</published>
+    <updated>2016-06-21T10:04:14.000Z</updated>
+    
+    <content type="html">&lt;p&gt;when your sails version &amp;gt;=  0.12.2 ,and your config/connection.js  adapter key is module ,such as : &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;devMongodb: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    module: &amp;apos;sails-mongo&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    host: process.env.MONGO_HOST || &amp;apos;localhost&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    port: process.env.MONGO_PORT || 57017,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    user: process.env.MONGO_USER || &amp;apos;&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    password: process.env.MONGO_PASS || &amp;apos;&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    database: process.env.MONGO_DBNAME || &amp;apos;koala&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;it will appear this error “Cannot read property ‘config’ of undefined”. Beacause sails version &amp;gt;= 0.12.2 orm is Separated into independent modules “sails-hook-orm” , this module don’t support ‘module’ key as adapter.&lt;/p&gt;
+&lt;p&gt;you can solve it by two way:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;change adapter  key ‘module’ to ‘adapter’&lt;/li&gt;
+&lt;li&gt;rockback sails to lower version (&amp;lt;=0.12.1) , and delete module “sails-hook-orm”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;when you config multi adapter and the adapter key is ‘adapter’ , sails &amp;lt;= 0.12.1 with orm haved bug : &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/balderdashy/sails/blob/v0.12.1/lib/hooks/orm/build-orm.js#L26&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;origin code : https://github.com/balderdashy/sails/blob/v0.12.1/lib/hooks/orm/build-orm.js#L26&lt;/a&gt; &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sails.log.verbose(&amp;apos;Starting ORM...&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var waterline = new Waterline();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    _.each(modelDefs, function loadModelsIntoWaterline(modelDef, modelID) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      sails.log.silly(&amp;apos;Registering model `&amp;apos; + modelID + &amp;apos;` in Waterline (ORM)&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      waterline.loadCollection(Waterline.Collection.extend(modelDef));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    // Find all the connections used&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var connections = _.reduce(sails.adapters, function getConnectionsInPlay(connections, adapter, adapterKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      _.each(sails.config.connections, function(connection, connectionKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        if (adapterKey === connection.adapter) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          connections[connectionKey] = connection;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      return connections;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;, &amp;#123;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;fix this bug : &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sails.log.verbose(&amp;apos;Starting ORM...&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var connectionsNameList = [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var waterline = new Waterline();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_.each(modelDefs, function loadModelsIntoWaterline(modelDef, modelID) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sails.log.silly(&amp;apos;Registering model `&amp;apos; + modelID + &amp;apos;` in Waterline (ORM)&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    connectionsNameList = connectionsNameList.concat(modelDef.connection);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    waterline.loadCollection(Waterline.Collection.extend(modelDef));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;connectionsNameList = _.uniq(connectionsNameList);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// Find all the connections used&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var connections = _.reduce(sails.adapters, function getConnectionsInPlay(connections, adapter, adapterKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_.each(sails.config.connections, function(connection, connectionKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if (adapterKey === connection.adapter &amp;amp;&amp;amp; _.indexOf(connectionsNameList,connectionKey) !== -1) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        connections[connectionKey] = connection;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;return connections;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;, &amp;#123;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      salis orm bug TypeError: Cannot read property &#39;config&#39; of undefined
+    
+    </summary>
+    
+      <category term="framework" scheme="http://www.navyxie.com/categories/framework/"/>
+    
+      <category term="sails" scheme="http://www.navyxie.com/categories/framework/sails/"/>
+    
+      <category term="nodejs" scheme="http://www.navyxie.com/categories/framework/sails/nodejs/"/>
+    
+      <category term="mvc" scheme="http://www.navyxie.com/categories/framework/sails/nodejs/mvc/"/>
+    
+    
+      <category term="sails" scheme="http://www.navyxie.com/tags/sails/"/>
+    
+      <category term="orm" scheme="http://www.navyxie.com/tags/orm/"/>
+    
+      <category term="bug" scheme="http://www.navyxie.com/tags/bug/"/>
+    
+  </entry>
   
   <entry>
     <title>access-token</title>
@@ -732,83 +819,6 @@
       <category term="连连" scheme="http://www.navyxie.com/tags/%E8%BF%9E%E8%BF%9E/"/>
     
       <category term="实名认证" scheme="http://www.navyxie.com/tags/%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工具</title>
-    <link href="http://www.navyxie.com/2016/04/07/tools/"/>
-    <id>http://www.navyxie.com/2016/04/07/tools/</id>
-    <published>2016-04-06T17:43:51.000Z</published>
-    <updated>2016-04-15T20:02:34.000Z</updated>
-    
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/minievent&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;事件扩展工具库&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/n-crypto&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Nodejs的加密解密&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://meiriyitie.com/2015/05/26/diagnosing-network-issues-with-mtr/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用 MTR 诊断网络问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://www.navyxie.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="工具库" scheme="http://www.navyxie.com/tags/%E5%B7%A5%E5%85%B7%E5%BA%93/"/>
-    
-      <category term="tool" scheme="http://www.navyxie.com/tags/tool/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微信开放平台接入</title>
-    <link href="http://www.navyxie.com/2016/04/07/wechat-develop/"/>
-    <id>http://www.navyxie.com/2016/04/07/wechat-develop/</id>
-    <published>2016-04-06T17:41:10.000Z</published>
-    <updated>2016-04-15T19:12:52.000Z</updated>
-    
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信公众平台接入例子&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-code/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信开放平台接入Code Demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-local-debug/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何在本地进行微信开放平台开发调试测与试&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/weixin_js/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何在微信6.0.2+版本不接入微信API的情况下设置自定义分享内容&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/oauth2-wechat-develop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;以接入微信开放平台为例讲解oauth2原理&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop/&quot;&gt;微信公众平台接入例子&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-code/&quot;&gt;微信开放平台接入Code Demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-local-debug/&quot;&gt;如何在本地进行微信开放平台开发调试测与试&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="微信开发" scheme="http://www.navyxie.com/categories/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="微信" scheme="http://www.navyxie.com/tags/%E5%BE%AE%E4%BF%A1/"/>
-    
-      <category term="开发平台" scheme="http://www.navyxie.com/tags/%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/"/>
     
   </entry>
   
