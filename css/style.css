@@ -1015,14 +1015,14 @@ a.article-title:hover {
   padding-left: 20px;
 }
 #comments {
-  background: #fff;
   -webkit-box-shadow: 1px 2px 3px #ddd;
   box-shadow: 1px 2px 3px #ddd;
-  padding: 20px;
   border: 1px solid #ddd;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  margin: 50px 0;
+}
+#comments #ds-thread #ds-reset .ds-login-buttons .ds-service-list li {
+  margin-left: 0;
 }
 #comments a {
   color: #258fb8;
@@ -1371,8 +1371,13 @@ pre .javascript .function {
   text-align: center;
   padding: 10px 0;
 }
-#page-tags .tag-cloud-tags a {
+#page-tags .tag-cloud-tags .tag-list-item {
   display: inline-block;
+  position: relative;
+}
+#page-tags .tag-cloud-tags .tag-list-item a {
+  display: inline-block;
+  color: #fff;
   width: 100px;
   height: 100px;
   line-height: 100px;
@@ -1383,9 +1388,14 @@ pre .javascript .function {
   text-align: center;
   overflow: hidden;
 }
-#page-tags .tag-cloud-tags a:hover {
+#page-tags .tag-cloud-tags .tag-list-item a:hover {
   text-decoration: underline;
   color: #258fb8;
+}
+#page-tags .tag-cloud-tags .tag-list-item .tag-list-count {
+  position: absolute;
+  top: 5px;
+  right: 15px;
 }
 #page-category .category-all-title {
   text-align: center;
@@ -1518,4 +1528,7 @@ pre .javascript .function {
   border-width: 0 7px 8px 7px;
   border-color: transparent transparent #fff transparent;
   border-style: solid;
+}
+.textCenter {
+  text-align: center;
 }

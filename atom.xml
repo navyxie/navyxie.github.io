@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://navyxie.github.io/"/>
-  <updated>2016-04-15T22:26:32.000Z</updated>
-  <id>http://navyxie.github.io/</id>
+  <link href="http://www.navyxie.com/"/>
+  <updated>2016-06-21T10:23:12.000Z</updated>
+  <id>http://www.navyxie.com/</id>
   
   <author>
     <name>Navy xie</name>
@@ -16,17 +16,492 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>write-sails-hook</title>
+    <link href="http://www.navyxie.com/2016/06/21/write-sails-hook/"/>
+    <id>http://www.navyxie.com/2016/06/21/write-sails-hook/</id>
+    <published>2016-06-21T10:03:05.000Z</published>
+    <updated>2016-06-21T10:23:12.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;how-to-write-one-sails-hook&quot;&gt;&lt;a href=&quot;#how-to-write-one-sails-hook&quot; class=&quot;headerlink&quot; title=&quot;how to write one sails-hook&quot;&gt;&lt;/a&gt;how to write one sails-hook&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;you module package.json must have key ‘sails’ , it’s a object, with contain key &lt;code&gt;isHook&lt;/code&gt;, if want to replace default hook, you can add key &lt;code&gt;hookName&lt;/code&gt;, eg: sails:{isHook:true,hookName:’orm’}&lt;/li&gt;
+&lt;li&gt;export a function and return object, the first param is sails&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;sails-hook-how-to-load&quot;&gt;&lt;a href=&quot;#sails-hook-how-to-load&quot; class=&quot;headerlink&quot; title=&quot;sails hook how to load?&quot;&gt;&lt;/a&gt;sails hook how to load?&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;load hook principle : &lt;a href=&quot;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L507&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L507&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;replace default hook : &lt;a href=&quot;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L513&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/balderdashy/sails/blob/v0.12.3/lib/hooks/moduleloader/index.js#L513&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;example&quot;&gt;&lt;a href=&quot;#example&quot; class=&quot;headerlink&quot; title=&quot;example&quot;&gt;&lt;/a&gt;example&lt;/h2&gt;&lt;p&gt;package.json&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;version&amp;quot;:&amp;quot;0.0.1&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;sails&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;quot;isHook&amp;quot;: true,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;quot;hookName&amp;quot;: &amp;quot;test&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;index.js(export)&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;module.exports = function(sails)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.log(&amp;apos;010101010101010101&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      how to write sails hook
+    
+    </summary>
+    
+      <category term="hook" scheme="http://www.navyxie.com/categories/hook/"/>
+    
+      <category term="sails" scheme="http://www.navyxie.com/categories/hook/sails/"/>
+    
+      <category term="module" scheme="http://www.navyxie.com/categories/hook/sails/module/"/>
+    
+    
+      <category term="sails" scheme="http://www.navyxie.com/tags/sails/"/>
+    
+      <category term="hook" scheme="http://www.navyxie.com/tags/hook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sails-orm-bug</title>
+    <link href="http://www.navyxie.com/2016/06/20/sails-orm-bug/"/>
+    <id>http://www.navyxie.com/2016/06/20/sails-orm-bug/</id>
+    <published>2016-06-20T11:38:39.000Z</published>
+    <updated>2016-06-21T10:04:14.000Z</updated>
+    
+    <content type="html">&lt;p&gt;when your sails version &amp;gt;=  0.12.2 ,and your config/connection.js  adapter key is module ,such as : &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;devMongodb: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    module: &amp;apos;sails-mongo&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    host: process.env.MONGO_HOST || &amp;apos;localhost&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    port: process.env.MONGO_PORT || 57017,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    user: process.env.MONGO_USER || &amp;apos;&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    password: process.env.MONGO_PASS || &amp;apos;&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    database: process.env.MONGO_DBNAME || &amp;apos;koala&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;it will appear this error “Cannot read property ‘config’ of undefined”. Beacause sails version &amp;gt;= 0.12.2 orm is Separated into independent modules “sails-hook-orm” , this module don’t support ‘module’ key as adapter.&lt;/p&gt;
+&lt;p&gt;you can solve it by two way:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;change adapter  key ‘module’ to ‘adapter’&lt;/li&gt;
+&lt;li&gt;rockback sails to lower version (&amp;lt;=0.12.1) , and delete module “sails-hook-orm”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;when you config multi adapter and the adapter key is ‘adapter’ , sails &amp;lt;= 0.12.1 with orm haved bug : &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/balderdashy/sails/blob/v0.12.1/lib/hooks/orm/build-orm.js#L26&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;origin code : https://github.com/balderdashy/sails/blob/v0.12.1/lib/hooks/orm/build-orm.js#L26&lt;/a&gt; &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sails.log.verbose(&amp;apos;Starting ORM...&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var waterline = new Waterline();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    _.each(modelDefs, function loadModelsIntoWaterline(modelDef, modelID) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      sails.log.silly(&amp;apos;Registering model `&amp;apos; + modelID + &amp;apos;` in Waterline (ORM)&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      waterline.loadCollection(Waterline.Collection.extend(modelDef));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    // Find all the connections used&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var connections = _.reduce(sails.adapters, function getConnectionsInPlay(connections, adapter, adapterKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      _.each(sails.config.connections, function(connection, connectionKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        if (adapterKey === connection.adapter) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          connections[connectionKey] = connection;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      return connections;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;, &amp;#123;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;fix this bug : &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sails.log.verbose(&amp;apos;Starting ORM...&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var connectionsNameList = [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var waterline = new Waterline();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_.each(modelDefs, function loadModelsIntoWaterline(modelDef, modelID) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sails.log.silly(&amp;apos;Registering model `&amp;apos; + modelID + &amp;apos;` in Waterline (ORM)&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    connectionsNameList = connectionsNameList.concat(modelDef.connection);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    waterline.loadCollection(Waterline.Collection.extend(modelDef));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;connectionsNameList = _.uniq(connectionsNameList);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// Find all the connections used&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var connections = _.reduce(sails.adapters, function getConnectionsInPlay(connections, adapter, adapterKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_.each(sails.config.connections, function(connection, connectionKey) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if (adapterKey === connection.adapter &amp;amp;&amp;amp; _.indexOf(connectionsNameList,connectionKey) !== -1) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        connections[connectionKey] = connection;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;return connections;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;, &amp;#123;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      salis orm bug TypeError: Cannot read property &#39;config&#39; of undefined
+    
+    </summary>
+    
+      <category term="framework" scheme="http://www.navyxie.com/categories/framework/"/>
+    
+      <category term="sails" scheme="http://www.navyxie.com/categories/framework/sails/"/>
+    
+      <category term="nodejs" scheme="http://www.navyxie.com/categories/framework/sails/nodejs/"/>
+    
+      <category term="mvc" scheme="http://www.navyxie.com/categories/framework/sails/nodejs/mvc/"/>
+    
+    
+      <category term="sails" scheme="http://www.navyxie.com/tags/sails/"/>
+    
+      <category term="orm" scheme="http://www.navyxie.com/tags/orm/"/>
+    
+      <category term="bug" scheme="http://www.navyxie.com/tags/bug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>access-token</title>
+    <link href="http://www.navyxie.com/2016/06/04/access-token/"/>
+    <id>http://www.navyxie.com/2016/06/04/access-token/</id>
+    <published>2016-06-04T06:50:42.000Z</published>
+    <updated>2016-06-04T09:54:46.000Z</updated>
+    
+    <content type="html">&lt;p&gt;WEB应用是开放的，WEB前端代码也是公开的，和后端交互的接口如果没有经过特殊处理（加密/token），那么就是裸露的，只要知道api地址，那么就能随便获取应用数据。这样应用数据就很容易被人爬取或者恶意盗刷，典型的短信被恶意盗刷。&lt;/p&gt;
+&lt;p&gt;公司理财产品的短信接口就是一个裸接口，只要手机号就可以任意盗刷，当然背后有根据手机号，ip地址做了请求限制，但还是不够。后面就加了一定时间内一定请求次数的Token，后面观察，基本没有被刷的迹象，说明新的机制还是起到很大作用。当然这个机制不仅是用于防短信盗刷，可用于任意的裸接口防护。&lt;/p&gt;
+&lt;p&gt;原理很简单，就是在web页面请求的时候由后端按一定的算法注入token到页面中去，然后前端可以通过对应的规则取到token，在请求接口数据时带上去就能在后端对token进行验证，验证通过就能正常请求到数据。如果是native app ，可通过加密的方法请求接口来获取token，最简单直接的方式就是native app 客户端使用一段字符串+时间戳（从后端获取）进行加密，然后请求后端接口，接口对数据进行解密，对时间戳对比，在一段时间内认为有效（避免加密信息被拦截，所以加了时间戳校验），从而获取token。&lt;/p&gt;
+&lt;p&gt;当然web应用都是公开的，所有源码理论上都是能获取到的。那么后端向web页面注入token的方式也能被破解，所以，后端注入token的形式可定制，比如注入到请求，或者自己实现一套算法，增加被破解的难度。&lt;/p&gt;
+&lt;p&gt;把这套机制整理成一个独立的npm包&lt;a href=&quot;https://github.com/navyxie/access-token-api&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;access-token-api&lt;/a&gt;，方便多项目复用。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;使用例子：&quot;&gt;&lt;a href=&quot;#使用例子：&quot; class=&quot;headerlink&quot; title=&quot;使用例子：&quot;&gt;&lt;/a&gt;使用例子：&lt;/h3&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install access-token-api&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//server(nodejs)  端&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; accessTokenApi = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;access-token-api&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; TokenApi = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; accessTokenApi(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    webTokenVarName:&lt;span class=&quot;string&quot;&gt;&#39;encrypt_api_tokenStr&#39;&lt;/span&gt;,&lt;span class=&quot;comment&quot;&gt;//前端可通过webTokenVarName变量去到token值，默认encrypt_api_tokenStr&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//web前端取token值&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;[webTokenVarName] &lt;span class=&quot;comment&quot;&gt;//请求接口时带上这个值就能进行token校验了&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;主要接口&quot;&gt;&lt;a href=&quot;#主要接口&quot; class=&quot;headerlink&quot; title=&quot;主要接口&quot;&gt;&lt;/a&gt;主要接口&lt;/h3&gt;&lt;p&gt;生成token api &lt;code&gt;issue&lt;/code&gt;&lt;br&gt;验证token api &lt;code&gt;verify&lt;/code&gt;&lt;br&gt;token 有效次数减一 api &lt;code&gt;decline&lt;/code&gt;&lt;br&gt;server 端 将token 注入到 web 前端页面 api &lt;code&gt;webInject&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;自定义后端注入token到web前端页面的方式，可以初始化模块时自定义webInject参数-函数&quot;&gt;&lt;a href=&quot;#自定义后端注入token到web前端页面的方式，可以初始化模块时自定义webInject参数-函数&quot; class=&quot;headerlink&quot; title=&quot;自定义后端注入token到web前端页面的方式，可以初始化模块时自定义webInject参数(函数)&quot;&gt;&lt;/a&gt;自定义后端注入token到web前端页面的方式，可以初始化模块时自定义webInject参数(函数)&lt;/h3&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; TokenApi = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; accessTokenApi(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    webInject:&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;html,token,callback&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; htmlEndIndex = html.indexOf(&lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/html&amp;gt;&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; tokenScript = &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;script&amp;gt;window.&#39;&lt;/span&gt; + &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.config.webTokenVarName + &lt;span class=&quot;string&quot;&gt;&#39;=&#39;&lt;/span&gt; + token + &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/script&amp;gt;&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; prevHtml = html.substring(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,htmlEndIndex);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; nextHtml = html.substr(htmlEndIndex); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      prevHtml += tokenScript;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      prevHtml += nextHtml;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      callback(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;,prevHtml);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;项目地址&lt;a href=&quot;https://github.com/navyxie/access-token-api&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/navyxie/access-token-api&lt;/a&gt;,里面有express和sails框架的使用例子&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      a simple api access token support count and ttl,which base on nodejs.
+    
+    </summary>
+    
+      <category term="安全" scheme="http://www.navyxie.com/categories/%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="api" scheme="http://www.navyxie.com/categories/%E5%AE%89%E5%85%A8/api/"/>
+    
+      <category term="Token" scheme="http://www.navyxie.com/categories/%E5%AE%89%E5%85%A8/api/Token/"/>
+    
+      <category term="access" scheme="http://www.navyxie.com/categories/%E5%AE%89%E5%85%A8/api/Token/access/"/>
+    
+    
+      <category term="安全" scheme="http://www.navyxie.com/tags/%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="Toekn" scheme="http://www.navyxie.com/tags/Toekn/"/>
+    
+      <category term="api" scheme="http://www.navyxie.com/tags/api/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>custom_weixin_share_content</title>
+    <link href="http://www.navyxie.com/2016/05/31/custom-weixin-share-content/"/>
+    <id>http://www.navyxie.com/2016/05/31/custom-weixin-share-content/</id>
+    <published>2016-05-31T07:35:05.000Z</published>
+    <updated>2016-06-04T06:50:23.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）&quot;&gt;&lt;a href=&quot;#如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）&quot; class=&quot;headerlink&quot; title=&quot;如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）&quot;&gt;&lt;/a&gt;如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）&lt;/h2&gt;&lt;p&gt;1 设置分享title:动态改变document.title值即可:&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.title = &lt;span class=&quot;string&quot;&gt;&#39;test&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;2 设置分享图片：在页面隐藏一张尺寸大于290*290的图（图片需要容器包裹，设置容器css属性display:none即可）:&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;div style=&lt;span class=&quot;string&quot;&gt;&quot;display:none&quot;&lt;/span&gt;&amp;gt;&amp;lt;img src=&quot;share.jpg&quot; /&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;3 设置分享的链接：动态修改document.documentURI的值即可（safari下，document.documentURI为只读属性，可借助history.pushState ）&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//android:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.documentURI = &lt;span class=&quot;string&quot;&gt;&quot;http://www.navyxie.com&quot;&lt;/span&gt;；&lt;span class=&quot;comment&quot;&gt;//经测试wechat6.3.13版本下此方法已失效，可使用同下IOS的方法自定义。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//ios:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.history.pushState(&lt;span class=&quot;string&quot;&gt;&quot;weixin-share-url&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;weixinshare&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;http://www.navyxie.com&quot;&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//只可设置同域链接&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;具体的运行原理可以看 &lt;a href=&quot;https://github.com/navyxie/weixin_js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信Android SDK 中的 js&lt;/a&gt; 源码分析。&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      自定义微信分享内容
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>redis_lock</title>
+    <link href="http://www.navyxie.com/2016/05/20/redis-lock/"/>
+    <id>http://www.navyxie.com/2016/05/20/redis-lock/</id>
+    <published>2016-05-20T06:42:14.000Z</published>
+    <updated>2016-06-04T06:50:23.000Z</updated>
+    
+    <content type="html">&lt;p&gt;场景：使用node+mongo搭建web应用时，常常遇到并发问题导致创建一条数据的时候会同时创建多条。&lt;/p&gt;
+&lt;p&gt;通过redis set 方法 配合 ‘NX’ 选项即可实现锁机制。&lt;/p&gt;
+&lt;p&gt;主要的方法有三个：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#lock&quot;&gt;&lt;code&gt;lock(加锁)&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#unlock&quot;&gt;&lt;code&gt;unlock(解锁)&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#extend&quot;&gt;&lt;code&gt;extend(更改锁过期时间)&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&quot;lock&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Redlock.prototype.lock = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;resource,ttl,callback&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; self = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _val = _random();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;resolve, reject&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; lock = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Lock(self, resource, _val);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    self.client.SET(resource,_val,&lt;span class=&quot;string&quot;&gt;&#39;EX&#39;&lt;/span&gt;,ttl,&lt;span class=&quot;string&quot;&gt;&#39;NX&#39;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,data&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!err &amp;amp;&amp;amp; data === &lt;span class=&quot;string&quot;&gt;&#39;OK&#39;&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; resolve(lock);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; err = err || &lt;span class=&quot;string&quot;&gt;&#39;resource: &#39;&lt;/span&gt;+resource+&lt;span class=&quot;string&quot;&gt;&#39; is locked.&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.emit(&lt;span class=&quot;string&quot;&gt;&#39;lockError&#39;&lt;/span&gt;, err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;).asCallback(callback);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a name=&quot;unlock&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Redlock.prototype.unlock = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;lock,callback&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; self = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;resolve, reject&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt; lock !== &lt;span class=&quot;string&quot;&gt;&#39;object&#39;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(&lt;span class=&quot;string&quot;&gt;&#39;unlockError:lock is not object.&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    self.client.GET(lock.resource,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,data&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!err &amp;amp;&amp;amp; data === lock.value)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.client.DEL(lock.resource,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(err)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.emit(&lt;span class=&quot;string&quot;&gt;&#39;unlockError&#39;&lt;/span&gt;,err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(&lt;span class=&quot;string&quot;&gt;&#39;unlockError:&#39;&lt;/span&gt;+err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; resolve(lock);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;#125;     &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.emit(&lt;span class=&quot;string&quot;&gt;&#39;unlockError&#39;&lt;/span&gt;,err || &lt;span class=&quot;string&quot;&gt;&#39;resource:&#39;&lt;/span&gt; + lock.resource + &lt;span class=&quot;string&quot;&gt;&#39; unable to unlock.&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(&lt;span class=&quot;string&quot;&gt;&#39;unlockError:&#39;&lt;/span&gt; + err || (&lt;span class=&quot;string&quot;&gt;&#39;resource:&#39;&lt;/span&gt; + lock.resource + &lt;span class=&quot;string&quot;&gt;&#39; unable to unlock.&#39;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;).asCallback(callback);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a name=&quot;extend&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Redlock.prototype.extend = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;lock,ttl,callback&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; self = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;resolve, reject&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt; lock !== &lt;span class=&quot;string&quot;&gt;&#39;object&#39;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(&lt;span class=&quot;string&quot;&gt;&#39;unlockError:lock is not object.&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    self.client.GET(lock.resource,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,data&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!err &amp;amp;&amp;amp; data === lock.value)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.client.expire(lock.resource,ttl,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,data&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!err &amp;amp;&amp;amp; data === &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; resolve(lock);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.emit(&lt;span class=&quot;string&quot;&gt;&#39;extendError&#39;&lt;/span&gt;, err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(&lt;span class=&quot;string&quot;&gt;&#39;extendError:&#39;&lt;/span&gt;+err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;#125;          &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.emit(&lt;span class=&quot;string&quot;&gt;&#39;extendError&#39;&lt;/span&gt;, err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(&lt;span class=&quot;string&quot;&gt;&#39;extendError:&#39;&lt;/span&gt;+err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;).asCallback(callback);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;用法&quot;&gt;&lt;a href=&quot;#用法&quot; class=&quot;headerlink&quot; title=&quot;用法&quot;&gt;&lt;/a&gt;用法&lt;/h2&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; client = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;redis&#39;&lt;/span&gt;).createClient(&lt;span class=&quot;string&quot;&gt;&#39;port&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;host&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; redlock = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; RedLock(client);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; lock;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;`callback`&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//lock&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;redlock.lock(&lt;span class=&quot;string&quot;&gt;&#39;test-resource-lock&#39;&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,lockInstance&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  lock = lockInstance;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  done(err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//unlock&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;redlock.unlock(lock,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,data&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  done(err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;`promise`&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;redlock.lock(&lt;span class=&quot;string&quot;&gt;&#39;test-resource-lock-promise&#39;&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;).done(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;lock&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//todo&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    redlock.unlock(lock);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;PS:支持callback and promise.&lt;/p&gt;
+&lt;p&gt;实现比较简单，100行内，有兴趣的可以在 &lt;a href=&quot;https://github.com/navyxie/redlock-node&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里https://github.com/navyxie/redlock-node&lt;/a&gt; 查看源码&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;场景：使用node+mongo搭建web应用时，常常遇到并发问题导致创建一条数据的时候会同时创建多条。&lt;/p&gt;
+&lt;p&gt;通过redis set 方法 配合 ‘NX’ 选项即可实现锁机制。&lt;/p&gt;
+&lt;p&gt;主要的方法有三个：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#lock&quot;&gt;&lt;code&gt;lock(加锁)&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#unlock&quot;&gt;&lt;code&gt;unlock(解锁)&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#extend&quot;&gt;&lt;code&gt;extend(更改锁过期时间)&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&quot;lock&quot; /&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Redlock.prototype.lock = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;resource,ttl,callback&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; self = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _val = _random();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;resolve, reject&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; lock = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Lock(self, resource, _val);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    self.client.SET(resource,_val,&lt;span class=&quot;string&quot;&gt;&#39;EX&#39;&lt;/span&gt;,ttl,&lt;span class=&quot;string&quot;&gt;&#39;NX&#39;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;err,data&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!err &amp;amp;&amp;amp; data === &lt;span class=&quot;string&quot;&gt;&#39;OK&#39;&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; resolve(lock);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; err = err || &lt;span class=&quot;string&quot;&gt;&#39;resource: &#39;&lt;/span&gt;+resource+&lt;span class=&quot;string&quot;&gt;&#39; is locked.&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.emit(&lt;span class=&quot;string&quot;&gt;&#39;lockError&#39;&lt;/span&gt;, err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; reject(err);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;).asCallback(callback);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="redis" scheme="http://www.navyxie.com/categories/redis/"/>
+    
+      <category term="lock" scheme="http://www.navyxie.com/categories/redis/lock/"/>
+    
+    
+      <category term="redis" scheme="http://www.navyxie.com/tags/redis/"/>
+    
+      <category term="lock" scheme="http://www.navyxie.com/tags/lock/"/>
+    
+      <category term="nodejs" scheme="http://www.navyxie.com/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>weixin-js-sdk</title>
+    <link href="http://www.navyxie.com/2016/05/05/weixin-js-sdk/"/>
+    <id>http://www.navyxie.com/2016/05/05/weixin-js-sdk/</id>
+    <published>2016-05-05T05:05:45.000Z</published>
+    <updated>2016-05-05T05:18:20.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;微信web开发者工具&quot;&gt;&lt;a href=&quot;#微信web开发者工具&quot; class=&quot;headerlink&quot; title=&quot;微信web开发者工具&quot;&gt;&lt;/a&gt;微信web开发者工具&lt;/h2&gt;&lt;p&gt;在调试js-sdk api showMenuItems 时存在bug，不按预期执行（本想只显示发送给朋友和分享到朋友圈选项，结果显示所有的选项），部署到真实环境是正常的。&lt;/p&gt;
+&lt;p&gt;OS：MacBook Pro (10.11.4)&lt;br&gt;微信web开发者工具反馈:v0.5.0（升级到最新版v0.6.0同样存在这个问题）&lt;/p&gt;
+&lt;h3 id=&quot;附图&quot;&gt;&lt;a href=&quot;#附图&quot; class=&quot;headerlink&quot; title=&quot;附图&quot;&gt;&lt;/a&gt;附图&lt;/h3&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;本想只显示发送给朋友和分享到朋友圈选项，结果显示所有的选项:&lt;br&gt;&lt;img src=&quot;images/wechat-js-sdk/share_dev.jpeg&quot; alt=&quot;微信web开发者工具显示效果图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;真实环境效果：&lt;br&gt;&lt;img src=&quot;images/wechat-js-sdk/share_prod.jpg&quot; alt=&quot;真实环境效果图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;前端js调用代码：&lt;br&gt;&lt;img src=&quot;images/wechat-js-sdk/call_code.png&quot; alt=&quot;前端js调用代码&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;微信web开发者工具&quot;&gt;&lt;a href=&quot;#微信web开发者工具&quot; class=&quot;headerlink&quot; title=&quot;微信web开发者工具&quot;&gt;&lt;/a&gt;微信web开发者工具&lt;/h2&gt;&lt;p&gt;在调试js-sdk api showMenuItems 时存在bug，不按预期执行（本想只显示发送给朋友和分享到朋友圈选项，结果显示所有的选项），部署到真实环境是正常的。&lt;/p&gt;
+&lt;p&gt;OS：MacBook Pro (10.11.4)&lt;br&gt;微信web开发者工具反馈:v0.5.0（升级到最新版v0.6.0同样存在这个问题）&lt;/p&gt;
+&lt;h3 id=&quot;附图&quot;&gt;&lt;a href=&quot;#附图&quot; class=&quot;headerlink&quot; title=&quot;附图&quot;&gt;&lt;/a&gt;附图&lt;/h3&gt;
+    
+    </summary>
+    
+    
+      <category term="微信" scheme="http://www.navyxie.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+      <category term="工具" scheme="http://www.navyxie.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="js-sdk" scheme="http://www.navyxie.com/tags/js-sdk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>haproxy-https-to-http</title>
+    <link href="http://www.navyxie.com/2016/04/29/haproxy-https-to-http/"/>
+    <id>http://www.navyxie.com/2016/04/29/haproxy-https-to-http/</id>
+    <published>2016-04-28T18:20:17.000Z</published>
+    <updated>2016-05-02T16:55:58.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;haproxy-把https转发的时候变成了http&quot;&gt;&lt;a href=&quot;#haproxy-把https转发的时候变成了http&quot; class=&quot;headerlink&quot; title=&quot;haproxy 把https转发的时候变成了http&quot;&gt;&lt;/a&gt;haproxy 把https转发的时候变成了http&lt;/h2&gt;&lt;p&gt;今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。&lt;/p&gt;
+&lt;p&gt;后来证实，这不是haproxy的bug.是由于我们项目使用的是&lt;a href=&quot;https://nodejs.org/en/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nodejs&lt;/a&gt;的&lt;a href=&quot;http://sailsjs.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;sails&lt;/a&gt;框架导致的。&lt;/p&gt;
+&lt;p&gt;使用express的nodejs应用程序，需要注意，使用代理服务器转发的时候，获取请求协议的时候正确的取值方法是req.headers[‘x-forwarded-proto’]，直接取值req.protocol取得值是http,在接入微信授权的时候，本地调试都正常，一旦部署到线上(https)，就会提示：&lt;code&gt;config: invalid signature&lt;/code&gt;。所以当接入微信API，本地调试一切正常，到线上(https)部署后发现不正常，就应当检查一下授权的地址协议是否正确。&lt;/p&gt;
+&lt;h3 id=&quot;referrer&quot;&gt;&lt;a href=&quot;#referrer&quot; class=&quot;headerlink&quot; title=&quot;referrer:&quot;&gt;&lt;/a&gt;referrer:&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/nodejs/node-v0.x-archive/issues/6735&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/nodejs/node-v0.x-archive/issues/6735&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/expressjs/express/issues/1863&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/expressjs/express/issues/1863&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;haproxy-把https转发的时候变成了http&quot;&gt;&lt;a href=&quot;#haproxy-把https转发的时候变成了http&quot; class=&quot;headerlink&quot; title=&quot;haproxy 把https转发的时候变成了http&quot;&gt;&lt;/a&gt;haproxy 
+    
+    </summary>
+    
+    
+      <category term="haproxy" scheme="http://www.navyxie.com/tags/haproxy/"/>
+    
+      <category term="https" scheme="http://www.navyxie.com/tags/https/"/>
+    
+      <category term="http" scheme="http://www.navyxie.com/tags/http/"/>
+    
+      <category term="微信" scheme="http://www.navyxie.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>image-preload</title>
+    <link href="http://www.navyxie.com/2016/04/27/image-preload/"/>
+    <id>http://www.navyxie.com/2016/04/27/image-preload/</id>
+    <published>2016-04-27T15:08:37.000Z</published>
+    <updated>2016-04-27T17:53:44.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;图片预加载——显示加载进度&quot;&gt;&lt;a href=&quot;#图片预加载——显示加载进度&quot; class=&quot;headerlink&quot; title=&quot;图片预加载——显示加载进度&quot;&gt;&lt;/a&gt;图片预加载——显示加载进度&lt;/h2&gt;&lt;h3 id=&quot;usage&quot;&gt;&lt;a href=&quot;#usage&quot; class=&quot;headerlink&quot; title=&quot;usage&quot;&gt;&lt;/a&gt;usage&lt;/h3&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@param imageArr:预先加载的图片数组,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@param config:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @param update:每加载一张执行一次update函数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @param complete:加载完成所有图片执行该函数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  @param silent:true//表示使用默认的加载样式&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ImageLoader(imageArr,config)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;ng-app&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;app&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;imageloader&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;../imageloader.js&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/css&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;../imageloader.css&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;h2&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text-align:center&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;imageloader demo&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;h2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;imageContainer&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; imagesArr = [&lt;span class=&quot;string&quot;&gt;&#39;./images/buy_domain.png&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;./images/dusk.jpg&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;./images/malaysia_dusk.jpg&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;./images/malaysia_sea.jpg&#39;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; updateFn = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; img = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.createElement(&lt;span class=&quot;string&quot;&gt;&#39;IMG&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        img.setAttribute(&lt;span class=&quot;string&quot;&gt;&#39;src&#39;&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;arguments&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;imageContainer&#39;&lt;/span&gt;).appendChild(img);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      ImageLoader(imagesArr,&amp;#123;update:updateFn,complete:&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        alert(&lt;span class=&quot;string&quot;&gt;&#39;All images loaded.&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;,silent:&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/navyxie/imageloader&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;源码地址：https://github.com/navyxie/imageloader&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      图片预加载
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://www.navyxie.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="加载" scheme="http://www.navyxie.com/tags/%E5%8A%A0%E8%BD%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mobile_fix</title>
+    <link href="http://www.navyxie.com/2016/04/22/mobile-fix/"/>
+    <id>http://www.navyxie.com/2016/04/22/mobile-fix/</id>
+    <published>2016-04-21T17:32:18.000Z</published>
+    <updated>2016-04-22T16:25:41.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;像图片一样布局&quot;&gt;&lt;a href=&quot;#像图片一样布局&quot; class=&quot;headerlink&quot; title=&quot;像图片一样布局&quot;&gt;&lt;/a&gt;像图片一样布局&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/xiangpaopao/blog/issues/9&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/xiangpaopao/blog/issues/9&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/peunzhang/pageResponse&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/peunzhang/pageResponse&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;单页，单屏切换&quot;&gt;&lt;a href=&quot;#单页，单屏切换&quot; class=&quot;headerlink&quot; title=&quot;单页，单屏切换&quot;&gt;&lt;/a&gt;单页，单屏切换&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/powy1993/fullpage&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/powy1993/fullpage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/thebird/Swipe&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/thebird/Swipe&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;打字效果&quot;&gt;&lt;a href=&quot;#打字效果&quot; class=&quot;headerlink&quot; title=&quot;打字效果&quot;&gt;&lt;/a&gt;打字效果&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://coffeedeveloper.github.io/typing.js/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://coffeedeveloper.github.io/typing.js/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mattboldt/typed.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mattboldt/typed.js&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;动画&quot;&gt;&lt;a href=&quot;#动画&quot; class=&quot;headerlink&quot; title=&quot;动画&quot;&gt;&lt;/a&gt;动画&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/daneden/animate.css&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/daneden/animate.css&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;像图片一样布局&quot;&gt;&lt;a href=&quot;#像图片一样布局&quot; class=&quot;headerlink&quot; title=&quot;像图片一样布局&quot;&gt;&lt;/a&gt;像图片一样布局&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/xiangpaopao/blog
+    
+    </summary>
+    
+      <category term="移动端" scheme="http://www.navyxie.com/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+    
+      <category term="移动端" scheme="http://www.navyxie.com/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+      <category term="适配" scheme="http://www.navyxie.com/tags/%E9%80%82%E9%85%8D/"/>
+    
+      <category term="单页" scheme="http://www.navyxie.com/tags/%E5%8D%95%E9%A1%B5/"/>
+    
+      <category term="singlepage" scheme="http://www.navyxie.com/tags/singlepage/"/>
+    
+      <category term="fullpage" scheme="http://www.navyxie.com/tags/fullpage/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web-security</title>
+    <link href="http://www.navyxie.com/2016/04/19/web-security/"/>
+    <id>http://www.navyxie.com/2016/04/19/web-security/</id>
+    <published>2016-04-18T21:18:50.000Z</published>
+    <updated>2016-04-20T17:34:08.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;随机token&quot;&gt;&lt;a href=&quot;#随机token&quot; class=&quot;headerlink&quot; title=&quot;随机token&quot;&gt;&lt;/a&gt;随机token&lt;/h2&gt;&lt;p&gt;整个处理流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在需要处理盗刷的接口添加token参数校验&lt;/li&gt;
+&lt;li&gt;web端在需要处理盗刷页面注入token&lt;/li&gt;
+&lt;li&gt;Native(IOS,android)通过API形式请求token，在相应的接口请求时带上&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;服务端生成token&quot;&gt;&lt;a href=&quot;#服务端生成token&quot; class=&quot;headerlink&quot; title=&quot;服务端生成token&quot;&gt;&lt;/a&gt;服务端生成token&lt;/h3&gt;&lt;p&gt;使用redis管理token&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;//生成token&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Redis.SETEX(token,ttl, 1,cb);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;//验证token&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Redis.GET(token,function (err, data) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(data &amp;amp;&amp;amp; data &amp;lt; 4)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      //每个token在ttl时间间隔内只能使用3次&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      self.incrToken(token,tokenPre,cb);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;else&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      self.removeToken(token,tokenPre,function(err,data)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cb(null,false);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;web端在render前注入token以及script脚本以便获取token值&quot;&gt;&lt;a href=&quot;#web端在render前注入token以及script脚本以便获取token值&quot; class=&quot;headerlink&quot; title=&quot;web端在render前注入token以及script脚本以便获取token值&quot;&gt;&lt;/a&gt;web端在render前注入token以及script脚本以便获取token值&lt;/h3&gt;&lt;p&gt;token值切分成每个字符插入到HTML dom 中&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;var bodyEndStr = &amp;apos;&amp;lt;/body&amp;gt;&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var bodyStartStr = &amp;apos;&amp;lt;body&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var token = &amp;apos;后端生成的token&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var tokenId = &amp;apos;_&amp;apos; + FN_UTIL.generateSalt(Math.ceil(Math.random()*10));//随机生成字符数字字符串作为dom id，为了避免第一个字符是数字，所以添加了前缀_&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var bodyStarIndex = html.indexOf(bodyStartStr);//body标签开启位置&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var bodyEndIndex = html.indexOf(bodyEndStr);//body标签结束位置&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var htmlTagLastIndexs = FN_UTIL.matchHtmlTags(html.substring(bodyStarIndex,bodyEndIndex+1));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var htmlTagLen = htmlTagLastIndexs.length;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var tokenLen = token.length;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var times = Math.floor(htmlTagLen/tokenLen);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var randomIndex = 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var addLen = 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var scriptStr = &amp;apos;var r=&amp;quot;&amp;quot;;function g(id)&amp;#123;return document.getElementById(id).innerHTML&amp;#125;&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;for(var i = 0 ; i &amp;lt; tokenLen ; i++)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var htmlTag = FN_UTIL.makeHtmlTag(tokenId+i,token[i]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  randomIndex += Math.floor(Math.random()*times);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  if(!htmlTagLastIndexs[randomIndex])&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    randomIndex = htmlTagLen - 1;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var curIndex = bodyStarIndex+htmlTagLastIndexs[randomIndex]+addLen;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var prevHtml = html.substring(0,curIndex);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var nextHtml = html.substr(curIndex); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  scriptStr += &amp;apos;r += g(&amp;quot;&amp;apos;+(tokenId+i)+&amp;apos;&amp;quot;);&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  if(i === tokenLen-1)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    scriptStr += &amp;apos;w.xxx=r;&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    html = prevHtml.concat(htmlTag,&amp;apos;&amp;lt;script&amp;gt;(function(w)&amp;#123;&amp;apos;+scriptStr+&amp;apos;&amp;#125;)(window)&amp;lt;/script&amp;gt;&amp;apos;,nextHtml);//执行js获取token值&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;else&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    html = prevHtml.concat(htmlTag,nextHtml);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  addLen += htmlTag.length;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;FN_UTIL 的代码：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;var SALTCHARS = &amp;apos;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var htmlTags = [&amp;apos;b&amp;apos;,&amp;apos;big&amp;apos;,&amp;apos;i&amp;apos;,&amp;apos;small&amp;apos;,&amp;apos;tt&amp;apos;,&amp;apos;abbr&amp;apos;,&amp;apos;acronym&amp;apos;,&amp;apos;cite&amp;apos;,&amp;apos;code&amp;apos;,&amp;apos;dfn&amp;apos;,&amp;apos;em&amp;apos;,&amp;apos;kbd&amp;apos;,&amp;apos;strong&amp;apos;,&amp;apos;samp&amp;apos;,&amp;apos;time&amp;apos;,&amp;apos;bdo&amp;apos;,&amp;apos;map&amp;apos;,&amp;apos;q&amp;apos;,&amp;apos;span&amp;apos;,&amp;apos;sub&amp;apos;,&amp;apos;sup&amp;apos;,&amp;apos;button&amp;apos;,&amp;apos;label&amp;apos;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;module.exports = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  generateSalt:function(length)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var i, r = [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    for (i = 0; i &amp;lt; length; ++i) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      r.push(SALTCHARS[Math.floor(Math.random() * SALTCHARS.length)]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return r.join(&amp;apos;&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  matchHtmlTags:function(html)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var reg = new RegExp(/&amp;lt;\/[^&amp;gt;]+&amp;gt;/gim);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var lastIndexs = [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    while((result = reg.exec(html)) != null)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      lastIndexs.push(reg.lastIndex);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return lastIndexs;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  makeHtmlTag:function(id,val)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var tag = this.randomHtmlTagName();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return &amp;apos;&amp;lt;&amp;apos;+tag+&amp;apos; id=&amp;quot;&amp;apos;+id+&amp;apos;&amp;quot; style=&amp;quot;display:none;&amp;quot;&amp;gt;&amp;apos; + val + &amp;apos;&amp;lt;/&amp;apos;+tag+&amp;apos;&amp;gt;&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  randomHtmlTagName:function()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return htmlTags[Math.floor(Math.random()*htmlTags.length)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Native-IOS-Android-端&quot;&gt;&lt;a href=&quot;#Native-IOS-Android-端&quot; class=&quot;headerlink&quot; title=&quot;Native(IOS,Android)端&quot;&gt;&lt;/a&gt;Native(IOS,Android)端&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;//获取服务器端的时间戳&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var serverTime = getServerTime();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;//使用对称加密算法加密特定字符串和时间戳&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var encodeData = crypto.encode(&amp;apos;xxxx_time&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;//服务器端解密加密数据，提取时间戳，与server时间戳对比，在一定差值(10s)内允许生成token，客户端通过token，执行后续操作&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;优点&quot;&gt;&lt;a href=&quot;#优点&quot; class=&quot;headerlink&quot; title=&quot;优点&quot;&gt;&lt;/a&gt;优点&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;整个防盗流程都是技术手段在处理，对用户透明，既起到一定的安全防护又不失用户体验&lt;/li&gt;
+&lt;li&gt;Native端通过加密获取token，即使获取token的接口被监听，有时间戳校验，也是在很大程度上防止盗刷&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;注意，随机的标签不能是块级元素，不然原本块级元素内包含内联元素，嵌入块级元素后会导致元素布局错乱.内联元素列表参照&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      不用验证码的防盗刷方式
+    
+    </summary>
+    
+      <category term="安全" scheme="http://www.navyxie.com/categories/%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="验证" scheme="http://www.navyxie.com/categories/%E5%AE%89%E5%85%A8/%E9%AA%8C%E8%AF%81/"/>
+    
+    
+      <category term="api" scheme="http://www.navyxie.com/tags/api/"/>
+    
+      <category term="web" scheme="http://www.navyxie.com/tags/web/"/>
+    
+      <category term="security" scheme="http://www.navyxie.com/tags/security/"/>
+    
+      <category term="盗刷" scheme="http://www.navyxie.com/tags/%E7%9B%97%E5%88%B7/"/>
+    
+      <category term="验证码" scheme="http://www.navyxie.com/tags/%E9%AA%8C%E8%AF%81%E7%A0%81/"/>
+    
+      <category term="加密" scheme="http://www.navyxie.com/tags/%E5%8A%A0%E5%AF%86/"/>
+    
+      <category term="解密" scheme="http://www.navyxie.com/tags/%E8%A7%A3%E5%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>watch-ENOSPC</title>
+    <link href="http://www.navyxie.com/2016/04/18/watch-ENOSPC/"/>
+    <id>http://www.navyxie.com/2016/04/18/watch-ENOSPC/</id>
+    <published>2016-04-18T08:44:36.000Z</published>
+    <updated>2016-04-18T20:26:14.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Node-JS-Error-ENOSPC-ENOSPC-Error-No-space-left-on-device&quot;&gt;&lt;a href=&quot;#Node-JS-Error-ENOSPC-ENOSPC-Error-No-space-left-on-device&quot; class=&quot;headerlink&quot; title=&quot;Node.JS Error: ENOSPC (ENOSPC:Error No space left on device)&quot;&gt;&lt;/a&gt;Node.JS Error: ENOSPC (ENOSPC:Error No space left on device)&lt;/h2&gt;&lt;h3 id=&quot;Run-the-below-command&quot;&gt;&lt;a href=&quot;#Run-the-below-command&quot; class=&quot;headerlink&quot; title=&quot;Run the below command:&quot;&gt;&lt;/a&gt;Run the below command:&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;amp;&amp;amp; sudo sysctl -p&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;em&gt;The system has a limit to how many files can be watched by a user. You can run out of watches pretty quickly if you have Grunt running with other programs like Dropbox. This command increases the maximum amount of watches a user can have.&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&quot;referrer&quot;&gt;&lt;a href=&quot;#referrer&quot; class=&quot;headerlink&quot; title=&quot;referrer&quot;&gt;&lt;/a&gt;referrer&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/16748737/grunt-watch-error-waiting-fatal-error-watch-enospc&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://stackoverflow.com/questions/16748737/grunt-watch-error-waiting-fatal-error-watch-enospc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Sysctl&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://wiki.archlinux.org/index.php/Sysctl&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      Node.JS Error: ENOSPC
+    
+    </summary>
+    
+      <category term="系统" scheme="http://www.navyxie.com/categories/%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="watch" scheme="http://www.navyxie.com/tags/watch/"/>
+    
+      <category term="ENOSPC" scheme="http://www.navyxie.com/tags/ENOSPC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mac-pow</title>
+    <link href="http://www.navyxie.com/2016/04/17/mac-pow/"/>
+    <id>http://www.navyxie.com/2016/04/17/mac-pow/</id>
+    <published>2016-04-16T21:37:11.000Z</published>
+    <updated>2016-04-16T23:06:26.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;a href=&quot;http://pow.cx/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pow is a zero-config Rack server for Mac OS X&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;h3 id=&quot;curl-get-pow-cx-sh&quot;&gt;&lt;a href=&quot;#curl-get-pow-cx-sh&quot; class=&quot;headerlink&quot; title=&quot;curl get.pow.cx | sh&quot;&gt;&lt;/a&gt;curl get.pow.cx | sh&lt;/h3&gt;&lt;p&gt;&lt;em&gt;install log info:&lt;/em&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                 Dload  Upload   Total   Spent    Left  Speed&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;100  9039  100  9039    0     0   3396      0  0:00:02  0:00:02 --:--:--  3395&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installing Pow 0.5.0...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installing local configuration files...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/Users/Navy/Library/LaunchAgents/cx.pow.powd.plist&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installing system configuration files as root...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Password:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/etc/resolver/dev&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/Library/LaunchDaemons/cx.pow.firewall.plist&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Starting the Pow server...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Performing self-test...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installed&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;For troubleshooting instructions, please see the Pow wiki:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;https://github.com/basecamp/pow/wiki/Troubleshooting&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;To uninstall Pow, `curl get.pow.cx/uninstall.sh | sh`&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;Serving-Static-Files&quot;&gt;&lt;a href=&quot;#Serving-Static-Files&quot; class=&quot;headerlink&quot; title=&quot;Serving Static Files&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://pow.cx/manual.html#section_2.4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Serving Static Files&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pow automatically serves static files in the public directory of your application. It’s possible to serve a completely static site without a config.ru file as long as it has a public directory. If you have a static site and want to keep your files in the root of your project (i.e. not in a public directory), you can do the following:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ cd ~/.pow&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ mkdir your-app-domain&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ cd !$&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ln -s ~/Projects/your-app public&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Accessing-Virtual-Hosts-from-Other-Computers&quot;&gt;&lt;a href=&quot;#Accessing-Virtual-Hosts-from-Other-Computers&quot; class=&quot;headerlink&quot; title=&quot;Accessing Virtual Hosts from Other Computers&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://pow.cx/manual.html#section_2.1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Accessing Virtual Hosts from Other Computers&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Sometimes you need to access your Pow virtual hosts from another computer on your local network — for example, when testing your application on a mobile device or from a Windows or Linux VM.&lt;/p&gt;
+&lt;p&gt;The .dev domain will only work on your development computer. However, you can use the special .xip.io domain to remotely access your Pow virtual hosts.&lt;/p&gt;
+&lt;p&gt;Construct your xip.io domain by appending your application’s name to your LAN IP address followed by .xip.io. For example, if your development computer’s LAN IP address is 10.0.1.43, you can visit myapp.dev from another computer on your local network using the URL &lt;a href=&quot;http://myapp.10.0.1.43.xip.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://myapp.10.0.1.43.xip.io/&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Port-Proxying&quot;&gt;&lt;a href=&quot;#Port-Proxying&quot; class=&quot;headerlink&quot; title=&quot;Port Proxying&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://pow.cx/manual.html#section_2.1.4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Port Proxying&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pow’s port proxying feature lets you route all web traffic on a particular hostname to another port or IP address. To use it, just create a file in &lt;code&gt;~/.pow&lt;/code&gt; (instead of a symlink) with the destination port number as its contents.&lt;/p&gt;
+&lt;p&gt;For example, to forward all traffic for &lt;code&gt;http://proxiedapp.dev/&lt;/code&gt; to port 8080 on your localhost:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;echo http://1.2.3.4:8080 &amp;gt; ~/.pow/proxiedapp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;You can also use port proxying to access web apps written for other runtimes such as Python or Node.js. Remember that services behind the proxy won’t automatically be started or stopped like Rack apps.&lt;/p&gt;
+&lt;h2 id=&quot;Subdomains&quot;&gt;&lt;a href=&quot;#Subdomains&quot; class=&quot;headerlink&quot; title=&quot;Subdomains&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://pow.cx/manual.html#section_3.3&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Subdomains&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Once a virtual host is installed, it’s also automatically accessible from all subdomains of the named host. For example, the &lt;code&gt;myapp&lt;/code&gt; virtual host described above could also be accessed at &lt;code&gt;http://www.myapp.dev/&lt;/code&gt; and &lt;code&gt;http://assets.www.myapp.dev/&lt;/code&gt;. You can override this behavior to, say, point &lt;code&gt;www.myapp.dev&lt;/code&gt; to a different application — just create another virtual host symlink named &lt;code&gt;www.myapp&lt;/code&gt; for the application you want.&lt;/p&gt;
+&lt;h2 id=&quot;start-or-stop-pow&quot;&gt;&lt;a href=&quot;#start-or-stop-pow&quot; class=&quot;headerlink&quot; title=&quot;start or stop pow&quot;&gt;&lt;/a&gt;start or stop pow&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;command line:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;stop Pow:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;launchctl unload ~/Library/LaunchAgents/cx.pow.powd.plist&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo launchctl unload ~/Library/LaunchDaemons/cx.pow.firewall.plist&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;start Pow:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;launchctl load ~/Library/LaunchAgents/cx.pow.powd.plist&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo launchctl load ~/Library/LaunchDaemons/cx.pow.firewall.plist&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It’s a lot easier, though, to use third-party tools like &lt;a href=&quot;https://github.com/rodreegez/powder&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;powder&lt;/a&gt; or &lt;a href=&quot;https://github.com/sethvargo/powify&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;powify&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Powder:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# Stop&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;powder down #or&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;powder stop&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Start&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;powder up #or&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;powder start&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Powify:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# Stop&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;powify server stop&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Start&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;powify server start&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Viewing-Log-Files&quot;&gt;&lt;a href=&quot;#Viewing-Log-Files&quot; class=&quot;headerlink&quot; title=&quot;Viewing Log Files&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://pow.cx/manual.html#section_2.6&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Viewing Log Files&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pow stores log files in the &lt;code&gt;~/Library/Logs/Pow directory&lt;/code&gt; so they can be viewed easily with OS X’s Console application. Each incoming request URL is logged, along with its hostname and HTTP method, in the &lt;code&gt;access.log&lt;/code&gt; file. The stdout and stderr streams for each worker process are captured and logged to the &lt;code&gt;apps&lt;/code&gt; directory in a file matching the name of the application.&lt;/p&gt;
+&lt;p&gt;Note: Rails logger output does not appear in Pow’s logs. You’ll want to tail -f &lt;code&gt;log/development.log&lt;/code&gt; to see those entries.&lt;/p&gt;
+&lt;h4 id=&quot;pow-docs-http-pow-cx-manual-html&quot;&gt;&lt;a href=&quot;#pow-docs-http-pow-cx-manual-html&quot; class=&quot;headerlink&quot; title=&quot;pow docs : http://pow.cx/manual.html&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://pow.cx/manual.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pow docs&lt;/a&gt; : &lt;a href=&quot;http://pow.cx/manual.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://pow.cx/manual.html&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;PS: Pow changed some file in /etc/ on installation. when php application occure 404 , should uninstalled this.&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://pow.cx/&quot;&gt;pow is a zero-config Rack server for Mac OS X&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;install&quot;&gt;&lt;a href=&quot;#install&quot; class=&quot;headerlink&quot; title=&quot;install&quot;&gt;&lt;/a&gt;install&lt;/h2&gt;&lt;h3 id=&quot;curl-get-pow-cx-sh&quot;&gt;&lt;a href=&quot;#curl-get-pow-cx-sh&quot; class=&quot;headerlink&quot; title=&quot;curl get.pow.cx | sh&quot;&gt;&lt;/a&gt;curl get.pow.cx | sh&lt;/h3&gt;&lt;p&gt;&lt;em&gt;install log info:&lt;/em&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                 Dload  Upload   Total   Spent    Left  Speed&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;100  9039  100  9039    0     0   3396      0  0:00:02  0:00:02 --:--:--  3395&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installing Pow 0.5.0...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installing local configuration files...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/Users/Navy/Library/LaunchAgents/cx.pow.powd.plist&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installing system configuration files as root...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Password:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/etc/resolver/dev&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/Library/LaunchDaemons/cx.pow.firewall.plist&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Starting the Pow server...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Performing self-test...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Installed&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;For troubleshooting instructions, please see the Pow wiki:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;https://github.com/basecamp/pow/wiki/Troubleshooting&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;To uninstall Pow, `curl get.pow.cx/uninstall.sh | sh`&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="software" scheme="http://www.navyxie.com/categories/software/"/>
+    
+    
+      <category term="mac" scheme="http://www.navyxie.com/tags/mac/"/>
+    
+      <category term="pow" scheme="http://www.navyxie.com/tags/pow/"/>
+    
+  </entry>
+  
+  <entry>
     <title>hexo-theme-landscape-swiftype</title>
-    <link href="http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/"/>
-    <id>http://navyxie.github.io/2016/04/16/hexo-theme-landscape-swiftype/</id>
+    <link href="http://www.navyxie.com/2016/04/16/hexo-theme-landscape-swiftype/"/>
+    <id>http://www.navyxie.com/2016/04/16/hexo-theme-landscape-swiftype/</id>
     <published>2016-04-15T22:16:04.000Z</published>
-    <updated>2016-04-15T22:26:32.000Z</updated>
+    <updated>2016-04-16T13:10:23.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;hexo站内搜索功能-——-swiftype&quot;&gt;&lt;a href=&quot;#hexo站内搜索功能-——-swiftype&quot; class=&quot;headerlink&quot; title=&quot;hexo站内搜索功能 —— swiftype&quot;&gt;&lt;/a&gt;hexo站内搜索功能 —— swiftype&lt;/h2&gt;&lt;p&gt;hexo 默认自带的搜索引擎是google,我们接下来是讲解如何用swiftype实现站内搜索&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;去&lt;a href=&quot;https://swiftype.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;swiftype&lt;/a&gt;官网注册一个账号，按步骤同步站点内容，然后复制代码，代码如下：&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;w,d,t,u,n,s,e&lt;/span&gt;)&lt;/span&gt;&amp;#123;w[&lt;span class=&quot;string&quot;&gt;&#39;SwiftypeObject&#39;&lt;/span&gt;]=n;w[n]=w[n]||&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (w[n].q=w[n].q||[]).push(&lt;span class=&quot;built_in&quot;&gt;arguments&lt;/span&gt;);&amp;#125;;s=d.createElement(t);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  e=d.getElementsByTagName(t)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];s.async=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;s.src=u;e.parentNode.insertBefore(s,e);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)(&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;script&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;//s.swiftypecdn.com/install/v2/st.js&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;_st&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  _st(&lt;span class=&quot;string&quot;&gt;&#39;install&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;kWSKry9NQXF2ddPp_Lay&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;2.0.0&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//请更换自己的kWSKry9NQXF2ddPp_Lay&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;ol&gt;
 &lt;li&gt;搜索主题的search_form方法，不同主题可能位置不一样，但是landscape主题是在layout/_partial/header.ejs文件中，替换掉search_form方法，如下：&lt;/li&gt;
 &lt;/ol&gt;
@@ -40,34 +515,35 @@
     
     </summary>
     
-      <category term="hexo" scheme="http://navyxie.github.io/categories/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/categories/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/categories/hexo/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/categories/hexo/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/categories/hexo/theme/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/categories/hexo/theme/landscape/"/>
     
     
-      <category term="hexo" scheme="http://navyxie.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/tags/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/tags/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/tags/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/tags/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/tags/landscape/"/>
     
-      <category term="swiftype" scheme="http://navyxie.github.io/tags/swiftype/"/>
+      <category term="swiftype" scheme="http://www.navyxie.com/tags/swiftype/"/>
     
   </entry>
   
   <entry>
     <title>hexo-them-landscape</title>
-    <link href="http://navyxie.github.io/2016/04/16/hexo-them-landscape/"/>
-    <id>http://navyxie.github.io/2016/04/16/hexo-them-landscape/</id>
+    <link href="http://www.navyxie.com/2016/04/16/hexo-them-landscape/"/>
+    <id>http://www.navyxie.com/2016/04/16/hexo-them-landscape/</id>
     <published>2016-04-15T22:06:28.000Z</published>
-    <updated>2016-04-15T22:15:09.000Z</updated>
+    <updated>2016-04-16T13:10:14.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;hexo-theme-landscape-0-0-1-版本文章分页显示的bug&quot;&gt;&lt;a href=&quot;#hexo-theme-landscape-0-0-1-版本文章分页显示的bug&quot; class=&quot;headerlink&quot; title=&quot;hexo-theme-landscape  0.0.1 版本文章分页显示的bug&quot;&gt;&lt;/a&gt;hexo-theme-landscape  0.0.1 版本文章分页显示的bug&lt;/h2&gt;&lt;p&gt;上一页和下一页的bug显示如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;« __(&#39;prev&#39;) __(&#39;next&#39;) »&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;解决方法(layout/_partial/archive.ejs)：&lt;/p&gt;
-&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;nav id=&lt;span class=&quot;string&quot;&gt;&quot;page-nav&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;prev_text&lt;/span&gt; = &quot;&amp;amp;&lt;span class=&quot;attr&quot;&gt;laquo&lt;/span&gt;; &quot; + &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;prev&lt;/span&gt;&#39;);&lt;span class=&quot;attr&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;next_text&lt;/span&gt; = &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;next&lt;/span&gt;&#39;) + &quot; &amp;amp;&lt;span class=&quot;attr&quot;&gt;raquo&lt;/span&gt;;&quot;%&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;%-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;paginator&lt;/span&gt;(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;prev_text:&lt;/span&gt; &quot;&amp;amp;&lt;span class=&quot;attr&quot;&gt;laquo&lt;/span&gt;; &quot;+&lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;prev&lt;/span&gt;&#39;),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;next_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;next&lt;/span&gt;&#39;)+&quot; &amp;amp;&lt;span class=&quot;attr&quot;&gt;raquo&lt;/span&gt;;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;prev_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;prev_text&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;next_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;next_text&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;) %&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;nav&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;nav id=&lt;span class=&quot;string&quot;&gt;&quot;page-nav&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;prev_text&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;&quot;&amp;amp;laquo; &quot;&lt;/span&gt; + &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;prev&lt;/span&gt;&#39;);&lt;span class=&quot;attr&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;next_text&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;__(&lt;/span&gt;&#39;&lt;span class=&quot;attr&quot;&gt;next&lt;/span&gt;&#39;) + &quot; &amp;amp;&lt;span class=&quot;attr&quot;&gt;raquo&lt;/span&gt;;&quot;%&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;%-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;paginator&lt;/span&gt;(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;prev_text:&lt;/span&gt; &quot;&amp;amp;&lt;span class=&quot;attr&quot;&gt;laquo&lt;/span&gt;; &quot;+&lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;prev&lt;/span&gt;&#39;),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;next_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;__&lt;/span&gt;(&#39;&lt;span class=&quot;attr&quot;&gt;next&lt;/span&gt;&#39;)+&quot; &amp;amp;&lt;span class=&quot;attr&quot;&gt;raquo&lt;/span&gt;;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;prev_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;prev_text&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;attr&quot;&gt;next_text:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;next_text&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;) %&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;nav&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;已向官方提交&lt;a href=&quot;https://github.com/hexojs/hexo-theme-landscape/pull/67/files&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PR&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -77,25 +553,25 @@
     
     </summary>
     
-      <category term="hexo" scheme="http://navyxie.github.io/categories/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/categories/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/categories/hexo/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/categories/hexo/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/categories/hexo/theme/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/categories/hexo/theme/landscape/"/>
     
     
-      <category term="hexo" scheme="http://navyxie.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="http://www.navyxie.com/tags/hexo/"/>
     
-      <category term="theme" scheme="http://navyxie.github.io/tags/theme/"/>
+      <category term="theme" scheme="http://www.navyxie.com/tags/theme/"/>
     
-      <category term="landscape" scheme="http://navyxie.github.io/tags/landscape/"/>
+      <category term="landscape" scheme="http://www.navyxie.com/tags/landscape/"/>
     
   </entry>
   
   <entry>
     <title>mongo_aggregate_cond</title>
-    <link href="http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/"/>
-    <id>http://navyxie.github.io/2016/04/16/mongo-aggregate-cond/</id>
+    <link href="http://www.navyxie.com/2016/04/16/mongo-aggregate-cond/"/>
+    <id>http://www.navyxie.com/2016/04/16/mongo-aggregate-cond/</id>
     <published>2016-04-15T18:24:19.000Z</published>
     <updated>2016-04-15T19:35:02.000Z</updated>
     
@@ -116,23 +592,23 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mongo" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
     
     
-      <category term="mongo" scheme="http://navyxie.github.io/tags/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/tags/mongo/"/>
     
-      <category term="数据库" scheme="http://navyxie.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="aggregate" scheme="http://navyxie.github.io/tags/aggregate/"/>
+      <category term="aggregate" scheme="http://www.navyxie.com/tags/aggregate/"/>
     
   </entry>
   
   <entry>
     <title>mongo</title>
-    <link href="http://navyxie.github.io/2016/04/15/mongo/"/>
-    <id>http://navyxie.github.io/2016/04/15/mongo/</id>
+    <link href="http://www.navyxie.com/2016/04/15/mongo/"/>
+    <id>http://www.navyxie.com/2016/04/15/mongo/</id>
     <published>2016-04-14T17:43:05.000Z</published>
     <updated>2016-04-15T19:11:12.000Z</updated>
     
@@ -150,21 +626,21 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mongo" scheme="http://navyxie.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongo/"/>
     
     
-      <category term="mongo" scheme="http://navyxie.github.io/tags/mongo/"/>
+      <category term="mongo" scheme="http://www.navyxie.com/tags/mongo/"/>
     
-      <category term="数据库" scheme="http://navyxie.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://www.navyxie.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>收藏</title>
-    <link href="http://navyxie.github.io/2016/04/07/collect/"/>
-    <id>http://navyxie.github.io/2016/04/07/collect/</id>
+    <link href="http://www.navyxie.com/2016/04/07/collect/"/>
+    <id>http://www.navyxie.com/2016/04/07/collect/</id>
     <published>2016-04-06T17:50:29.000Z</published>
     <updated>2016-04-15T19:34:51.000Z</updated>
     
@@ -202,19 +678,19 @@
     
     </summary>
     
-      <category term="收藏" scheme="http://navyxie.github.io/categories/%E6%94%B6%E8%97%8F/"/>
+      <category term="收藏" scheme="http://www.navyxie.com/categories/%E6%94%B6%E8%97%8F/"/>
     
     
-      <category term="JavaScript" scheme="http://navyxie.github.io/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="http://www.navyxie.com/tags/JavaScript/"/>
     
-      <category term="框架" scheme="http://navyxie.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="http://www.navyxie.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
   <entry>
     <title>文章</title>
-    <link href="http://navyxie.github.io/2016/04/07/post/"/>
-    <id>http://navyxie.github.io/2016/04/07/post/</id>
+    <link href="http://www.navyxie.com/2016/04/07/post/"/>
+    <id>http://www.navyxie.com/2016/04/07/post/</id>
     <published>2016-04-06T17:49:10.000Z</published>
     <updated>2016-04-15T20:02:39.000Z</updated>
     
@@ -248,27 +724,27 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://navyxie.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://www.navyxie.com/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="框架" scheme="http://navyxie.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="http://www.navyxie.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="插件化" scheme="http://navyxie.github.io/tags/%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
+      <category term="插件化" scheme="http://www.navyxie.com/tags/%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
     
-      <category term="npm" scheme="http://navyxie.github.io/tags/npm/"/>
+      <category term="npm" scheme="http://www.navyxie.com/tags/npm/"/>
     
-      <category term="protractor" scheme="http://navyxie.github.io/tags/protractor/"/>
+      <category term="protractor" scheme="http://www.navyxie.com/tags/protractor/"/>
     
-      <category term="测试" scheme="http://navyxie.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="http://www.navyxie.com/tags/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>游戏开发</title>
-    <link href="http://navyxie.github.io/2016/04/07/game/"/>
-    <id>http://navyxie.github.io/2016/04/07/game/</id>
+    <link href="http://www.navyxie.com/2016/04/07/game/"/>
+    <id>http://www.navyxie.com/2016/04/07/game/</id>
     <published>2016-04-06T17:47:44.000Z</published>
-    <updated>2016-04-15T20:02:38.000Z</updated>
+    <updated>2016-04-16T18:46:42.000Z</updated>
     
     <content type="html">&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/Phaser-demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;phaser-demo&lt;/a&gt;&lt;/li&gt;
@@ -292,21 +768,21 @@
     
     </summary>
     
-      <category term="游戏" scheme="http://navyxie.github.io/categories/%E6%B8%B8%E6%88%8F/"/>
+      <category term="游戏" scheme="http://www.navyxie.com/categories/%E6%B8%B8%E6%88%8F/"/>
     
     
-      <category term="game" scheme="http://navyxie.github.io/tags/game/"/>
+      <category term="game" scheme="http://www.navyxie.com/tags/game/"/>
     
-      <category term="游戏" scheme="http://navyxie.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+      <category term="游戏" scheme="http://www.navyxie.com/tags/%E6%B8%B8%E6%88%8F/"/>
     
-      <category term="phaser" scheme="http://navyxie.github.io/tags/phaser/"/>
+      <category term="phaser" scheme="http://www.navyxie.com/tags/phaser/"/>
     
   </entry>
   
   <entry>
     <title>支付</title>
-    <link href="http://navyxie.github.io/2016/04/07/pay/"/>
-    <id>http://navyxie.github.io/2016/04/07/pay/</id>
+    <link href="http://www.navyxie.com/2016/04/07/pay/"/>
+    <id>http://www.navyxie.com/2016/04/07/pay/</id>
     <published>2016-04-06T17:45:48.000Z</published>
     <updated>2016-04-15T20:02:36.000Z</updated>
     
@@ -333,93 +809,16 @@
     
     </summary>
     
-      <category term="支付" scheme="http://navyxie.github.io/categories/%E6%94%AF%E4%BB%98/"/>
+      <category term="支付" scheme="http://www.navyxie.com/categories/%E6%94%AF%E4%BB%98/"/>
     
     
-      <category term="支付" scheme="http://navyxie.github.io/tags/%E6%94%AF%E4%BB%98/"/>
+      <category term="支付" scheme="http://www.navyxie.com/tags/%E6%94%AF%E4%BB%98/"/>
     
-      <category term="易宝" scheme="http://navyxie.github.io/tags/%E6%98%93%E5%AE%9D/"/>
+      <category term="易宝" scheme="http://www.navyxie.com/tags/%E6%98%93%E5%AE%9D/"/>
     
-      <category term="连连" scheme="http://navyxie.github.io/tags/%E8%BF%9E%E8%BF%9E/"/>
+      <category term="连连" scheme="http://www.navyxie.com/tags/%E8%BF%9E%E8%BF%9E/"/>
     
-      <category term="实名认证" scheme="http://navyxie.github.io/tags/%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工具</title>
-    <link href="http://navyxie.github.io/2016/04/07/tools/"/>
-    <id>http://navyxie.github.io/2016/04/07/tools/</id>
-    <published>2016-04-06T17:43:51.000Z</published>
-    <updated>2016-04-15T20:02:34.000Z</updated>
-    
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/minievent&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;事件扩展工具库&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/n-crypto&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Nodejs的加密解密&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://meiriyitie.com/2015/05/26/diagnosing-network-issues-with-mtr/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用 MTR 诊断网络问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/bankcardinfo&quot;&gt;根据银行卡卡号查询银行类型和卡类型&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/phone-service&quot;&gt;通过手机号查询运营商以及号码归属地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/idcard&quot;&gt;校验身份证合法性，获取身份证详细信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://navyxie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="工具库" scheme="http://navyxie.github.io/tags/%E5%B7%A5%E5%85%B7%E5%BA%93/"/>
-    
-      <category term="tool" scheme="http://navyxie.github.io/tags/tool/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微信开放平台接入</title>
-    <link href="http://navyxie.github.io/2016/04/07/wechat-develop/"/>
-    <id>http://navyxie.github.io/2016/04/07/wechat-develop/</id>
-    <published>2016-04-06T17:41:10.000Z</published>
-    <updated>2016-04-15T19:12:52.000Z</updated>
-    
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信公众平台接入例子&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-code/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信开放平台接入Code Demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-local-debug/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何在本地进行微信开放平台开发调试测与试&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/weixin_js/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何在微信6.0.2+版本不接入微信API的情况下设置自定义分享内容&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/oauth2-wechat-develop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;以接入微信开放平台为例讲解oauth2原理&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop/&quot;&gt;微信公众平台接入例子&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-code/&quot;&gt;微信开放平台接入Code Demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/navyxie/wechat-develop-local-debug/&quot;&gt;如何在本地进行微信开放平台开发调试测与试&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="微信开发" scheme="http://navyxie.github.io/categories/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="微信" scheme="http://navyxie.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
-    
-      <category term="开发平台" scheme="http://navyxie.github.io/tags/%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/"/>
+      <category term="实名认证" scheme="http://www.navyxie.com/tags/%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81/"/>
     
   </entry>
   
