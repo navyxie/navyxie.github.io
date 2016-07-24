@@ -76,6 +76,129 @@
       <div class="outer" id="body">
         <section id="main">
   
+    <article id="post-access-token" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/04/access-token/" class="article-date">
+  <time datetime="2016-06-04T06:50:42.000Z" itemprop="datePublished">2016-06-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/安全/">安全</a>►<a class="article-category-link" href="/categories/安全/api/">api</a>►<a class="article-category-link" href="/categories/安全/api/Token/">Token</a>►<a class="article-category-link" href="/categories/安全/api/Token/access/">access</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/04/access-token/">access-token</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>WEB应用是开放的，WEB前端代码也是公开的，和后端交互的接口如果没有经过特殊处理（加密/token），那么就是裸露的，只要知道api地址，那么就能随便获取应用数据。这样应用数据就很容易被人爬取或者恶意盗刷，典型的短信被恶意盗刷。</p>
+<p>公司理财产品的短信接口就是一个裸接口，只要手机号就可以任意盗刷，当然背后有根据手机号，ip地址做了请求限制，但还是不够。后面就加了一定时间内一定请求次数的Token，后面观察，基本没有被刷的迹象，说明新的机制还是起到很大作用。当然这个机制不仅是用于防短信盗刷，可用于任意的裸接口防护。</p>
+<p>原理很简单，就是在web页面请求的时候由后端按一定的算法注入token到页面中去，然后前端可以通过对应的规则取到token，在请求接口数据时带上去就能在后端对token进行验证，验证通过就能正常请求到数据。如果是native app ，可通过加密的方法请求接口来获取token，最简单直接的方式就是native app 客户端使用一段字符串+时间戳（从后端获取）进行加密，然后请求后端接口，接口对数据进行解密，对时间戳对比，在一段时间内认为有效（避免加密信息被拦截，所以加了时间戳校验），从而获取token。</p>
+<p>当然web应用都是公开的，所有源码理论上都是能获取到的。那么后端向web页面注入token的方式也能被破解，所以，后端注入token的形式可定制，比如注入到请求，或者自己实现一套算法，增加被破解的难度。</p>
+<p>把这套机制整理成一个独立的npm包<a href="https://github.com/navyxie/access-token-api">access-token-api</a>，方便多项目复用。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/06/04/access-token/#more">阅读全文 &gt;</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+</article>
+
+  
+    <article id="post-custom-weixin-share-content" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/31/custom-weixin-share-content/" class="article-date">
+  <time datetime="2016-05-31T07:35:05.000Z" itemprop="datePublished">2016-05-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/31/custom-weixin-share-content/">custom_weixin_share_content</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）"><a href="#如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）" class="headerlink" title="如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）"></a>如何在不接入微信API的情况下自定义分享内容（图片、链接、标题）</h2><p>1 设置分享title:动态改变document.title值即可:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.title = <span class="string">'test'</span></span><br></pre></td></tr></table></figure>
+<p>2 设置分享图片：在页面隐藏一张尺寸大于290*290的图（图片需要容器包裹，设置容器css属性display:none即可）:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"display:none"</span>&gt;&lt;img src="share.jpg" /&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>3 设置分享的链接：动态修改document.documentURI的值即可（safari下，document.documentURI为只读属性，可借助history.pushState ）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//android:</span></span><br><span class="line"><span class="built_in">document</span>.documentURI = <span class="string">"http://www.navyxie.com"</span>；<span class="comment">//经测试wechat6.3.13版本下此方法已失效，可使用同下IOS的方法自定义。</span></span><br><span class="line"><span class="comment">//ios:</span></span><br><span class="line"><span class="built_in">window</span>.history.pushState(<span class="string">"weixin-share-url"</span>, <span class="string">"weixinshare"</span>, <span class="string">"http://www.navyxie.com"</span>);<span class="comment">//只可设置同域链接</span></span><br></pre></td></tr></table></figure>
+<p><strong>具体的运行原理可以看 <a href="https://github.com/navyxie/weixin_js" target="_blank" rel="external">微信Android SDK 中的 js</a> 源码分析。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+</article>
+
+  
     <article id="post-redis-lock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/20/redis-lock/" class="article-date">
@@ -201,117 +324,6 @@ var jiathis_config={
 </article>
 
   
-    <article id="post-haproxy-https-to-http" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/29/haproxy-https-to-http/" class="article-date">
-  <time datetime="2016-04-28T18:20:17.000Z" itemprop="datePublished">2016-04-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/29/haproxy-https-to-http/">haproxy-https-to-http</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-        <h2 id="haproxy-把https转发的时候变成了http"><a href="#haproxy-把https转发的时候变成了http" class="headerlink" title="haproxy 把https转发的时候变成了http"></a>haproxy 把https转发的时候变成了http</h2><p>今天接微信API的时候，发现一个很奇怪的问题，本地调试都ok,一旦部署到线上就出问题，后来经过仔细排查，发现我们网站用的是https,很奇怪，haproxy转发的时候会把https转化成http，这是bug吗？待续。</p>
-<p>后来证实，这不是haproxy的bug.是由于我们项目使用的是<a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a>的<a href="http://sailsjs.org/" target="_blank" rel="external">sails</a>框架导致的。</p>
-<p>使用express的nodejs应用程序，需要注意，使用代理服务器转发的时候，获取请求协议的时候正确的取值方法是req.headers[‘x-forwarded-proto’]，直接取值req.protocol取得值是http,在接入微信授权的时候，本地调试都正常，一旦部署到线上(https)，就会提示：<code>config: invalid signature</code>。所以当接入微信API，本地调试一切正常，到线上(https)部署后发现不正常，就应当检查一下授权的地址协议是否正确。</p>
-<h3 id="referrer"><a href="#referrer" class="headerlink" title="referrer:"></a>referrer:</h3><p><a href="https://github.com/nodejs/node-v0.x-archive/issues/6735" target="_blank" rel="external">https://github.com/nodejs/node-v0.x-archive/issues/6735</a><br><a href="https://github.com/expressjs/express/issues/1863" target="_blank" rel="external">https://github.com/expressjs/express/issues/1863</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-<!-- JiaThis Button BEGIN -->
-<div style="float:right;">
-<div class="jiathis_style">
-<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
-</div>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-	data_track_clickback:true,
-	summary:"",
-	shortUrl:false,
-	hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-    <article id="post-image-preload" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/27/image-preload/" class="article-date">
-  <time datetime="2016-04-27T15:08:37.000Z" itemprop="datePublished">2016-04-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/27/image-preload/">image-preload</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-        <h2 id="图片预加载——显示加载进度"><a href="#图片预加载——显示加载进度" class="headerlink" title="图片预加载——显示加载进度"></a>图片预加载——显示加载进度</h2><h3 id="usage"><a href="#usage" class="headerlink" title="usage"></a>usage</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">@param imageArr:预先加载的图片数组,</span><br><span class="line">@param config:</span><br><span class="line">  @param update:每加载一张执行一次update函数</span><br><span class="line">  @param complete:加载完成所有图片执行该函数</span><br><span class="line">  @param silent:true//表示使用默认的加载样式</span><br><span class="line">*/</span></span><br><span class="line">ImageLoader(imageArr,config)</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>imageloader<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../imageloader.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"../imageloader.css"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">style</span>=<span class="string">"text-align:center"</span>&gt;</span>imageloader demo<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"imageContainer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">      <span class="keyword">var</span> imagesArr = [<span class="string">'./images/buy_domain.png'</span>,<span class="string">'./images/dusk.jpg'</span>,<span class="string">'./images/malaysia_dusk.jpg'</span>,<span class="string">'./images/malaysia_sea.jpg'</span>];</span><br><span class="line">      <span class="keyword">var</span> updateFn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> img = <span class="built_in">document</span>.createElement(<span class="string">'IMG'</span>);</span><br><span class="line">        img.setAttribute(<span class="string">'src'</span>,<span class="built_in">arguments</span>[<span class="number">2</span>]);</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">'imageContainer'</span>).appendChild(img);</span><br><span class="line">      &#125;</span><br><span class="line">      ImageLoader(imagesArr,&#123;update:updateFn,complete:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        alert(<span class="string">'All images loaded.'</span>);</span><br><span class="line">      &#125;,silent:<span class="literal">true</span>&#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/navyxie/imageloader" target="_blank" rel="external">源码地址：https://github.com/navyxie/imageloader</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-<!-- JiaThis Button BEGIN -->
-<div style="float:right;">
-<div class="jiathis_style">
-<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
-</div>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-	data_track_clickback:true,
-	summary:"",
-	shortUrl:false,
-	hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
-
-    </footer>
-  </div>
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -368,6 +380,14 @@ updateTime()
       <ul>
         
           <li>
+            <a href="/2016/07/24/nodejs-path/">nodejs-path</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/15/influx-query-language/">influx_query_language</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/21/write-sails-hook/">write-sails-hook</a>
           </li>
         
@@ -379,14 +399,6 @@ updateTime()
             <a href="/2016/06/04/access-token/">access-token</a>
           </li>
         
-          <li>
-            <a href="/2016/05/31/custom-weixin-share-content/">custom_weixin_share_content</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/20/redis-lock/">redis_lock</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -396,7 +408,7 @@ updateTime()
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ENOSPC/" style="font-size: 10px;">ENOSPC</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Toekn/" style="font-size: 10px;">Toekn</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/api/" style="font-size: 15px;">api</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/fullpage/" style="font-size: 10px;">fullpage</a> <a href="/tags/game/" style="font-size: 10px;">game</a> <a href="/tags/haproxy/" style="font-size: 10px;">haproxy</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/hook/" style="font-size: 10px;">hook</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/js-sdk/" style="font-size: 10px;">js-sdk</a> <a href="/tags/landscape/" style="font-size: 15px;">landscape</a> <a href="/tags/lock/" style="font-size: 10px;">lock</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongo/" style="font-size: 15px;">mongo</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/orm/" style="font-size: 10px;">orm</a> <a href="/tags/phaser/" style="font-size: 10px;">phaser</a> <a href="/tags/pow/" style="font-size: 10px;">pow</a> <a href="/tags/protractor/" style="font-size: 10px;">protractor</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sails/" style="font-size: 15px;">sails</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/singlepage/" style="font-size: 10px;">singlepage</a> <a href="/tags/swiftype/" style="font-size: 10px;">swiftype</a> <a href="/tags/theme/" style="font-size: 15px;">theme</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/watch/" style="font-size: 10px;">watch</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/加载/" style="font-size: 10px;">加载</a> <a href="/tags/单页/" style="font-size: 10px;">单页</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/实名认证/" style="font-size: 10px;">实名认证</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/工具库/" style="font-size: 10px;">工具库</a> <a href="/tags/开发平台/" style="font-size: 10px;">开发平台</a> <a href="/tags/微信/" style="font-size: 20px;">微信</a> <a href="/tags/插件化/" style="font-size: 10px;">插件化</a> <a href="/tags/支付/" style="font-size: 10px;">支付</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/易宝/" style="font-size: 10px;">易宝</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a> <a href="/tags/盗刷/" style="font-size: 10px;">盗刷</a> <a href="/tags/移动端/" style="font-size: 10px;">移动端</a> <a href="/tags/解密/" style="font-size: 10px;">解密</a> <a href="/tags/连连/" style="font-size: 10px;">连连</a> <a href="/tags/适配/" style="font-size: 10px;">适配</a> <a href="/tags/验证码/" style="font-size: 10px;">验证码</a>
+      <a href="/tags/ENOSPC/" style="font-size: 10px;">ENOSPC</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Toekn/" style="font-size: 10px;">Toekn</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/api/" style="font-size: 15px;">api</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/fullpage/" style="font-size: 10px;">fullpage</a> <a href="/tags/game/" style="font-size: 10px;">game</a> <a href="/tags/haproxy/" style="font-size: 10px;">haproxy</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/hook/" style="font-size: 10px;">hook</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/influx/" style="font-size: 10px;">influx</a> <a href="/tags/js-sdk/" style="font-size: 10px;">js-sdk</a> <a href="/tags/landscape/" style="font-size: 15px;">landscape</a> <a href="/tags/lock/" style="font-size: 10px;">lock</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongo/" style="font-size: 15px;">mongo</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/orm/" style="font-size: 10px;">orm</a> <a href="/tags/path/" style="font-size: 10px;">path</a> <a href="/tags/phaser/" style="font-size: 10px;">phaser</a> <a href="/tags/pow/" style="font-size: 10px;">pow</a> <a href="/tags/protractor/" style="font-size: 10px;">protractor</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sails/" style="font-size: 15px;">sails</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/singlepage/" style="font-size: 10px;">singlepage</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/swiftype/" style="font-size: 10px;">swiftype</a> <a href="/tags/theme/" style="font-size: 15px;">theme</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/watch/" style="font-size: 10px;">watch</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/加载/" style="font-size: 10px;">加载</a> <a href="/tags/单页/" style="font-size: 10px;">单页</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/实名认证/" style="font-size: 10px;">实名认证</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/工具库/" style="font-size: 10px;">工具库</a> <a href="/tags/开发平台/" style="font-size: 10px;">开发平台</a> <a href="/tags/微信/" style="font-size: 20px;">微信</a> <a href="/tags/插件化/" style="font-size: 10px;">插件化</a> <a href="/tags/支付/" style="font-size: 10px;">支付</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/易宝/" style="font-size: 10px;">易宝</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a> <a href="/tags/盗刷/" style="font-size: 10px;">盗刷</a> <a href="/tags/移动端/" style="font-size: 10px;">移动端</a> <a href="/tags/解密/" style="font-size: 10px;">解密</a> <a href="/tags/连连/" style="font-size: 10px;">连连</a> <a href="/tags/适配/" style="font-size: 10px;">适配</a> <a href="/tags/验证码/" style="font-size: 10px;">验证码</a>
     </div>
   </div>
 

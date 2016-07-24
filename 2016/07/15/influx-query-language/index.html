@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>influx_query_language | Navy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="influx query language">
+<meta property="og:type" content="article">
+<meta property="og:title" content="influx_query_language">
+<meta property="og:url" content="http://www.navyxie.com/2016/07/15/influx-query-language/index.html">
+<meta property="og:site_name" content="Navy's Blog">
+<meta property="og:description" content="influx query language">
+<meta property="og:updated_time" content="2016-07-24T03:27:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="influx_query_language">
+<meta name="twitter:description" content="influx query language">
+  
+    <link rel="alternate" href="/atom.xml" title="Navy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-ico" href="/favicon32.ico">
+  
+  
+    <!-- <link href="http://fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <div id="avatar"><a href="/"></a></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+          <a class="main-nav-link" href="https://github.com/navyxie">Github</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+        
+      </nav>
+      
+        <div id="search-form-wrap">
+	<input type="text" class="st-default-search-input search-form-input" style="outline: none;width: 110px;">
+</div>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+  _st('install','kWSKry9NQXF2ddPp_Lay','2.0.0');
+</script>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer" id="body">
+        <section id="main"><article id="post-influx-query-language" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/15/influx-query-language/" class="article-date">
+  <time datetime="2016-07-15T07:25:44.000Z" itemprop="datePublished">2016-07-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/database/">database</a>►<a class="article-category-link" href="/categories/database/influx/">influx</a>►<a class="article-category-link" href="/categories/database/influx/sql/">sql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      influx_query_language
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <p>InfluxQL is an SQL-like query language for interacting with data in InfluxDB. The following sections cover useful query syntax for exploring your data.</p>
+<h3 id="WHERE-clause-in-InfluxQL"><a href="#WHERE-clause-in-InfluxQL" class="headerlink" title="WHERE clause in InfluxQL:"></a>WHERE clause in InfluxQL:</h3><ul>
+<li>The <code>WHERE</code> clause supports comparisons against strings, booleans, floats, integers, and against the <code>time</code> of the timestamp. It supports using regular expressions to match tags, but not to match fields.</li>
+<li>Chain logic together using <code>AND</code> and <code>OR</code>, and separate using <code>(</code> and <code>)</code>.</li>
+<li>Acceptable comparators include:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">= equal to</span><br><span class="line">&lt;&gt; not equal to</span><br><span class="line">!= not equal to</span><br><span class="line">&gt; greater than</span><br><span class="line">&lt; less than</span><br><span class="line">=~ matches against</span><br><span class="line">!~ doesn’t match against</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="The-basics"><a href="#The-basics" class="headerlink" title="The basics:"></a>The basics:</h3><ul>
+<li>The <code>SELECT</code> statement and the <code>WHERE</code> clause<ul>
+<li>The basic <code>SELECT</code> statement</li>
+<li>The <code>SELECT</code> statement and arithmetic</li>
+<li>The <code>WHERE</code> clause</li>
+</ul>
+</li>
+<li>The GROUP BY clause<ul>
+<li>The basic <code>GROUP BY</code> clause</li>
+<li>The <code>GROUP BY</code> clause and <code>fill()</code></li>
+</ul>
+</li>
+<li>The INTO clause<ul>
+<li>Relocate data</li>
+<li>Downsample data</li>
+</ul>
+</li>
+</ul>
+<h3 id="Limit-and-sort-your-results"><a href="#Limit-and-sort-your-results" class="headerlink" title="Limit and sort your results:"></a>Limit and sort your results:</h3><ul>
+<li>Limit query returns with <code>LIMIT</code> and <code>SLIMIT</code><ul>
+<li>Limit results per series with LIMIT</li>
+<li>Limit the number of series returned with SLIMIT</li>
+</ul>
+</li>
+<li>Sort query returns with ORDER BY time DESC</li>
+<li>Paginate query returns with OFFSET</li>
+</ul>
+<h3 id="General-tips-on-query-syntax"><a href="#General-tips-on-query-syntax" class="headerlink" title="General tips on query syntax:"></a>General tips on query syntax:</h3><ul>
+<li>Multiple statements in queries</li>
+<li>Merge series in queries</li>
+<li>Time syntax in queries<ul>
+<li>Relative time</li>
+<li>Absolute time</li>
+</ul>
+</li>
+<li>Regular expressions in queries<ul>
+<li>Regular expressions and selecting measurements</li>
+<li>Regular expressions and specifying tags</li>
+</ul>
+</li>
+</ul>
+<p>The examples below query data using InfluxDB’s Command Line Interface (CLI). See the Querying Data guide for how to query data directly using the HTTP API.</p>
+<h2 id="Sample-data"><a href="#Sample-data" class="headerlink" title="Sample data"></a>Sample data</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If you’d like to follow along with the queries in this document, see Sample Data for how to download and write the data to InfluxDB. This document uses publicly available data from the National Oceanic and Atmospheric Administration’s (NOAA) Center for Operational Oceanographic Products and Services. The data include water levels (ft) collected every six seconds at two stations (Santa Monica, CA (ID 9410840) and Coyote Creek, CA (ID 9414575)) over the period from August 18, 2015 through September 18, 2015. A subsample of the data in the measurement h2o_feet:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                             level description        location         water_level</span><br><span class="line">2015-08-18T00:00:00Z       below 3 feet               santa_monica     2.064</span><br><span class="line">2015-08-18T00:00:00Z       between 6 and 9 feet    coyote_creek    8.12</span><br><span class="line">2015-08-18T00:06:00Z       between 6 and 9 feet    coyote_creek    8.005</span><br><span class="line">2015-08-18T00:06:00Z       below 3 feet               santa_monica     2.116</span><br><span class="line">2015-08-18T00:12:00Z       between 6 and 9 feet    coyote_creek    7.887</span><br><span class="line">2015-08-18T00:12:00Z       below 3 feet               santa_monica     2.028</span><br><span class="line">2015-08-18T00:18:00Z       between 6 and 9 feet    coyote_creek    7.762</span><br><span class="line">2015-08-18T00:18:00Z       below 3 feet               santa_monica     2.126</span><br><span class="line">2015-08-18T00:24:00Z       between 6 and 9 feet    coyote_creek    7.635</span><br><span class="line">2015-08-18T00:24:00Z       below 3 feet               santa_monica     2.041</span><br></pre></td></tr></table></figure>
+<p>The <code>series</code> are made up of the <code>measurement</code> <code>h2o_feet</code> and the <code>tag key</code> <code>location</code> with the <code>tag values</code> <code>santa_monica</code> and <code>coyote_creek</code>. There are two fields: <code>water_level</code> which stores floats and <code>level description</code> which stores strings. All of the data are in the <code>NOAA_water_database</code> database.</p>
+<blockquote>
+<p>Disclaimer: The level description field isn’t part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string field values.</p>
+</blockquote>
+<h1 id="The-SELECT-statement-and-the-WHERE-clause"><a href="#The-SELECT-statement-and-the-WHERE-clause" class="headerlink" title="The SELECT statement and the WHERE clause"></a>The SELECT statement and the WHERE clause</h1><p>InfluxQL’s <code>SELECT</code> statement follows the form of an SQL <code>SELECT</code> statement where the <code>WHERE</code> clause is optional:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;stuff&gt; FROM &lt;measurement_name&gt; WHERE &lt;some_conditions&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="The-basic-SELECT-statement"><a href="#The-basic-SELECT-statement" class="headerlink" title="The basic SELECT statement"></a>The basic SELECT statement</h4><p>The following three examples return everything from the measurement h2o_feet (see the CLI response at the end of this section). While they all return the same result, they get to that result in slightly different ways and serve to introduce some of the specifics of the SELECT syntax:</p>
+<p>Select everything from h2o_feet with *:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet</span><br></pre></td></tr></table></figure>
+<p>Select everything from h2o_feet by specifying each tag key and field key:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &quot;level description&quot;,location,water_level FROM h2o_feet</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Separate multiple fields and tags of interest with a comma. Note that you must specify at least one field in the SELECT statement.</li>
+<li>Leave identifiers unquoted unless they start with a digit, contain characters other than [A-z,0-9,_], or if they are an InfluxQL keyword then you need to double quote them. Identifiers are database names, retention policy names, user names</li>
+<li>measurement names, tag keys, and field keys.</li>
+</ul>
+<p>Select everything from h2o_feet by fully qualifying the measurement:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM NOAA_water_database.&quot;default&quot;.h2o_feet</span><br></pre></td></tr></table></figure>
+<p>Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default retention policy. A fully qualified measurement takes the following form:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;database&gt;&quot;.&quot;&lt;retention policy&gt;&quot;.&quot;&lt;measurement&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>The CLI response for all three queries:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                             level description        location         water_level</span><br><span class="line">2015-08-18T00:00:00Z       below 3 feet               santa_monica     2.064</span><br><span class="line">2015-08-18T00:00:00Z       between 6 and 9 feet    coyote_creek    8.12</span><br><span class="line">2015-08-18T00:06:00Z       between 6 and 9 feet    coyote_creek    8.005</span><br><span class="line">2015-08-18T00:06:00Z       below 3 feet               santa_monica     2.116</span><br><span class="line">[...]</span><br><span class="line">2015-09-18T21:24:00Z       between 3 and 6 feet    santa_monica    5.013</span><br><span class="line">2015-09-18T21:30:00Z       between 3 and 6 feet    santa_monica    5.01</span><br><span class="line">2015-09-18T21:36:00Z       between 3 and 6 feet    santa_monica    5.066</span><br><span class="line">2015-09-18T21:42:00Z       between 3 and 6 feet    santa_monica    4.938</span><br></pre></td></tr></table></figure>
+<h3 id="The-SELECT-statement-and-arithmetic"><a href="#The-SELECT-statement-and-arithmetic" class="headerlink" title="The SELECT statement and arithmetic"></a>The SELECT statement and arithmetic</h3><p>Perform basic arithmetic operations on fields that store floats and integers.<br>Add two to the field water_level:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level + 2 FROM h2o_feet</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time</span><br><span class="line">2015-08-18T00:00:00Z    4.064</span><br><span class="line">2015-08-18T00:00:00Z    10.12</span><br><span class="line">[...]</span><br><span class="line">2015-09-18T21:36:00Z    7.066</span><br><span class="line">2015-09-18T21:42:00Z    6.938</span><br></pre></td></tr></table></figure>
+<p>Another example that works:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT (water_level * 2) + 4 from h2o_feet</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time</span><br><span class="line">2015-08-18T00:00:00Z    8.128</span><br><span class="line">2015-08-18T00:00:00Z    20.24</span><br><span class="line">[...]</span><br><span class="line">2015-09-18T21:36:00Z    14.132</span><br><span class="line">2015-09-18T21:42:00Z    13.876</span><br></pre></td></tr></table></figure>
+<p>Note: When performing arithmetic on fields that store integers be aware that InfluxDB casts those integers to floats for all mathematical operations. This can lead to overflow issues for some numbers.</p>
+<h3 id="The-WHERE-clause"><a href="#The-WHERE-clause" class="headerlink" title="The WHERE clause"></a>The WHERE clause</h3><p>Use a WHERE clause to filter your data based on tags, time ranges, and/or field values.</p>
+<p>Tags<br>Return data where the tag key location has the tag value santa_monica:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE location = &apos;santa_monica&apos;</span><br></pre></td></tr></table></figure>
+<p>Always single quote tag values in queries - they are strings. Note that double quotes do not work when specifying tag values and can cause queries to silently fail.</p>
+<blockquote>
+<p>Note: Tags are indexed so queries on tag keys or tag values are more performant than queries on fields.</p>
+</blockquote>
+<p>Return data where the tag key location has no tag value (more on regular expressions later):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE location !~ /.*/</span><br></pre></td></tr></table></figure>
+<p>Return data where the tag key location has a value:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE location =~ /.*/</span><br></pre></td></tr></table></figure>
+<p>Time ranges<br>Return data from the past seven days:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE time &gt; now() - 7d</span><br></pre></td></tr></table></figure>
+<p>now() is the Unix time of the server at the time the query is executed on that server. For more on now() and other ways to specify time in queries, see time syntax in queries.</p>
+<p>Field values<br>Return data where the tag key location has the tag value coyote_creek and the field water_level is greater than 8 feet:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE location = &apos;coyote_creek&apos; AND  water_level &gt; 8</span><br></pre></td></tr></table></figure>
+<p>Return data where the tag key location has the tag value santa_monica and the field level description equals ‘below 3 feet’:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE location = &apos;santa_monica&apos; AND &quot;level description&quot; = &apos;below 3 feet&apos;</span><br></pre></td></tr></table></figure>
+<p>Always single quote field values that are strings. Note that double quotes do not work when specifying string field values and can cause queries to silently fail.</p>
+<p>Note: Fields are not indexed; queries on fields are not as performant as those on tags.</p>
+<h2 id="The-GROUP-BY-clause"><a href="#The-GROUP-BY-clause" class="headerlink" title="The GROUP BY clause"></a>The GROUP BY clause</h2><p>Use the <code>GROUP BY</code> clause to group data by tags and/or time intervals. To successfully implement <code>GROUP BY</code>, append the <code>GROUP BY</code> clause to a <code>SELECT</code> statement and pair the <code>SELECT</code> statement with one of InfluxQL’s functions.</p>
+<blockquote>
+<p>Note: If your query includes both a WHERE clause and a GROUP BY clause, the GROUP BY clause must come after the WHERE clause.</p>
+</blockquote>
+<p>The basic GROUP BY clause</p>
+<p>GROUP BY tag values</p>
+<p>Calculate the MEAN() water_level for the different tag values of location:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MEAN(water_level) FROM h2o_feet GROUP BY location</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">tags: location=coyote_creek</span><br><span class="line">time            mean</span><br><span class="line">----            ----</span><br><span class="line">1970-01-01T00:00:00Z    5.359342451341403</span><br><span class="line"></span><br><span class="line">name: h2o_feet</span><br><span class="line">tags: location=santa_monica</span><br><span class="line">time            mean</span><br><span class="line">----            ----</span><br><span class="line">1970-01-01T00:00:00Z    3.5308634700810053</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: In InfluxDB, epoch 0 (1970-01-01T00:00:00Z) is often used as a null timestamp equivalent. If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.</p>
+</blockquote>
+<p>Calculate the MEAN() index for every tag set in h2o_quality:</p>
+<p>SELECT MEAN(index) FROM h2o_quality GROUP BY *</p>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_quality</span><br><span class="line">tags: location = coyote_creek, randtag = 1</span><br><span class="line">time                           mean</span><br><span class="line">----                           ----</span><br><span class="line">1970-01-01T00:00:00Z     50.69033760186263</span><br><span class="line"></span><br><span class="line">name: h2o_quality</span><br><span class="line">tags: location = coyote_creek, randtag = 2</span><br><span class="line">time                           mean</span><br><span class="line">----                           ----</span><br><span class="line">1970-01-01T00:00:00Z     49.661867544220485</span><br><span class="line"></span><br><span class="line">name: h2o_quality</span><br><span class="line">tags: location = coyote_creek, randtag = 3</span><br><span class="line">time                           mean</span><br><span class="line">----                           ----</span><br><span class="line">1970-01-01T00:00:00Z     49.360939907550076</span><br><span class="line"></span><br><span class="line">name: h2o_quality</span><br><span class="line">tags: location = santa_monica, randtag = 1</span><br><span class="line">time                           mean</span><br><span class="line">----                           ----</span><br><span class="line">1970-01-01T00:00:00Z     49.132712456344585</span><br><span class="line"></span><br><span class="line">name: h2o_quality</span><br><span class="line">tags: location = santa_monica, randtag = 2</span><br><span class="line">time                           mean</span><br><span class="line">----                           ----</span><br><span class="line">1970-01-01T00:00:00Z     50.2937984496124</span><br><span class="line"></span><br><span class="line">name: h2o_quality</span><br><span class="line">tags: location = santa_monica, randtag = 3</span><br><span class="line">time                           mean</span><br><span class="line">----                           ----</span><br><span class="line">1970-01-01T00:00:00Z     49.99919903884662</span><br></pre></td></tr></table></figure>
+<p>GROUP BY time intervals</p>
+<p>GROUP BY time intervals<br>COUNT() the number of water_level points between August 18, 2015 at midnight and September 18 at 5:00pm at two day intervals:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(water_level) FROM h2o_feet WHERE time &gt;= &apos;2015-08-18T00:00:00Z&apos; AND time &lt;= &apos;2015-09-18T17:00:00Z&apos; AND location=&apos;coyote_creek&apos; GROUP BY time(2d)</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time                           count</span><br><span class="line">2015-08-17T00:00:00Z     240</span><br><span class="line">2015-08-19T00:00:00Z     480</span><br><span class="line">2015-08-21T00:00:00Z     480</span><br><span class="line">2015-08-23T00:00:00Z     480</span><br><span class="line">2015-08-25T00:00:00Z     480</span><br><span class="line">2015-08-27T00:00:00Z     480</span><br><span class="line">2015-08-29T00:00:00Z     480</span><br><span class="line">2015-08-31T00:00:00Z     480</span><br><span class="line">2015-09-02T00:00:00Z     480</span><br><span class="line">2015-09-04T00:00:00Z     479</span><br><span class="line">2015-09-06T00:00:00Z     480</span><br><span class="line">2015-09-08T00:00:00Z     480</span><br><span class="line">2015-09-10T00:00:00Z     480</span><br><span class="line">2015-09-12T00:00:00Z     480</span><br><span class="line">2015-09-14T00:00:00Z     480</span><br><span class="line">2015-09-16T00:00:00Z     480</span><br><span class="line">2015-09-18T00:00:00Z     165</span><br></pre></td></tr></table></figure>
+<p>Notice that each timestamp represents a two day interval and that the value in the count field is the number of water_level points that occurred in that two day interval. You could get the same results by querying the data 17 times - that is, one COUNT() query for every two days between August 18, 2015 at midnight and September 18 at 5:00pm - but that could take a while.</p>
+<blockquote>
+<p>Note: The first timestamp in the CLI response (2015-08-17T00:00:00Z) occurs before the lower bound of the query’s time range (2015-08-18T00:00:00Z). See Frequently Encountered Issues for an explanation of the time intervals returned from GROUP BY time() queries.</p>
+</blockquote>
+<p>Other things to note about GROUP BY time():</p>
+<ul>
+<li><p>InfluxQL requires a WHERE clause if you’re using GROUP BY with time(). Note that unless you specify a different upper and lower bound for the time range, GROUP BY uses epoch 0 as the lower bound and now() as the upper bound for the query - this can lead to unexpected results.</p>
+</li>
+<li><p>Valid units for time() are:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">`u` microseconds</span><br><span class="line">`ms` milliseconds</span><br><span class="line">`s` seconds</span><br><span class="line">`m` minutes</span><br><span class="line">`h` hours</span><br><span class="line">`d` days</span><br><span class="line">`w` weeks</span><br></pre></td></tr></table></figure>
+<p>GROUP BY tag values AND a time interval</p>
+<p>Calculate the average water_level for the different tag values of location in the last two weeks at 6 hour intervals:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MEAN(water_level) FROM h2o_feet WHERE time &gt; now() - 2w GROUP BY location,time(6h)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Separate multiple GROUP BY arguments with a comma.</li>
+</ul>
+<h3 id="The-GROUP-BY-clause-and-fill"><a href="#The-GROUP-BY-clause-and-fill" class="headerlink" title="The GROUP BY clause and fill()"></a>The GROUP BY clause and fill()</h3><p>By default, a GROUP BY interval with no data has null as its value in the output column. Use fill() to change the value reported for intervals that have no data. fill() options include:</p>
+<ul>
+<li>Any numerical value</li>
+<li>null - sets null as the value for intervals with no data</li>
+<li>previous - copies the value from the previous interval for intervals with no data</li>
+<li>none - skips intervals with no data to report</li>
+</ul>
+<p>Follow the ✨ in the examples below to see what fill() can do.</p>
+<p>GROUP BY without fill()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MEAN(water_level) FROM h2o_feet WHERE time &gt;= &apos;2015-08-18&apos; AND time &lt; &apos;2015-09-24&apos; GROUP BY time(10d)</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time            mean</span><br><span class="line">2015-08-13T00:00:00Z    4.306212083333333</span><br><span class="line">2015-08-23T00:00:00Z    4.328549999999998</span><br><span class="line">2015-09-02T00:00:00Z    4.44695286757038</span><br><span class="line">2015-09-12T00:00:00Z    4.701986209010117</span><br><span class="line">✨2015-09-22T00:00:00Z</span><br></pre></td></tr></table></figure>
+<p>GROUP BY with fill()</p>
+<p>Use fill() with -100:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MEAN(water_level) FROM h2o_feet WHERE time &gt;= &apos;2015-08-18&apos; AND time &lt; &apos;2015-09-24&apos; GROUP BY time(10d) fill(-100)</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time            mean</span><br><span class="line">2015-08-13T00:00:00Z    4.306212083333323</span><br><span class="line">2015-08-23T00:00:00Z    4.328549999999999</span><br><span class="line">2015-09-02T00:00:00Z    4.4469528675703796</span><br><span class="line">2015-09-12T00:00:00Z    4.701986209010117</span><br><span class="line">✨2015-09-22T00:00:00Z   -100</span><br></pre></td></tr></table></figure>
+<p>Use fill() with none:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MEAN(water_level) FROM h2o_feet WHERE time &gt;= &apos;2015-08-18&apos; AND time &lt; &apos;2015-09-24&apos; GROUP BY time(10d) fill(none)</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time            mean</span><br><span class="line">2015-08-13T00:00:00Z    4.306212083333333</span><br><span class="line">2015-08-23T00:00:00Z    4.32855</span><br><span class="line">2015-09-02T00:00:00Z    4.4469528675703796</span><br><span class="line">2015-09-12T00:00:00Z    4.701986209010117</span><br><span class="line">✨</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: If you’re GROUP(ing) BY several things (for example, both tags and a time interval) fill() must go at the end of the GROUP BY clause.</p>
+</blockquote>
+<p>The INTO clause</p>
+<p>Relocate data</p>
+<p>Copy data to another database, retention policy, and measurement with the INTO clause:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;field_key&gt; INTO &lt;different_measurement&gt; FROM &lt;current_measurement&gt; [WHERE &lt;stuff&gt;] [GROUP BY &lt;stuff&gt;]</span><br></pre></td></tr></table></figure>
+<p>Write the field water_level in h2o_feet to a new measurement (h2o_feet_copy) in the same database:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level INTO h2o_feet_copy FROM h2o_feet WHERE location = &apos;coyote_creek&apos;</span><br></pre></td></tr></table></figure>
+<p>The CLI response shows the number of points that InfluxDB wrote to h2o_feet_copy:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: result</span><br><span class="line">------------</span><br><span class="line">time                           written</span><br><span class="line">1970-01-01T00:00:00Z     7604</span><br></pre></td></tr></table></figure>
+<p>Write the field water_level in h2o_feet to a new measurement (h2o_feet_copy) and to the retention policy default in the database where_else:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level INTO where_else.&quot;default&quot;.h2o_feet_copy FROM h2o_feet WHERE location = &apos;coyote_creek&apos;</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: result</span><br><span class="line">------------</span><br><span class="line">time                           written</span><br><span class="line">1970-01-01T00:00:00Z     7604</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: If you use SELECT * with INTO, the query converts tags in the current measurement to fields in the new measurement. This can cause InfluxDB to overwrite points that were previously differentiated by a tag value. Use GROUP BY <tag_key> to preserve tags as tags.</tag_key></p>
+</blockquote>
+<p>Downsample data</p>
+<p>Combine the INTO clause with an InfluxQL function and a GROUP BY clause to write the lower precision query results to a different measurement:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;function&gt;(&lt;field_key&gt;) INTO &lt;different_measurement&gt; FROM &lt;current_measurement&gt; WHERE &lt;stuff&gt; GROUP BY &lt;stuff&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: The INTO queries in this section downsample old data, that is, data that have already been written to InfluxDB. If you want InfluxDB to automatically query and downsample all future data see Continuous Queries.</p>
+</blockquote>
+<p>Calculate the average water_level in santa_monica, and write the results to a new measurement (average) in the same database:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT mean(water_level) INTO average FROM h2o_feet WHERE location = &apos;santa_monica&apos; AND time &gt;= &apos;2015-08-18T00:00:00Z&apos; AND time &lt;= &apos;2015-08-18T00:30:00Z&apos; GROUP BY time(12m)</span><br></pre></td></tr></table></figure>
+<p>The CLI response shows the number of points that InfluxDB wrote to the new measurement:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: result</span><br><span class="line">------------</span><br><span class="line">time                           written</span><br><span class="line">1970-01-01T00:00:00Z     3</span><br></pre></td></tr></table></figure>
+<p>To see the query results, select everything from the new measurement average in NOAA_water_database:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM average</span><br><span class="line"></span><br><span class="line">name: average</span><br><span class="line">-------------</span><br><span class="line">time                           mean</span><br><span class="line">2015-08-18T00:00:00Z     2.09</span><br><span class="line">2015-08-18T00:12:00Z     2.077</span><br><span class="line">2015-08-18T00:24:00Z     2.0460000000000003</span><br></pre></td></tr></table></figure>
+<p>Calculate the average water_level and the max water_level in santa_monica, and write the results to a new measurement (aggregates) in a different database (where_else):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT mean(water_level), max(water_level) INTO where_else.&quot;default&quot;.aggregates FROM h2o_feet WHERE location = &apos;santa_monica&apos; AND time &gt;= &apos;2015-08-18T00:00:00Z&apos; AND time &lt;= &apos;2015-08-18T00:30:00Z&apos; GROUP BY time(12m)</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: result</span><br><span class="line">------------</span><br><span class="line">time                           written</span><br><span class="line">1970-01-01T00:00:00Z     3</span><br></pre></td></tr></table></figure>
+<p>Select everything from the new measurement aggregates in the database where_else:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM where_else.&quot;default&quot;.aggregates</span><br><span class="line"></span><br><span class="line">name: aggregates</span><br><span class="line">----------------</span><br><span class="line">time                           max     mean</span><br><span class="line">2015-08-18T00:00:00Z     2.116   2.09</span><br><span class="line">2015-08-18T00:12:00Z     2.126   2.077</span><br><span class="line">2015-08-18T00:24:00Z     2.051   2.0460000000000003</span><br></pre></td></tr></table></figure>
+<p>Calculate the average degrees for all temperature measurements (h2o_temperature and average_temperature) in the NOAA_water_database and write the results to new measurements with the same names in a different database (where_else). :MEASUREMENT tells InfluxDB to write the query results to measurements with the same names as those targeted by the query:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT mean(degrees) INTO where_else.&quot;default&quot;.:MEASUREMENT FROM /temperature/ WHERE time &gt;= &apos;2015-08-18T00:00:00Z&apos; AND time &lt;= &apos;2015-08-18T00:30:00Z&apos; GROUP BY time(12m)</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: result</span><br><span class="line">------------</span><br><span class="line">time                           written</span><br><span class="line">1970-01-01T00:00:00Z     6</span><br></pre></td></tr></table></figure>
+<p>Select the mean field from all new temperature measurements in the database where_else.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SELECT mean FROM where_else.&quot;default&quot;./temperature/</span><br><span class="line"></span><br><span class="line">name: average_temperature</span><br><span class="line">-------------------------</span><br><span class="line">time                           mean</span><br><span class="line">2015-08-18T00:00:00Z     78.5</span><br><span class="line">2015-08-18T00:12:00Z     84</span><br><span class="line">2015-08-18T00:24:00Z     74.75</span><br><span class="line"></span><br><span class="line">name: h2o_temperature</span><br><span class="line">---------------------</span><br><span class="line">time                            mean</span><br><span class="line">2015-08-18T00:00:00Z      63.75</span><br><span class="line">2015-08-18T00:12:00Z      63.5</span><br><span class="line">2015-08-18T00:24:00Z      63.5</span><br></pre></td></tr></table></figure>
+<p>More on downsampling with INTO:</p>
+<ul>
+<li>InfluxDB does not store null values. Depending on the frequency of your data, the query results may be missing time intervals. Use fill() to ensure that every time interval appears in the results.</li>
+<li>The number of writes in the CLI response includes one write for every time interval in the query’s time range even if there is no data for some of the time intervals.</li>
+</ul>
+<p>Limit query returns with LIMIT and SLIMIT</p>
+<p>SLIMIT InfluxQL supports two different clauses to limit your query results. Currently, they are mutually exclusive so you may use one or the other, but not both in the same query.</p>
+<blockquote>
+<p>Please note that using LIMIT and SLIMIT without a GROUP BY * clause can cause unexpected results. See GitHub Issue #4232 for more information.</p>
+</blockquote>
+<p>Limit the number of results returned per series with LIMIT</p>
+<p>Use LIMIT <n> with SELECT and GROUP BY * to return the first N points from each series.<br>Return the three oldest points from each series associated with the measurement h2o_feet:</n></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">tags: location=coyote_creek</span><br><span class="line">time                          water_level</span><br><span class="line">----                          -----------</span><br><span class="line">2015-08-18T00:00:00Z    8.12</span><br><span class="line">2015-08-18T00:06:00Z    8.005</span><br><span class="line">2015-08-18T00:12:00Z    7.887</span><br><span class="line"></span><br><span class="line">name: h2o_feet</span><br><span class="line">tags: location=santa_monica</span><br><span class="line">time                          water_level</span><br><span class="line">----                          -----------</span><br><span class="line">2015-08-18T00:00:00Z    2.064</span><br><span class="line">2015-08-18T00:06:00Z    2.116</span><br><span class="line">2015-08-18T00:12:00Z    2.028</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: If N is greater than the number of points in the series, InfluxDB returns all points in the series.</p>
+</blockquote>
+<h3 id="Limit-the-number-of-series-returned-with-SLIMIT"><a href="#Limit-the-number-of-series-returned-with-SLIMIT" class="headerlink" title="Limit the number of series returned with SLIMIT"></a>Limit the number of series returned with SLIMIT</h3><p>Use SLIMIT <n> with SELECT and GROUP BY * to return every point from N series.<br>Return everything from one of the series associated with the measurement h2o_feet:</n></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet GROUP BY * SLIMIT 1</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">tags: location=coyote_creek</span><br><span class="line">time                          water_level</span><br><span class="line">----                          -----</span><br><span class="line">2015-08-18T00:00:00Z    8.12</span><br><span class="line">2015-08-18T00:06:00Z    8.005</span><br><span class="line">2015-08-18T00:12:00Z    7.887</span><br><span class="line">[...]</span><br><span class="line">2015-09-18T16:12:00Z    3.402</span><br><span class="line">2015-09-18T16:18:00Z    3.314</span><br><span class="line">2015-09-18T16:24:00Z    3.235</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: If N is greater than the number of series associated with the specified measurement, InfluxDB returns all points from every series.</p>
+</blockquote>
+<h3 id="Sort-query-returns-with-ORDER-BY-time-DESC"><a href="#Sort-query-returns-with-ORDER-BY-time-DESC" class="headerlink" title="Sort query returns with ORDER BY time DESC"></a>Sort query returns with ORDER BY time DESC</h3><p>By default, InfluxDB returns results in ascending time order - so the first points that are returned are the oldest points by timestamp. Use ORDER BY time DESC to see the newest points by timestamp.</p>
+<p>Return the oldest five points from one series without ORDER BY time DESC:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE location = &apos;santa_monica&apos; LIMIT 5</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time            water_level</span><br><span class="line">2015-08-18T00:00:00Z    2.064</span><br><span class="line">2015-08-18T00:06:00Z    2.116</span><br><span class="line">2015-08-18T00:12:00Z    2.028</span><br><span class="line">2015-08-18T00:18:00Z    2.126</span><br><span class="line">2015-08-18T00:24:00Z    2.041</span><br></pre></td></tr></table></figure>
+<p>Now include ORDER BY time DESC to get the newest five points from the same series:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE location = &apos;santa_monica&apos; ORDER BY time DESC LIMIT 5</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time            water_level</span><br><span class="line">2015-09-18T21:42:00Z    4.938</span><br><span class="line">2015-09-18T21:36:00Z    5.066</span><br><span class="line">2015-09-18T21:30:00Z    5.01</span><br><span class="line">2015-09-18T21:24:00Z    5.013</span><br><span class="line">2015-09-18T21:18:00Z    5.072</span><br></pre></td></tr></table></figure>
+<p>Finally, use <code>GROUP BY</code> with <code>ORDER BY time DESC</code> to return the last five points from each series:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet GROUP BY location ORDER BY time DESC LIMIT 5</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">tags: location=coyote_creek</span><br><span class="line">time            water_level</span><br><span class="line">----            -----------</span><br><span class="line">2015-09-18T16:24:00Z    3.235</span><br><span class="line">2015-09-18T16:18:00Z    3.314</span><br><span class="line">2015-09-18T16:12:00Z    3.402</span><br><span class="line">2015-09-18T16:06:00Z    3.497</span><br><span class="line">2015-09-18T16:00:00Z    3.599</span><br><span class="line"></span><br><span class="line">name: h2o_feet</span><br><span class="line">tags: location=santa_monica</span><br><span class="line">time            water_level</span><br><span class="line">----            -----------</span><br><span class="line">2015-09-18T21:42:00Z    4.938</span><br><span class="line">2015-09-18T21:36:00Z    5.066</span><br><span class="line">2015-09-18T21:30:00Z    5.01</span><br><span class="line">2015-09-18T21:24:00Z    5.013</span><br><span class="line">2015-09-18T21:18:00Z    5.072</span><br></pre></td></tr></table></figure>
+<h3 id="aginate-query-returns-with-OFFSET"><a href="#aginate-query-returns-with-OFFSET" class="headerlink" title="aginate query returns with OFFSET"></a>aginate query returns with OFFSET</h3><p>Use OFFSET to paginate the results returned. For example, get the first three points written to a series:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE location = &apos;coyote_creek&apos; LIMIT 3</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time            water_level</span><br><span class="line">2015-08-18T00:00:00Z    8.12</span><br><span class="line">2015-08-18T00:06:00Z    8.005</span><br><span class="line">2015-08-18T00:12:00Z    7.887</span><br></pre></td></tr></table></figure>
+<p>Then get the second three points from that same series:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE location = &apos;coyote_creek&apos; LIMIT 3 OFFSET 3</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">----------</span><br><span class="line">time            water_level</span><br><span class="line">2015-08-18T00:18:00Z    7.762</span><br><span class="line">2015-08-18T00:24:00Z    7.635</span><br><span class="line">2015-08-18T00:30:00Z    7.5</span><br></pre></td></tr></table></figure>
+<h3 id="Multiple-statements-in-queries"><a href="#Multiple-statements-in-queries" class="headerlink" title="Multiple statements in queries"></a>Multiple statements in queries</h3><p>Separate multiple statements in a query with a semicolon. For example: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT mean(water_level) FROM h2o_feet WHERE time &gt; now() - 2w GROUP BY location,time(24h) fill(none); SELECT count(water_level) FROM h2o_feet WHERE time &gt; now() - 2w GROUP BY location,time(24h) fill(80)</span><br></pre></td></tr></table></figure>
+<h3 id="Merge-series-in-queries"><a href="#Merge-series-in-queries" class="headerlink" title="Merge series in queries"></a>Merge series in queries</h3><p>In InfluxDB, queries merge series automatically.</p>
+<p>The <code>NOAA_water_database</code> database has two <code>series</code>. The first series is made up of the measurement <code>h2o_feet</code> and the tag key <code>location</code> with the tag value <code>coyote_creek</code>. The second series is made of up the measurement <code>h2o_feet</code> and the tag key <code>location</code> with the tag value <code>santa_monica</code>.</p>
+<p>The following query automatically merges those two series when it calculates the MEAN() water_level:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MEAN(water_level) FROM h2o_feet</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                          mean</span><br><span class="line">1970-01-01T00:00:00Z    4.442107025822523</span><br></pre></td></tr></table></figure>
+<p>If you only want the MEAN() water_level for the first series, specify the tag set in the WHERE clause:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MEAN(water_level) FROM h2o_feet WHERE location = &apos;coyote_creek&apos;</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                          mean</span><br><span class="line">1970-01-01T00:00:00Z    5.359342451341402</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NOTE: In InfluxDB, epoch 0 (1970-01-01T00:00:00Z) is often used as a null timestamp equivalent. If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.</p>
+</blockquote>
+<h3 id="Time-syntax-in-queries"><a href="#Time-syntax-in-queries" class="headerlink" title="Time syntax in queries"></a>Time syntax in queries</h3><p>InfluxDB is a time series database so, unsurprisingly, InfluxQL has a lot to do with specifying time ranges. If you do not specify start and end times in your query, they default to epoch 0 (1970-01-01T00:00:00Z) and now(). The following sections detail how to specify different start and end times in queries.</p>
+<h4 id="Relative-time"><a href="#Relative-time" class="headerlink" title="Relative time"></a>Relative time</h4><p><code>now()</code> is the Unix time of the server at the time the query is executed on that server. Use now() to calculate a timestamp relative to the server’s current timestamp.</p>
+<p>Query data starting an hour ago and ending <code>now():</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE time &gt; now() - 1h</span><br></pre></td></tr></table></figure>
+<p>Query data that occur between epoch 0 and 1,000 days from now():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &quot;level description&quot; FROM h2o_feet WHERE time &lt; now() + 1000d</span><br></pre></td></tr></table></figure>
+<p>Note the whitespace between the operator and the time duration. Leaving that whitespace out can cause InfluxDB to return no results or an error parsing query error .</p>
+<p>The other options for specifying time durations with now() are listed below.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">`u` microseconds</span><br><span class="line">`ms` milliseconds</span><br><span class="line">`s` seconds</span><br><span class="line">`m` minutes</span><br><span class="line">`h` hours</span><br><span class="line">`d` days</span><br><span class="line">`w` weeks</span><br></pre></td></tr></table></figure>
+<h4 id="Absolute-time"><a href="#Absolute-time" class="headerlink" title="Absolute time"></a>Absolute time</h4><p>Date time strings</p>
+<p>Specify time with date time strings. Date time strings can take two formats: YYYY-MM-DD HH:MM:SS.nnnnnnnnn and YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ, where the second specification is RFC3339. Nanoseconds (nnnnnnnnn) are optional in both formats.</p>
+<p>The following two queries query data between August 18, 2015 23:00:01.232000000 and September 19, 2015 00:00:00.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE time &gt; &apos;2015-08-18 23:00:01.232000000&apos; AND time &lt; &apos;2015-09-19&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT water_level FROM h2o_feet WHERE time &gt; &apos;2015-08-18T23:00:01.232000000Z&apos; AND time &lt; &apos;2015-09-19&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Single quote the date time string. InfluxDB fails to restrict data by date time strings that are double quoted.</li>
+<li>If you only specify the date, InfluxDB sets the time to 00:00:00.</li>
+</ul>
+<p>Epoch time<br>Specify time with timestamps in epoch time. Epoch time is the number of nanoseconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970. Indicate the units of the timestamp at the end of the timestamp (see the section above for a list of acceptable time units).<br>Return all points that occur after 2014-01-01 00:00:00:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE time &gt; 1388534400s</span><br></pre></td></tr></table></figure>
+<h3 id="Regular-expressions-in-queries"><a href="#Regular-expressions-in-queries" class="headerlink" title="Regular expressions in queries"></a>Regular expressions in queries</h3><p>Regular expressions are surrounded by / characters and use Golang’s regular expression syntax. Use regular expressions when selecting measurements and tags.</p>
+<blockquote>
+<p>Note: You cannot use regular expressions to match databases, retention policies, or fields. You can only use regular expressions to match measurements and tags.</p>
+</blockquote>
+<p>The <code>sample data</code> need to be more intricate for the following sections. Assume that the database <code>NOAA_water_database</code> now holds several measurements: <code>h2o_feet</code>, <code>h2o_quality</code>, <code>h2o_pH</code>, <code>average_temperature</code>, and <code>h2o_temperature</code>. Please note that every measurement besides h2o_feet is fictional and contains fictional data.</p>
+<p>Regular expressions and selecting measurements</p>
+<p>Select the oldest point from every measurement in the <code>NOAA_water_database</code> database:</p>
+<p>SELECT <em> FROM /.</em>/ LIMIT 1</p>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">name: average_temperature</span><br><span class="line">-------------------------</span><br><span class="line">time                          degrees   index   level description   location        pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z    85                                           santa_monica</span><br><span class="line"></span><br><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                          degrees   index   level description   location        pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z                        below 3 feet            santa_monica                     2.064</span><br><span class="line"></span><br><span class="line">name: h2o_pH</span><br><span class="line">------------</span><br><span class="line">time                          degrees   index   level description   location        pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z                                                   santa_monica 6</span><br><span class="line"></span><br><span class="line">name: h2o_quality</span><br><span class="line">-----------------</span><br><span class="line">time                          degrees   index   level description   location        pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z               41                                 coyote_creek        1</span><br><span class="line"></span><br><span class="line">name: h2o_temperature</span><br><span class="line">---------------------</span><br><span class="line">time                          degrees   index   level description   location        pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z    70                                           santa_monica</span><br></pre></td></tr></table></figure>
+<p>Alternatively, <code>SELECT</code> all of the measurements in <code>NOAA_water_database</code> by typing them out and separating each name with a comma (see below), but that could get tedious: <code>sql &gt; SELECT * FROM average_temperature,h2o_feet,h2o_pH,h2o_quality,h2o_temperature LIMIT 1</code></p>
+<p>Select the first three points from every measurement whose name starts with h2o:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM /^h2o/ LIMIT 3</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                          degrees   index   level description      location     pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z                        below 3 feet               santa_monica                 2.064</span><br><span class="line">2015-08-18T00:00:00Z                        between 6 and 9 feet    coyote_creek                    8.12</span><br><span class="line">2015-08-18T00:06:00Z                        between 6 and 9 feet    coyote_creek                    8.005</span><br><span class="line"></span><br><span class="line">name: h2o_pH</span><br><span class="line">------------</span><br><span class="line">time                          degrees   index   level description      location     pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z                                                      santa_monica  6</span><br><span class="line">2015-08-18T00:00:00Z                                                      coyote_creek  7</span><br><span class="line">2015-08-18T00:06:00Z                                                      coyote_creek  8</span><br><span class="line"></span><br><span class="line">name: h2o_quality</span><br><span class="line">-----------------</span><br><span class="line">time                          degrees   index   level description      location     pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z               99                           santa_monica          2</span><br><span class="line">2015-08-18T00:00:00Z               41                           coyote_creek          1</span><br><span class="line">2015-08-18T00:06:00Z               11                           coyote_creek          3</span><br><span class="line"></span><br><span class="line">name: h2o_temperature</span><br><span class="line">---------------------</span><br><span class="line">time                          degrees   index   level description      location     pH  randtag water_level</span><br><span class="line">2015-08-18T00:00:00Z    70                                                 santa_monica</span><br><span class="line">2015-08-18T00:00:00Z    60                                                 coyote_creek</span><br><span class="line">2015-08-18T00:06:00Z    65                                                 coyote_creek</span><br></pre></td></tr></table></figure>
+<p>Select the last 5 points from every measurement whose name contains temperature:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM /.*temperature.*/ LIMIT 5</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">name: average_temperature</span><br><span class="line">-------------------------</span><br><span class="line">time                          degrees   location</span><br><span class="line">2015-08-18T00:00:00Z    85       santa_monica</span><br><span class="line">2015-08-18T00:00:00Z    82       coyote_creek</span><br><span class="line">2015-08-18T00:06:00Z    73       coyote_creek</span><br><span class="line">2015-08-18T00:06:00Z    74       santa_monica</span><br><span class="line">2015-08-18T00:12:00Z    86       coyote_creek</span><br><span class="line"></span><br><span class="line">name: h2o_temperature</span><br><span class="line">---------------------</span><br><span class="line">time                          degrees   location</span><br><span class="line">2015-08-18T00:00:00Z    70       santa_monica</span><br><span class="line">2015-08-18T00:00:00Z    60       coyote_creek</span><br><span class="line">2015-08-18T00:06:00Z    65       coyote_creek</span><br><span class="line">2015-08-18T00:06:00Z    60       santa_monica</span><br><span class="line">2015-08-18T00:12:00Z    68       coyote_creek</span><br></pre></td></tr></table></figure>
+<h3 id="Regular-expressions-and-specifying-tags"><a href="#Regular-expressions-and-specifying-tags" class="headerlink" title="Regular expressions and specifying tags"></a>Regular expressions and specifying tags</h3><p>Use regular expressions to specify tags in the WHERE clause. The relevant comparators include:</p>
+<p>=~ matches against<br>!~ doesn’t match against</p>
+<p>Select the oldest four points from the measurement <code>h2o_feet</code> where the value of the tag <code>location</code> does not include an a:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE location !~ /.*a.*/ LIMIT 4</span><br></pre></td></tr></table></figure>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                           level description        location         water_level</span><br><span class="line">2015-08-18T00:00:00Z     between 6 and 9 feet   coyote_creek     8.12</span><br><span class="line">2015-08-18T00:06:00Z     between 6 and 9 feet    coyote_creek    8.005</span><br><span class="line">2015-08-18T00:12:00Z     between 6 and 9 feet    coyote_creek    7.887</span><br><span class="line">2015-08-18T00:18:00Z     between 6 and 9 feet    coyote_creek    7.762</span><br></pre></td></tr></table></figure>
+<p>Select the oldest four points from the measurement <code>h2o_feet</code> where the value of the tag <code>location</code> includes a <code>y</code> or an <code>m</code> and <code>water_level</code> is greater than zero:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE (location =~ /.*y.*/ OR location =~ /.*m.*/) AND water_level &gt; 0 LIMIT 4</span><br></pre></td></tr></table></figure>
+<p>or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM h2o_feet WHERE location =~ /[ym]/ AND water_level &gt; 0 LIMIT 4</span><br></pre></td></tr></table></figure></p>
+<p>CLI response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name: h2o_feet</span><br><span class="line">--------------</span><br><span class="line">time                           level description        location         water_level</span><br><span class="line">2015-08-18T00:00:00Z     below 3 feet               santa_monica     2.064</span><br><span class="line">2015-08-18T00:00:00Z     between 6 and 9 feet   coyote_creek     8.12</span><br><span class="line">2015-08-18T00:06:00Z     between 6 and 9 feet   coyote_creek     8.005</span><br><span class="line">2015-08-18T00:06:00Z     below 3 feet               santa_monica     2.116</span><br></pre></td></tr></table></figure>
+<p>referrerr: <a href="https://docs.influxdata.com/influxdb/v0.9/query_language/data_exploration" target="_blank" rel="external">https://docs.influxdata.com/influxdb/v0.9/query_language/data_exploration</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/24/nodejs-path/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          nodejs-path
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/21/write-sails-hook/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">write-sails-hook</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap" style="text-align:center;">
+  <h3 class="widget-title">当前时间</h3>
+  <div class="widget">
+    <span id="year-month-date"></span>
+    <span id="weekDay"></span>
+    <span id="hour-min-sec"></span>
+  </div>
+</div>
+<script>
+var weekday = [
+  "星期日",
+  "星期一",
+  "星期二",
+  "星期三",
+  "星期四",
+  "星期五",
+  "星期六"
+];
+var dateDom = document.getElementById('year-month-date');
+var weekdayDom =  document.getElementById('weekDay');
+var timeDom = document.getElementById('hour-min-sec');
+function prefixTime(num){
+  if(num < 10){
+    return '0'+num;
+  }
+  return num;
+}
+function updateDom(){
+  var date = new Date();
+  dateDom.innerHTML = date.getFullYear() + '/' + (1+date.getMonth()) + '/'+date.getDate();
+  weekdayDom.innerHTML = weekday[date.getDay()];
+  timeDom.innerHTML = prefixTime(date.getHours()) + ':' + prefixTime(date.getMinutes()) + ':' + prefixTime(date.getSeconds());
+}
+function updateTime(){
+  window.setInterval(updateDom,1000);
+}
+updateTime()
+</script/>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/24/nodejs-path/">nodejs-path</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/15/influx-query-language/">influx_query_language</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/21/write-sails-hook/">write-sails-hook</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/20/sails-orm-bug/">sails-orm-bug</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/04/access-token/">access-token</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ENOSPC/" style="font-size: 10px;">ENOSPC</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Toekn/" style="font-size: 10px;">Toekn</a> <a href="/tags/aggregate/" style="font-size: 10px;">aggregate</a> <a href="/tags/api/" style="font-size: 15px;">api</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/fullpage/" style="font-size: 10px;">fullpage</a> <a href="/tags/game/" style="font-size: 10px;">game</a> <a href="/tags/haproxy/" style="font-size: 10px;">haproxy</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/hook/" style="font-size: 10px;">hook</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/influx/" style="font-size: 10px;">influx</a> <a href="/tags/js-sdk/" style="font-size: 10px;">js-sdk</a> <a href="/tags/landscape/" style="font-size: 15px;">landscape</a> <a href="/tags/lock/" style="font-size: 10px;">lock</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongo/" style="font-size: 15px;">mongo</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/orm/" style="font-size: 10px;">orm</a> <a href="/tags/path/" style="font-size: 10px;">path</a> <a href="/tags/phaser/" style="font-size: 10px;">phaser</a> <a href="/tags/pow/" style="font-size: 10px;">pow</a> <a href="/tags/protractor/" style="font-size: 10px;">protractor</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sails/" style="font-size: 15px;">sails</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/singlepage/" style="font-size: 10px;">singlepage</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/swiftype/" style="font-size: 10px;">swiftype</a> <a href="/tags/theme/" style="font-size: 15px;">theme</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/watch/" style="font-size: 10px;">watch</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/加载/" style="font-size: 10px;">加载</a> <a href="/tags/单页/" style="font-size: 10px;">单页</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/实名认证/" style="font-size: 10px;">实名认证</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/工具库/" style="font-size: 10px;">工具库</a> <a href="/tags/开发平台/" style="font-size: 10px;">开发平台</a> <a href="/tags/微信/" style="font-size: 20px;">微信</a> <a href="/tags/插件化/" style="font-size: 10px;">插件化</a> <a href="/tags/支付/" style="font-size: 10px;">支付</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/易宝/" style="font-size: 10px;">易宝</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/游戏/" style="font-size: 10px;">游戏</a> <a href="/tags/盗刷/" style="font-size: 10px;">盗刷</a> <a href="/tags/移动端/" style="font-size: 10px;">移动端</a> <a href="/tags/解密/" style="font-size: 10px;">解密</a> <a href="/tags/连连/" style="font-size: 10px;">连连</a> <a href="/tags/适配/" style="font-size: 10px;">适配</a> <a href="/tags/验证码/" style="font-size: 10px;">验证码</a>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+  
+  <h3 class="widget-title">我有话说</h3>
+  <div class="widget">
+    <section id="comments">
+      <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="page-404.html" data-title="" data-url="http://www.navyxie.com/404.html"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"navyxie"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0] 
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      <!-- 多说公共JS代码 end -->
+    </section>
+  </div>
+  
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+    	<div id="copyRight">
+        &copy; 2016 - 2016 Navy xie<br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+      <div id="siteInfo">
+        <a href="/sitemap.xml" target="_blank">网站地图</a>
+        <a href="https://github.com/navyxie/hexo-github-page" target="_blank">网站源码</a>
+      </div>
+    </div>
+  </div>
+  
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div style="text-align:center;">本站总访问量<span id="busuanzi_value_site_pv"></span>次 本站访客数<span id="busuanzi_value_site_uv"></span>人 本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</div>
+  
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+    <a href="https://github.com/navyxie" class="mobile-nav-link">Github</a>
+  
+</nav>
+    
+
+<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<div id="totop"></div>
+<script src="/js/totop.js"></script>
+{% if theme.baidu_push %}
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+{% endif %}
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?2da296b109637a928dbd18a25189d7e2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>
