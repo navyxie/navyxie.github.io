@@ -9,14 +9,21 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/05/20/redis-lock/</loc>
+    <loc>http://www.navyxie.com/2016/04/07/pay/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/06/04/access-token/</loc>
+    <loc>http://www.navyxie.com/2016/05/31/custom-weixin-share-content/</loc>
+    
+    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.navyxie.com/2016/04/07/game/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -44,14 +51,14 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/07/game/</loc>
+    <loc>http://www.navyxie.com/2016/04/27/image-preload/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/27/image-preload/</loc>
+    <loc>http://www.navyxie.com/2016/07/15/influx-query-language/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -72,20 +79,6 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/07/pay/</loc>
-    
-    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.navyxie.com/2016/07/15/influx-query-language/</loc>
-    
-    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.navyxie.com/2016/04/16/mongo-aggregate-cond/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
@@ -100,7 +93,7 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/05/31/custom-weixin-share-content/</loc>
+    <loc>http://www.navyxie.com/2016/06/04/access-token/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -114,6 +107,20 @@
   </url>
   
   <url>
+    <loc>http://www.navyxie.com/2016/04/07/post/</loc>
+    
+    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.navyxie.com/2016/05/20/redis-lock/</loc>
+    
+    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.navyxie.com/2016/06/20/sails-orm-bug/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
@@ -121,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/19/web-security/</loc>
+    <loc>http://www.navyxie.com/2016/04/07/tools/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -129,6 +136,13 @@
   
   <url>
     <loc>http://www.navyxie.com/2016/04/18/watch-ENOSPC/</loc>
+    
+    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.navyxie.com/2016/04/19/web-security/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -156,20 +170,6 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/07/tools/</loc>
-    
-    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.navyxie.com/2016/04/07/post/</loc>
-    
-    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.navyxie.com/404.html</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
@@ -184,14 +184,14 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/tags/index.html</loc>
+    <loc>http://www.navyxie.com/categories/index.html</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/categories/index.html</loc>
+    <loc>http://www.navyxie.com/tags/index.html</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     

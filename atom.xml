@@ -646,11 +646,11 @@
       <category term="lock" scheme="http://www.navyxie.com/categories/redis/lock/"/>
     
     
+      <category term="nodejs" scheme="http://www.navyxie.com/tags/nodejs/"/>
+    
       <category term="redis" scheme="http://www.navyxie.com/tags/redis/"/>
     
       <category term="lock" scheme="http://www.navyxie.com/tags/lock/"/>
-    
-      <category term="nodejs" scheme="http://www.navyxie.com/tags/nodejs/"/>
     
   </entry>
   
