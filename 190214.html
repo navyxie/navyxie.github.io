@@ -3,17 +3,54 @@
 <head>
   <meta charset="utf-8">
   
-  <title>标签: protractor | Navy&#39;s Blog</title>
+  <title>Navy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
+  <meta name="description" content="❤️️️老婆我爱你❤️
+    
+    
+        
+
+        
+        Again
+    
+    
+        document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
+            init();
+        });
+        let flag">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Navy's Blog">
-<meta property="og:url" content="http://www.navyxie.com/tags/protractor/index.html">
+<meta property="og:url" content="http://www.navyxie.com/190214.html">
 <meta property="og:site_name" content="Navy's Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="❤️️️老婆我爱你❤️
+    
+    
+        
+
+        
+        Again
+    
+    
+        document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
+            init();
+        });
+        let flag">
+<meta property="og:updated_time" content="2019-02-14T11:42:23.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Navy's Blog">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:description" content="❤️️️老婆我爱你❤️
+    
+    
+        
+
+        
+        Again
+    
+    
+        document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
+            init();
+        });
+        let flag">
   
     <link rel="alternate" href="/atom.xml" title="Navy&#39;s Blog" type="application/atom+xml">
   
@@ -75,38 +112,104 @@
 </header>
       <div class="outer" id="body">
         <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/07/post/" class="archive-article-date">
-  <time datetime="2016-04-06T17:49:10.000Z" itemprop="datePublished">4月 7</time>
+<article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/190214.html" class="article-date">
+  <time datetime="2019-02-14T11:42:23.497Z" itemprop="datePublished">2019-02-14</time>
 </a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/07/post/">文章</a>
-    </h1>
-  
-
-    </header>
+    
   </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <html>
+    <head>
+    <meta charset="utf-8">
+    <title>❤️️️老婆我爱你❤️</title>
+    </head>
+    <body>
+        <div id="declaration" style="text-align:center; padding: 20px;">
+
+        </div>
+        <div style="text-align:center; padding: 20px;" onclick="reStart()">Again</div>
+    </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            init();
+        });
+        let flag;
+        let count = 0;
+        let word = "老婆，❤️️️我爱你❤️️️，天天开心，岁岁18。—— Your's Navy";
+        let arr = word.split(''); 
+        let len = arr.length;
+        function clear() {
+            count = 0;
+            clearInterval(flag);
+            document.getElementById('declaration').innerHTML = '';
+        }
+        function init() {
+            flag = setInterval(function(){
+                showWord('declaration',arr[count++])
+            },500) 
+        }
+        function showWord(domId, word) {
+            if (count > len) {
+                return clearInterval(flag)
+            }
+            document.getElementById(domId).appendChild(createDom(word))
+        }
+        function createDom (text) {
+            let node = document.createElement("SPAN");
+            var textnode = document.createTextNode(text);
+            node.appendChild(textnode);
+            node.style.color = randomColor();
+            return node
+        }
+        function randomColor () {
+            let letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        function reStart () {
+            clear();
+            init();
+        }
+    </script>
+</html>
+      
+    </div>
+    <footer class="article-footer">
+      
+<!-- JiaThis Button BEGIN -->
+<div style="float:right;">
+<div class="jiathis_style">
+<a href="http://www.jiathis.com/share?uid=2094601" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis1.gif" border="0" /></a>
+</div>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2094601" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+    </footer>
+  </div>
+  
+    
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

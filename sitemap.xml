@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.navyxie.com/190214.html</loc>
+    
+    <lastmod>2019-02-14T11:42:23.497Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.navyxie.com/2016/07/24/nodejs-path/</loc>
     
     <lastmod>2016-07-24T05:01:58.000Z</lastmod>
@@ -9,21 +16,7 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/07/pay/</loc>
-    
-    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.navyxie.com/2016/05/31/custom-weixin-share-content/</loc>
-    
-    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.navyxie.com/2016/04/07/game/</loc>
+    <loc>http://www.navyxie.com/2016/04/07/post/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -31,6 +24,13 @@
   
   <url>
     <loc>http://www.navyxie.com/2016/04/29/haproxy-https-to-http/</loc>
+    
+    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.navyxie.com/2016/05/31/custom-weixin-share-content/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -58,14 +58,14 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/07/15/influx-query-language/</loc>
+    <loc>http://www.navyxie.com/2016/04/17/mac-pow/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/17/mac-pow/</loc>
+    <loc>http://www.navyxie.com/2016/07/15/influx-query-language/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -93,7 +93,7 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/06/04/access-token/</loc>
+    <loc>http://www.navyxie.com/2016/04/07/pay/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -107,7 +107,7 @@
   </url>
   
   <url>
-    <loc>http://www.navyxie.com/2016/04/07/post/</loc>
+    <loc>http://www.navyxie.com/2016/06/04/access-token/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
@@ -171,6 +171,13 @@
   
   <url>
     <loc>http://www.navyxie.com/404.html</loc>
+    
+    <lastmod>2016-07-24T03:27:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.navyxie.com/2016/04/07/game/</loc>
     
     <lastmod>2016-07-24T03:27:49.000Z</lastmod>
     
